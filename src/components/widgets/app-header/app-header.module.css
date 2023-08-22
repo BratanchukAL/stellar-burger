@@ -1,0 +1,12 @@
+.navbar{
+    display: flex;
+    align-items: center;
+	justify-content: space-between;
+
+    background: linear-gradient(0deg, #1C1C21, #1C1C21);
+}
+
+.brand{
+    position: absolute;
+    left: calc(50vw - 290px/2);
+}
