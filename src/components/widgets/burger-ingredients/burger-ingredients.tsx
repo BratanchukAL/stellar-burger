@@ -61,7 +61,10 @@ export const BurgerIngredients = () => {
             <div style={{display: 'flex'}} >
                 {
                     categoriesData && categoriesData.map((v)=>
-                        <Tab key={v.name} value={v.name} active={current === v.name} onClick={OnClickTabCategory}>
+                        <Tab key={v.name}
+                             value={v.name}
+                             active={current === v.name}
+                             onClick={OnClickTabCategory}>
                             {v.lang}
                         </Tab>
                     )
