@@ -24,7 +24,10 @@ export const CardProduct: FC<CardProductProps> = (props) => {
         <div className={styles.card_content +' '+ props.extraClass}>
             <div className={styles.image_content}>
                 {counterElement}
-                <img width={240} height={120} src={props.image} alt={props.caption} className={'ml-4 mr-4'}/>
+                <img src={props.image}
+                     alt={props.caption}
+                     className={styles.img + ' ml-4 mr-4'}
+                />
             </div>
             <div className={styles.currency_content + ' mt-1 mb-1'}>
                 <span className="text text_type_digits-default p-2">{props.price}</span>

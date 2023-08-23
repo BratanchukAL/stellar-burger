@@ -1,3 +1,7 @@
+:root{
+    --card_product_image_width: 240px
+}
+
 .card_content{
     display: flex;
     flex-direction: column;
@@ -15,6 +19,11 @@
 }
 
 .caption{
-    max-width: 240px;
+    max-width: var(--card_product_image_width);
     text-align: center;
+}
+
+.img{
+    width: var(--card_product_image_width);
+    height: 120px;
 }
