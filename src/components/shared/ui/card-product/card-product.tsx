@@ -31,7 +31,7 @@ export const CardProduct: FC<CardProductProps> = (props) => {
                 <CurrencyIcon type="primary" />
             </div>
 
-            <p className={'text text_type_main-small'}>{props.caption}</p>
+            <p className={styles.caption + ' text text_type_main-small'}>{props.caption}</p>
         </div>
     )
 }

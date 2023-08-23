@@ -14,3 +14,7 @@
     justify-content: center;
 }
 
+.caption{
+    max-width: 240px;
+    text-align: center;
+}
