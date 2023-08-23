@@ -2,7 +2,8 @@ import React, {useContext, useRef, useState} from "react"
 
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 
-import {CardProduct, CategoryProduct} from "components/shared/ui";
+import {CategoryProduct} from "./category-product/category-product";
+import {CardProduct} from "./card-product/card-product";
 
 import {ProductsContext} from "components/entities/products";
 
