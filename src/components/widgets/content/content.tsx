@@ -9,7 +9,7 @@ interface ContentProps{
 
 export const Content:FC<ContentProps>=(props)=>{
     return(
-        <main className={styles.content}>
+        <main className={styles.content + ' p-10'}>
             {props.children}
         </main>
     )
