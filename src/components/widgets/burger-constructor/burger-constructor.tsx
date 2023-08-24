@@ -53,7 +53,8 @@ export const BurgerConstructor = () => {
             </div>
             <div className={styles.button_order}>
                 <span className="mr-10">
-                    <p className="text text_type_digits-medium">{price}&nbsp;<CurrencyIcon type="primary" /></p>
+                    <p className="text text_type_digits-medium">{price}&nbsp;
+                    <CurrencyIcon type="primary" /></p>
                 </span>
                 <Button htmlType={'button'}>Оформить заказ</Button>
             </div>
