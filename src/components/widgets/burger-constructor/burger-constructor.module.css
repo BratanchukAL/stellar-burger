@@ -1,0 +1,13 @@
+.content{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+.button_order{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
