@@ -18,10 +18,32 @@ export const BurgerConstructor = () => {
                     text="Краторная булка N-200i (верх)"
                     price={200}
                 />
-                <CardPosition
-                    text="Краторная булка N-200i (верх)"
-                    price={50}
-                />
+                <div className={styles.box}>
+                    <CardPosition
+                        text="Краторная булка N-200i (верх)"
+                        price={50}
+                    />
+                    <CardPosition
+                            text="Краторная булка N-200i (верх)"
+                            price={50}
+                        />
+                    <CardPosition
+                            text="Краторная булка N-200i (верх)"
+                            price={50}
+                        />
+                    <CardPosition
+                            text="Краторная булка N-200i (верх)"
+                            price={50}
+                        />
+                    <CardPosition
+                            text="Краторная булка N-200i (верх)"
+                            price={50}
+                        />
+                    <CardPosition
+                            text="Краторная булка N-200i (верх)"
+                            price={50}
+                        />
+                </div>
                 <CardPosition
                     type="bottom"
                     isLocked={true}

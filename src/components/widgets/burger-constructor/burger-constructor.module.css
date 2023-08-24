@@ -11,3 +11,10 @@
     align-items: center;
     justify-content: flex-end;
 }
+
+.box {
+    composes: content;
+    max-height: 60vh; /* TODO: var from react? */
+    /*width: 600px; !*TODO: Tabs fixed? *!*/
+    overflow-y: scroll;
+}
