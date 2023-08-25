@@ -1,7 +1,7 @@
 import React, {FC, ReactNode} from "react";
+import PropTypes from "prop-types";
 
 import styles from './category-product.module.css'
-import PropTypes from "prop-types";
 
 interface CategoryProductProps{
     title: string

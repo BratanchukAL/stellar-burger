@@ -1,10 +1,10 @@
 import React, {FC} from "react";
+import PropTypes from "prop-types";
 
 import DefaultImage from "@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png";
 import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import styles from './card-product.module.css'
-import PropTypes from "prop-types";
 
 interface CardProductProps{
     count?: number
