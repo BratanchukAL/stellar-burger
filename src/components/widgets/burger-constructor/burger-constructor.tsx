@@ -21,38 +21,43 @@ export const BurgerConstructor = () => {
         v._id === selectedUser.find((id)=>id==v._id)
     )
 
-    return (
-        <section>
-            <div className={styles.content + ' pl-4 pr-4 mb-10'} >
-                <CardPosition
-                    type="top"
-                    isLocked={true}
-                    text="Краторная булка N-200i (верх)"
-                    price={200}
-                />
-                <div className={styles.box}>
-                    {selectedProducts && selectedProducts.map((v)=>
-                        <CardPosition key={v._id}
-                            text={v.name}
-                            price={v.price}
-                            thumbnail={v.image}
-                        />
-                    )}
-                </div>
-                <CardPosition
-                    type="bottom"
-                    isLocked={true}
-                    text="Краторная булка N-200i (низ)"
-                    price={200}
-                />
-            </div>
-            <div className={styles.button_order}>
-                <span className="mr-10">
-                    <p className="text text_type_digits-medium">{price}&nbsp;
-                    <CurrencyIcon type="primary" /></p>
-                </span>
-                <Button htmlType={'button'}>Оформить заказ</Button>
-            </div>
-        </section>
-    );
+   return (
+       <section>
+           <div className={styles.content + ' pl-4 mb-10'} >
+               <div className="pr-4">
+                   <CardPosition
+                       type="top"
+                       isLocked={true}
+                       text="Краторная булка N-200i (верх)"
+                       price={200}
+                   />
+               </div>
+               <div className={styles.box + ' pr-2'}>
+                   {selectedProducts && selectedProducts.map((v)=>
+                       <CardPosition
+                           key={v._id}
+                           text={v.name}
+                           price={v.price}
+                           thumbnail={v.image}
+                       />
+                   )}
+               </div>
+               <div className="pr-4">
+                   <CardPosition
+                       type="bottom"
+                       isLocked={false}
+                       text="Краторная булка N-200i (низ)"
+                       price={200}
+                   />
+               </div>
+           </div>
+           <div className={styles.button_order}>
+               <span className="mr-10">
+                   <p className="text text_type_digits-medium">{price}&nbsp;
+                   <CurrencyIcon type="primary" /></p>
+               </span>
+               <Button htmlType={'button'}>Оформить заказ</Button>
+           </div>
+       </section>
+   );
 }
