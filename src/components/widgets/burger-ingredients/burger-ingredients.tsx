@@ -30,7 +30,7 @@ export const BurgerIngredients = () => {
 
     const OnClickTabCategory = (tabName: string)=>{
         setCurrent(tabName)
-        categoriesRefs.current[tabName].scrollIntoView();
+        categoriesRefs.current[tabName].scrollIntoView({ block: "start",  behavior: "smooth" });
     }
 
     const productsElements = categoriesData && categoriesData.map((category, index)=>{

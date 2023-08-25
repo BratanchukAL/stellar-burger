@@ -1,13 +1,25 @@
-import React from "react";
+import React, {useContext} from "react";
 
 import {Button, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import {CardPosition} from "./card-position/card-position";
 
+import {ProductsContext} from "components/entities/products";
+
 import styles from './burger-constructor.module.css'
+
 
 export const BurgerConstructor = () => {
     const price = 610
+    const data = useContext(ProductsContext)
+
+
+    const selectedUser = ["60666c42cc7b410027a1a9b7", "60666c42cc7b410027a1a9b6",
+    "60666c42cc7b410027a1a9b9", "60666c42cc7b410027a1a9b8", "60666c42cc7b410027a1a9bb",
+    "60666c42cc7b410027a1a9ba"]
+    const selectedProducts = data && data.filter((v)=>
+        v._id === selectedUser.find((id)=>id==v._id)
+    )
 
     return (
         <section>
@@ -19,30 +31,13 @@ export const BurgerConstructor = () => {
                     price={200}
                 />
                 <div className={styles.box}>
-                    <CardPosition
-                        text="Краторная булка N-200i (верх)"
-                        price={50}
-                    />
-                    <CardPosition
-                            text="Краторная булка N-200i (верх)"
-                            price={50}
+                    {selectedProducts && selectedProducts.map((v)=>
+                        <CardPosition key={v._id}
+                            text={v.name}
+                            price={v.price}
+                            thumbnail={v.image}
                         />
-                    <CardPosition
-                            text="Краторная булка N-200i (верх)"
-                            price={50}
-                        />
-                    <CardPosition
-                            text="Краторная булка N-200i (верх)"
-                            price={50}
-                        />
-                    <CardPosition
-                            text="Краторная булка N-200i (верх)"
-                            price={50}
-                        />
-                    <CardPosition
-                            text="Краторная булка N-200i (верх)"
-                            price={50}
-                        />
+                    )}
                 </div>
                 <CardPosition
                     type="bottom"
