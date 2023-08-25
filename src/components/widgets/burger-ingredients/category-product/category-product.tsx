@@ -1,6 +1,7 @@
 import React, {FC, ReactNode} from "react";
 
 import styles from './category-product.module.css'
+import PropTypes from "prop-types";
 
 interface CategoryProductProps{
     title: string
@@ -21,4 +22,10 @@ export const CategoryProduct:FC<CategoryProductProps> = (props) => {
 
 CategoryProduct.defaultProps={
     extraClass: ''
+}
+
+CategoryProduct.propTypes = {
+    title: PropTypes.string.isRequired,
+    children: PropTypes.node.isRequired,
+    extraClass: PropTypes.string
 }

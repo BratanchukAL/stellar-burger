@@ -1,4 +1,5 @@
 import React, {FC} from "react";
+import PropTypes from "prop-types";
 
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import DefaultImage from "@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png";
@@ -34,4 +35,14 @@ export const CardPosition: FC<CardPositionProps> = (props)=>{
 CardPosition.defaultProps={
     thumbnail: DefaultImage,
     isLocked: false
+}
+
+CardPosition.propTypes = {
+    text: PropTypes.string.isRequired,
+    thumbnail: PropTypes.string,
+    price: PropTypes.number.isRequired,
+    type: PropTypes.oneOf(['top' , 'bottom']),
+    isLocked: PropTypes.bool,
+    extraClass: PropTypes.string,
+    handleClose: PropTypes.func,
 }

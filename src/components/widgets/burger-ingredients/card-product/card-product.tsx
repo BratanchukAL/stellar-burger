@@ -4,11 +4,12 @@ import DefaultImage from "@ya.praktikum/react-developer-burger-ui-components/dis
 import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import styles from './card-product.module.css'
+import PropTypes from "prop-types";
 
 interface CardProductProps{
     count?: number
     image?: string
-    price: string | number
+    price: number
     caption: string
 
     extraClass?: string
@@ -42,4 +43,13 @@ export const CardProduct: FC<CardProductProps> = (props) => {
 CardProduct.defaultProps = {
     image: DefaultImage,
     extraClass: '',
+    count: 0
+}
+
+CardProduct.propTypes = {
+    count: PropTypes.number,
+    price: PropTypes.number.isRequired,
+    caption: PropTypes.string.isRequired,
+    image: PropTypes.string,
+    extraClass: PropTypes.string
 }
