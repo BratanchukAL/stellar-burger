@@ -45,7 +45,7 @@ export const BurgerConstructor = () => {
                <div className="pr-4">
                    <CardPosition
                        type="bottom"
-                       isLocked={false}
+                       isLocked={true}
                        text="Краторная булка N-200i (низ)"
                        price={200}
                    />
