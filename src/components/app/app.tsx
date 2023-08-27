@@ -1,17 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import {Pages} from "components/pages";
-import {ProductsContext} from "components/entities/products";
+import {IProduct, ProductsContext} from "components/entities/products";
 
 import './app.module.css'
 
 
 function App() {
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState<IProduct[]>([])
     const [isLoading, setLoading] = useState(false)
     const [isError, setError] = useState(false)
     /* const detailError */
 
     useEffect(()=>{
+        if (products.length) return
         setLoading(true)
         setError(false)
         /*by task, here. loading*/
