@@ -1,5 +1,7 @@
 import React, {FC, SyntheticEvent} from "react";
 
+import {clx} from "components/shared/utils";
+
 import styles  from './button-link.module.css';
 
 
@@ -13,26 +15,29 @@ interface ButtonLinkProps extends React.PropsWithChildren<Omit<React.HTMLProps<H
 }
 
 
-export const ButtonLink: FC<ButtonLinkProps> = (props) =>{
-    const {active, type, size, extraClass, htmlType, onClick, ...otherProps} = props
+export const ButtonLink: FC<ButtonLinkProps> = ({
+                                                    active= false,
+                                                    type = 'primary',
+                                                    size = 'small',
+                                                    extraClass = '',
+                                                    htmlType = 'button',
+                                                    onClick= ()=>{},
+                                                    children,
+                                                    ...otherProps
+}) => {
+    const buttonStyle = clx(styles.buttonLink, [
+        styles[`buttonLink_type_${type}`],
+        styles[`buttonLink_size_${size}`]
+    ],{
+        [styles.active]: active,
+        [extraClass]: extraClass
+    })
 
-    const classNameOptional = styles[`buttonLink_type_${type}`] + ' ' +styles[`buttonLink_size_${size}`]
-    const buttonStyle = styles.buttonLink+ ' ' +classNameOptional + ' ' + (active?styles.active:'') + ' ' + extraClass
-
-    return(
+    return (
         <button className={buttonStyle} type={htmlType} onClick={onClick} {...otherProps}>
             <div className={styles.caption}>
-                {props.children}
+                {children}
             </div>
         </button>
     )
-}
-
-ButtonLink.defaultProps = {
-    active: false,
-    type: 'primary',
-    size: 'small',
-    onClick: ()=>{},
-    extraClass: '',
-    htmlType: 'button',
-}
+};
