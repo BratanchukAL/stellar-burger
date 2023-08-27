@@ -12,7 +12,7 @@ import styles from './burger-ingredients.module.css'
 
 export const BurgerIngredients = () => {
     const [current, setCurrent] = useState('bun')
-    const categoriesRefs = useRef({} as any);
+    const categoriesRefs = useRef<Record<string, HTMLDivElement>>({} as any);
 
     const data = useContext(ProductsContext)
     const categoriesData = [
@@ -37,7 +37,7 @@ export const BurgerIngredients = () => {
         const productsOfCat = data && data.filter((v)=>v.type===category.name)
 
         return (<React.Fragment key={category.name}>
-            <div ref={el => categoriesRefs.current[category.name] = el }> </div>
+            <div ref={el => categoriesRefs.current[category.name] = el! }> </div>
             <CategoryProduct  title={category.lang} extraClass={'mb-10'}>
                 {
                     productsOfCat.map((prod => {
