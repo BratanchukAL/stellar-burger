@@ -5,13 +5,13 @@ import {clx} from "components/shared/utils";
 import styles  from './button-link.module.css';
 
 
-interface ButtonLinkProps extends React.PropsWithChildren<Omit<React.HTMLProps<HTMLButtonElement>, 'type' | 'size'>> {
+interface ButtonLinkProps extends Omit<React.HTMLProps<HTMLLinkElement>, 'type' | 'size'> {
     active?: boolean
-    type?: 'secondary' | 'primary';
-    size?: 'small' | 'medium' | 'large';
-    onClick?: (() => void) | ((e: SyntheticEvent) => void);
-    extraClass?: string;
-    htmlType?: 'button' | 'submit' | 'reset';
+    type?: 'secondary' | 'primary'
+    size?: 'small' | 'medium' | 'large'
+    to?: string
+    onClick?: (() => void) | ((e: SyntheticEvent) => void)
+    extraClass?: string
 }
 
 
@@ -20,7 +20,7 @@ export const ButtonLink: FC<ButtonLinkProps> = ({
                                                     type = 'primary',
                                                     size = 'small',
                                                     extraClass = '',
-                                                    htmlType = 'button',
+                                                    to = '#',
                                                     onClick= ()=>{},
                                                     children,
                                                     ...otherProps
@@ -34,10 +34,10 @@ export const ButtonLink: FC<ButtonLinkProps> = ({
     })
 
     return (
-        <button className={buttonStyle} type={htmlType} onClick={onClick} {...otherProps}>
+        <a className={buttonStyle} onClick={onClick} href={to}>
             <div className={styles.caption}>
                 {children}
             </div>
-        </button>
+        </a>
     )
 };

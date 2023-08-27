@@ -1,9 +1,13 @@
 .buttonLink {
+	display: inline-block;
+
 	border: none;
 	cursor: pointer;
 	outline: none;
 	border-radius: var(--common-border-radius);
 	transition: var(--common-transition);
+
+	text-decoration: none;
 }
 
 .caption {
