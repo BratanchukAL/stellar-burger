@@ -16,7 +16,11 @@ function App() {
         setError(false)
         /*by task, here. loading*/
         fetch('/fixtures/products.json')
-            .then((response)=>response.json())
+            .then((response)=>{
+                if (!response.ok)
+                    throw new Error(`HTTP error: ${response.status}`);
+                return response.json()
+            })
             .then((json)=>json || [])
             .then((json)=>setData(json))
             .catch((reason) => setError(true))
