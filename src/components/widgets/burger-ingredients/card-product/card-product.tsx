@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import DefaultImage from "@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png";
 import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
+import {clx} from "components/shared/utils";
+
 import styles from './card-product.module.css'
 
 
@@ -29,20 +31,20 @@ export const CardProduct: FC<CardProductProps> = (
         counterElement = <Counter count={count} size="default" extraClass="m-1" />
 
     return (
-        <div className={styles.card_content +' '+ extraClass}>
+        <div className={clx(styles.card_content, [extraClass])}>
             <div className={styles.image_content}>
                 {counterElement}
                 <img src={image}
                      alt={props.caption}
-                     className={styles.img + ' ml-4 mr-4'}
+                     className={clx(styles.img, ['ml-4', 'mr-4'])}
                 />
             </div>
-            <div className={styles.currency_content + ' mt-1 mb-1'}>
+            <div className={clx(styles.currency_content, ['mt-1', 'mb-1'])}>
                 <span className="text text_type_digits-default p-2">{props.price}</span>
                 <CurrencyIcon type="primary" />
             </div>
 
-            <p className={styles.caption + ' text text_type_main-small'}>{props.caption}</p>
+            <p className={clx(styles.caption, ['text', 'text_type_main-small'])}>{props.caption}</p>
         </div>
     )
 }
