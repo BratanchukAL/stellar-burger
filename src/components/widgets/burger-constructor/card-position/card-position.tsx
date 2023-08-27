@@ -27,7 +27,7 @@ export const CardPosition: FC<CardPositionProps> = (
 
     return(
         <div className={styles.content}>
-            <span style={{width:32}}>
+            <span className={styles.drag_place}>
                 {!isLocked && <DragIcon type="primary" />}
             </span>
             <ConstructorElement
