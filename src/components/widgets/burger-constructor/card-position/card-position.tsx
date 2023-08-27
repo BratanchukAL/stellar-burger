@@ -6,6 +6,7 @@ import DefaultImage from "@ya.praktikum/react-developer-burger-ui-components/dis
 
 import styles from './card-position.module.css'
 
+
 interface CardPositionProps{
     text: string;
     thumbnail?: string;
@@ -16,8 +17,13 @@ interface CardPositionProps{
     handleClose?: () => void;
 }
 
-export const CardPosition: FC<CardPositionProps> = (props)=>{
-    const {thumbnail, isLocked, ...other} = props
+export const CardPosition: FC<CardPositionProps> = (
+    {
+        thumbnail= DefaultImage,
+        isLocked = false,
+        ...props
+    }
+)=>{
 
     return(
         <div className={styles.content}>
@@ -26,16 +32,12 @@ export const CardPosition: FC<CardPositionProps> = (props)=>{
             </span>
             <ConstructorElement
                 thumbnail={thumbnail as string}
-                {...other}
+                {...props}
                 />
         </div>
     )
 }
 
-CardPosition.defaultProps={
-    thumbnail: DefaultImage,
-    isLocked: false
-}
 
 CardPosition.propTypes = {
     text: PropTypes.string.isRequired,

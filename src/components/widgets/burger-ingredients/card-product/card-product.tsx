@@ -6,6 +6,7 @@ import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-com
 
 import styles from './card-product.module.css'
 
+
 interface CardProductProps{
     count?: number
     image?: string
@@ -15,17 +16,23 @@ interface CardProductProps{
     extraClass?: string
 }
 
-//to entities
-export const CardProduct: FC<CardProductProps> = (props) => {
+export const CardProduct: FC<CardProductProps> = (
+    {
+        image = DefaultImage,
+        extraClass = '',
+        count = 0,
+        ...props
+    }
+) => {
     let counterElement = undefined
-    if (props.count)
-        counterElement = <Counter count={props.count} size="default" extraClass="m-1" />
+    if (count)
+        counterElement = <Counter count={count} size="default" extraClass="m-1" />
 
     return (
-        <div className={styles.card_content +' '+ props.extraClass}>
+        <div className={styles.card_content +' '+ extraClass}>
             <div className={styles.image_content}>
                 {counterElement}
-                <img src={props.image}
+                <img src={image}
                      alt={props.caption}
                      className={styles.img + ' ml-4 mr-4'}
                 />
@@ -40,11 +47,6 @@ export const CardProduct: FC<CardProductProps> = (props) => {
     )
 }
 
-CardProduct.defaultProps = {
-    image: DefaultImage,
-    extraClass: '',
-    count: 0
-}
 
 CardProduct.propTypes = {
     count: PropTypes.number,
