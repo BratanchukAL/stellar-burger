@@ -6,7 +6,7 @@ import './app.module.css'
 
 
 function App() {
-    const [data, setData] = useState([])
+    const [products, setProducts] = useState([])
     const [isLoading, setLoading] = useState(false)
     const [isError, setError] = useState(false)
     /* const detailError */
@@ -22,14 +22,14 @@ function App() {
                 return response.json()
             })
             .then((json)=>json || [])
-            .then((json)=>setData(json))
+            .then((json)=>setProducts(json))
             .catch((reason) => setError(true))
             .finally(()=>setLoading(false))
-    }, [data])
+    }, [products])
 
 
     return (
-        <ProductsContext.Provider value={data}>
+        <ProductsContext.Provider value={products}>
             <Pages/>
         </ProductsContext.Provider>
     );

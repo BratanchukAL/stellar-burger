@@ -14,7 +14,7 @@ export const BurgerIngredients = () => {
     const [current, setCurrent] = useState('bun')
     const categoriesRefs = useRef<Record<string, HTMLDivElement>>({} as any);
 
-    const data = useContext(ProductsContext)
+    const products = useContext(ProductsContext)
     const categoriesData = [
         {
             name: 'bun',
@@ -34,7 +34,7 @@ export const BurgerIngredients = () => {
     }
 
     const productsElements = categoriesData && categoriesData.map((category, index)=>{
-        const productsOfCat = data && data.filter((v)=>v.type===category.name)
+        const productsOfCat = products && products.filter((v)=>v.type===category.name)
 
         return (<React.Fragment key={category.name}>
             <div ref={el => categoriesRefs.current[category.name] = el! }> </div>

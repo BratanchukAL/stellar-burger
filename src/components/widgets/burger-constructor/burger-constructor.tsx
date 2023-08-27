@@ -11,13 +11,13 @@ import styles from './burger-constructor.module.css'
 
 export const BurgerConstructor = () => {
     const price = 610
-    const data = useContext(ProductsContext)
+    const products = useContext(ProductsContext)
 
 
     const selectedUser = ["60666c42cc7b410027a1a9b7", "60666c42cc7b410027a1a9b6",
     "60666c42cc7b410027a1a9b9", "60666c42cc7b410027a1a9b8", "60666c42cc7b410027a1a9bb",
     "60666c42cc7b410027a1a9ba"]
-    const selectedProducts = data && data.filter((v)=>
+    const selectedProducts = products && products.filter((v)=>
         v._id === selectedUser.find((id)=>id==v._id)
     )
 
