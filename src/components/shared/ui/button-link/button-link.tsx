@@ -1,11 +1,11 @@
-import React, {FC, SyntheticEvent} from "react";
+import React, {FC, HTMLProps, SyntheticEvent} from "react";
 
 import {clx} from "components/shared/utils";
 
 import styles  from './button-link.module.css';
 
 
-interface ButtonLinkProps extends Omit<React.HTMLProps<HTMLLinkElement>, 'type' | 'size'> {
+interface ButtonLinkProps extends Omit<HTMLProps<HTMLLinkElement>, 'type' | 'size'> {
     active?: boolean
     type?: 'secondary' | 'primary'
     size?: 'small' | 'medium' | 'large'
