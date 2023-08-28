@@ -1,25 +1,19 @@
-import React, {useCallback, useState} from "react";
+import React from "react";
 
 import {Button} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import {clx} from "components/shared/utils";
 import {Modal} from "components/shared/ui";
+import {useVisible} from "components/shared/hooks";
 
 import CheckImage from 'images/check.png'
 import styles from './order-details.module.css'
 
 
-export const OrderDetails= ({...props}) =>{
-    const [isOpen, setVisible] = useState(false)
+
+export const OrderDetails= () =>{
+    const [isOpen, handleClose, handleOpen] = useVisible(false)
     const order_id = '034536'
-
-    const handleClose = useCallback(() =>{
-        setVisible(false)
-    }, [])
-
-    const handleOpen = useCallback(() => {
-        setVisible(true)
-    }, [])
 
     return(
         <>
