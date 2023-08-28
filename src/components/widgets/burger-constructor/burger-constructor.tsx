@@ -1,10 +1,11 @@
 import React, {useContext} from "react";
 
-import {Button, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-
-import {CardPosition} from "./card-position/card-position";
+import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import {ProductsContext} from "components/entities/products";
+
+import {CardPosition} from "./card-position/card-position";
+import {OrderModal} from "./order-modal/order-modal";
 
 import styles from './burger-constructor.module.css'
 
@@ -18,7 +19,7 @@ export const BurgerConstructor = () => {
     "60666c42cc7b410027a1a9b9", "60666c42cc7b410027a1a9b8", "60666c42cc7b410027a1a9bb",
     "60666c42cc7b410027a1a9ba"]
     const selectedProducts = products && products.filter((v)=>
-        v._id === selectedUser.find((id)=>id==v._id)
+        v._id === selectedUser.find((id)=>id===v._id)
     )
 
    return (
@@ -56,7 +57,7 @@ export const BurgerConstructor = () => {
                    <p className="text text_type_digits-medium">{price}&nbsp;
                    <CurrencyIcon type="primary" /></p>
                </span>
-               <Button htmlType={'button'}>Оформить заказ</Button>
+               <OrderModal />
            </div>
        </section>
    );
