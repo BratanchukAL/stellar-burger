@@ -14,17 +14,21 @@ const bodyElement = document.getElementsByTagName("body")[0]!;
 
 interface ModalProps{
     onClose: (() => void)
+    extraClassContent?: string
 }
 
 export const Modal: FC<React.PropsWithChildren<ModalProps>> = ({
     onClose,
+    extraClassContent= '',
     children, ...props
 }) => {
 
     const bodyRef = useRef(bodyElement)
+    const modalRef= useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         bodyRef.current.style.overflow = 'hidden'
+        modalRef.current?.focus()
 
         return () => {
             bodyRef.current.style.overflow = ''
@@ -44,13 +48,15 @@ export const Modal: FC<React.PropsWithChildren<ModalProps>> = ({
         (
             <>
                 <div className={styles.overlay}> </div>
-                <div className={styles.modal} onKeyDown={handleCloseByKeyDown} tabIndex={-1}>
+                <div className={styles.modal} onKeyDown={handleCloseByKeyDown}
+                     ref={modalRef}
+                     tabIndex={-1}
+                >
                     <div className={clx(styles.modal_dialog, ['p-10'])}>
                         <div className={styles.close_icon_content}>
                             <CloseIcon type="primary" onClick={handleClose}/>
                         </div>
-                        <div className={styles.modal_content}>
-                            hello
+                        <div className={clx(styles.modal_content, [extraClassContent])}>
                             {children}
                         </div>
                     </div>
