@@ -1,6 +1,4 @@
-import React from "react";
-
-import {Button} from "@ya.praktikum/react-developer-burger-ui-components";
+import React, {FC, PropsWithChildren} from "react";
 
 import {clx} from "components/shared/utils";
 import {Modal} from "components/shared/ui";
@@ -11,13 +9,15 @@ import styles from './order-details.module.css'
 
 
 
-export const OrderDetails= () =>{
+export const OrderDetails: FC<PropsWithChildren>= ({children}) =>{
     const [isOpen, handleClose, handleOpen] = useVisible(false)
     const order_id = '034536'
 
     return(
         <>
-            <Button htmlType={'button'} onClick={handleOpen}>Оформить заказ</Button>
+            <div className={styles.click_children} onClick={handleOpen}>
+                {children}
+            </div>
             { isOpen &&
                 <Modal onClose={handleClose} extraClassContent="pt-20 pb-20">
                     <p className={'text text_type_digits-large'}>{order_id}</p>

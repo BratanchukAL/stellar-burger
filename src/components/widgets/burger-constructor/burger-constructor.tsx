@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 
-import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Button, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import {ProductsContext} from "components/entities/products";
 
@@ -57,7 +57,9 @@ export const BurgerConstructor = () => {
                    <p className="text text_type_digits-medium">{price}&nbsp;
                    <CurrencyIcon type="primary" /></p>
                </span>
-               <OrderDetails />
+               <OrderDetails>
+                   <Button htmlType={'button'}>Оформить заказ</Button>
+               </OrderDetails>
            </div>
        </section>
    );
