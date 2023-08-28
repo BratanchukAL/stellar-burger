@@ -61,7 +61,7 @@ export const BurgerIngredients = () => {
 
     return (
         <section>
-            <div style={{display: 'flex'}} >
+            <div className={styles.tabs_content} >
                 {
                     categoriesData && categoriesData.map((v)=>
                         <Tab key={v.name}

@@ -6,6 +6,10 @@
   flex-wrap: wrap;
 }
 
+.tabs_content{
+  display: flex;
+}
+
 .box {
   composes: content;
 
