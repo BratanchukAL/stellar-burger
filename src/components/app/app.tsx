@@ -5,6 +5,10 @@ import {IProduct, ProductsContext} from "components/entities/products";
 import './app.module.css'
 
 
+// configs
+const API_URL = '/fixtures/products.json'
+
+
 function App() {
     const [products, setProducts] = useState<IProduct[]>([])
     const [isLoading, setLoading] = useState(false)
@@ -16,7 +20,7 @@ function App() {
         setLoading(true)
         setError(false)
         /*by task, here. loading*/
-        fetch('/fixtures/products.json')
+        fetch(API_URL)
             .then((response)=>{
                 if (!response.ok)
                     throw new Error(`HTTP error: ${response.status}`);
