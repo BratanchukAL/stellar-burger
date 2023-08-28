@@ -16,7 +16,6 @@ function App() {
     /* const detailError */
 
     useEffect(()=>{
-        if (products.length) return
         setLoading(true)
         setError(false)
         /*by task, here. loading*/
@@ -30,7 +29,7 @@ function App() {
             .then((json)=>setProducts(json))
             .catch((reason) => setError(true))
             .finally(()=>setLoading(false))
-    }, [products])
+    }, [])
 
 
     return (
