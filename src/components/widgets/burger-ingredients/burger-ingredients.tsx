@@ -8,6 +8,7 @@ import {CardProduct} from "./card-product/card-product";
 import {ProductsContext} from "components/entities/products";
 
 import styles from './burger-ingredients.module.css'
+import {IngredientDetails} from "./ingredient-details/ingredient-details";
 
 
 export const BurgerIngredients = () => {
@@ -42,14 +43,15 @@ export const BurgerIngredients = () => {
                 {
                     productsOfCat.map((prod => {
                         return (
-                            <CardProduct
-                                key={prod._id}
-                                count={1}
-                                price={prod.price}
-                                caption={prod.name}
-                                image={prod.image_large}
-                                extraClass={'mr-3 ml-3 mb-4 mt-4'}
-                            />
+                            <IngredientDetails key={prod._id} detail={prod}>
+                                <CardProduct
+                                    count={1}
+                                    price={prod.price}
+                                    caption={prod.name}
+                                    image={prod.image_large}
+                                    extraClass={'mr-3 ml-3 mb-4 mt-4'}
+                                />
+                            </IngredientDetails>
                         )
                     }))
                 }
