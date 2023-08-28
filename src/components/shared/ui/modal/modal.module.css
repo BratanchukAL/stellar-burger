@@ -22,7 +22,9 @@
 }
 
 .modal_dialog{
+    position: relative;
     margin: 1.7rem auto;
+    border-radius: var(--common-border-radius-s) var(--common-border-radius-s);
     background-color: var(--background);
 }
 
@@ -37,6 +39,22 @@
     .modal_dialog {
         max-width: 720px;
     }
+}
+
+.close_icon_content{
+    position: absolute;
+    top: 60px;
+    right: 40px;
+
+    cursor: pointer;
+}
+
+.modal_content{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    min-height: 200px;
 }
 
 
