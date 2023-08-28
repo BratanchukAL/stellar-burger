@@ -19,6 +19,8 @@
     overflow-x: hidden;
     overflow-y: auto;
     outline: 0;
+
+    pointer-events: none;
 }
 
 .modal_dialog{
@@ -26,6 +28,8 @@
     margin: 1.7rem auto;
     border-radius: var(--common-border-radius-s) var(--common-border-radius-s);
     background-color: var(--background);
+
+    pointer-events: auto;
 }
 
 @media (min-width: 576px) {

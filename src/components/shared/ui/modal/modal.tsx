@@ -47,8 +47,10 @@ export const Modal: FC<React.PropsWithChildren<ModalProps>> = ({
     return ReactDOM.createPortal(
         (
             <>
-                <div className={styles.overlay}> </div>
-                <div className={styles.modal} onKeyDown={handleCloseByKeyDown}
+                <div className={styles.overlay} onClick={handleClose}>
+                </div>
+                <div className={styles.modal}
+                     onKeyDown={handleCloseByKeyDown}
                      ref={modalRef}
                      tabIndex={-1}
                 >
