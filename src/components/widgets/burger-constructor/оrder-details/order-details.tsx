@@ -6,10 +6,10 @@ import {clx} from "components/shared/utils";
 import {Modal} from "components/shared/ui";
 
 import CheckImage from 'images/check.png'
-import styles from './order-modal.module.css'
+import styles from './order-details.module.css'
 
 
-export const OrderModal= ({...props}) =>{
+export const OrderDetails= ({...props}) =>{
     const [isOpen, setVisible] = useState(false)
     const order_id = '034536'
 

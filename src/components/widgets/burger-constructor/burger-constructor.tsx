@@ -5,7 +5,7 @@ import {CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import {ProductsContext} from "components/entities/products";
 
 import {CardPosition} from "./card-position/card-position";
-import {OrderModal} from "./order-modal/order-modal";
+import {OrderDetails} from "./оrder-details/order-details";
 
 import styles from './burger-constructor.module.css'
 
@@ -57,7 +57,7 @@ export const BurgerConstructor = () => {
                    <p className="text text_type_digits-medium">{price}&nbsp;
                    <CurrencyIcon type="primary" /></p>
                </span>
-               <OrderModal />
+               <OrderDetails />
            </div>
        </section>
    );
