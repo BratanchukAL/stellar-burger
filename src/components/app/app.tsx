@@ -6,7 +6,7 @@ import './app.module.css'
 
 
 // configs
-const API_URL = '/fixtures/products.json'
+const API_URL = 'https://norma.nomoreparties.space/api/ingredients'
 
 
 function App() {
@@ -25,9 +25,17 @@ function App() {
                     throw new Error(`HTTP error: ${response.status}`);
                 return response.json()
             })
-            .then((json)=>json || [])
+            .then((json)=>{
+                if (json && json.success && json.data)
+                    return json.data
+                else
+                    throw new Error(`Response error: success - ${json && json.success}`);
+            })
             .then((json)=>setProducts(json))
-            .catch((reason) => setError(true))
+            .catch((reason) => {
+                console.error(reason)
+                setError(true)
+            })
             .finally(()=>setLoading(false))
     }, [])
 
