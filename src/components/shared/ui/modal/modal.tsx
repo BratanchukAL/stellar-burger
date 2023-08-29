@@ -5,6 +5,8 @@ import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import {clx} from "components/shared/utils";
 
+import {ModalOverlay} from "./modal-overlay/modal-overlay";
+
 import styles from './modal.module.css'
 
 
@@ -47,8 +49,7 @@ export const Modal: FC<React.PropsWithChildren<ModalProps>> = ({
     return ReactDOM.createPortal(
         (
             <>
-                <div className={styles.overlay} onClick={handleClose}>
-                </div>
+                <ModalOverlay onClick={handleClose}/>
                 <div className={styles.modal}
                      onKeyDown={handleCloseByKeyDown}
                      ref={modalRef}
