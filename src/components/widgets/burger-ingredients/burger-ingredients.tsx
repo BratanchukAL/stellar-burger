@@ -41,7 +41,7 @@ export const BurgerIngredients = () => {
             <div ref={el => categoriesRefs.current[category.name] = el! }> </div>
             <CategoryProduct  title={category.lang} extraClass={'mb-10'}>
                 {
-                    productsOfCat.map((prod => {
+                    productsOfCat && productsOfCat.map((prod => {
                         return (
                             <IngredientDetails key={prod._id} detail={prod}>
                                 <CardProduct

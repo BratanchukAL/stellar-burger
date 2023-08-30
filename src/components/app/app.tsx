@@ -1,12 +1,10 @@
 import React, {useEffect, useState} from 'react';
+
 import {Pages} from "components/pages";
-import {IProduct, ProductsContext} from "components/entities/products";
+import {fetchIngredients, IProduct, ProductsContext} from "components/entities/products";
 
 import './app.module.css'
 
-
-// configs
-const API_URL = 'https://norma.nomoreparties.space/api/ingredients'
 
 
 function App() {
@@ -19,24 +17,12 @@ function App() {
         setLoading(true)
         setError(false)
         /*by task, here. loading*/
-        fetch(API_URL)
-            .then((response)=>{
-                if (!response.ok)
-                    throw new Error(`HTTP error: ${response.status}`);
-                return response.json()
-            })
-            .then((json)=>{
-                if (json && json.success && json.data)
-                    return json.data
-                else
-                    throw new Error(`Response error: success - ${json && json.success}`);
-            })
-            .then((json)=>setProducts(json))
-            .catch((reason) => {
-                console.error(reason)
+        fetchIngredients()
+            .then((json) => setProducts(json))
+            .catch(() => {
                 setError(true)
             })
-            .finally(()=>setLoading(false))
+            .finally(() => setLoading(false));
     }, [])
 
 
