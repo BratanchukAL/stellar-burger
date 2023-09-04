@@ -9,7 +9,7 @@ import styles from './modal.module.css'
 
 
 const modalRoot = document.getElementById("react-modals")!;
-const bodyElement = document.getElementsByTagName("body")[0]!;
+const bodyElement = document.getElementsByTagName("html")[0]!;
 
 
 interface ModalProps{
