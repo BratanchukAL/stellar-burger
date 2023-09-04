@@ -1,11 +1,9 @@
-import React, {FC, KeyboardEvent, useEffect, useRef} from "react";
+import React, {FC, KeyboardEvent, SyntheticEvent, useEffect, useRef} from "react";
 import ReactDOM from "react-dom";
 
 import {CloseIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import {clx} from "components/shared/utils";
-
-import {ModalOverlay} from "./modal-overlay/modal-overlay";
 
 import styles from './modal.module.css'
 
@@ -23,30 +21,41 @@ export const Modal: FC<React.PropsWithChildren<ModalProps>> = ({
     extraClassContent= '',
     children, ...props
 }) => {
-    const modalRef= useRef<HTMLDivElement>(null)
+    const modalRef= useRef<HTMLDialogElement>(null)
 
     useEffect(() => {
+        modalRef.current?.showModal()
         modalRef.current?.focus()
-
     }, [])
 
-    const handleCloseByKeyDown = (e:KeyboardEvent<HTMLInputElement>) =>{
+    const handleCloseByKeyDown = (e:KeyboardEvent<HTMLInputElement | HTMLDialogElement>) =>{
         if (e.code === 'Escape')
             onClose()
     }
 
-    const handleClose = () =>{
+    const handleClose = (e?: SyntheticEvent<HTMLDialogElement>) =>{
         onClose()
+        modalRef.current?.close()
+    }
+
+    const handleClickBackdrop = (e: any) =>{
+        const rect = e?.currentTarget.getBoundingClientRect();
+        if (rect)
+            if (e?.clientY < rect.top || e?.clientY > rect.bottom ||
+                e?.clientX < rect.left || e?.clientX > rect.right) {
+                modalRef.current?.close();
+                onClose()
+            }
     }
 
     return ReactDOM.createPortal(
         (
             <>
-                <ModalOverlay onClick={handleClose}/>
-                <div className={styles.modal}
-                     onKeyDown={handleCloseByKeyDown}
-                     ref={modalRef}
-                     tabIndex={-1}
+                <dialog className={styles.modal}
+                    onClick={handleClickBackdrop}
+                    onClose={handleClose}
+                    onKeyPress={handleCloseByKeyDown}
+                    ref={modalRef}
                 >
                     <div className={clx(styles.modal_dialog, ['p-10'])}>
                         <div className={styles.close_icon_content}>
@@ -56,7 +65,7 @@ export const Modal: FC<React.PropsWithChildren<ModalProps>> = ({
                             {children}
                         </div>
                     </div>
-                </div>
+                </dialog>
             </>
         ),
         modalRoot
