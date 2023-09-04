@@ -35,7 +35,7 @@ export const IngredientDetails: FC<PropsWithChildren<IngredientDetailsProps>> = 
                         Детали ингредиента
                     </p>
                     <img className={styles.img}
-                         src={detail.image}
+                         src={detail.image_large}
                          alt={'картинка продукта'}
                     />
                     <p className={"text text_type_main-medium mt-4 mb-8"}>

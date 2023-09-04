@@ -9,6 +9,7 @@ import styles from './modal.module.css'
 
 
 const modalRoot = document.getElementById("react-modals")!;
+const bodyElement = document.getElementsByTagName("body")[0]!;
 
 
 interface ModalProps{
@@ -22,11 +23,17 @@ export const Modal: FC<React.PropsWithChildren<ModalProps>> = ({
     children, ...props
 }) => {
     const modalRef= useRef<HTMLDialogElement>(null)
+    const bodyRef = useRef(bodyElement)
 
     useEffect(() => {
+        bodyRef.current.style.overflow = 'hidden'
         modalRef.current?.showModal()
         modalRef.current?.focus()
-    }, [])
+
+        return () => {
+            bodyRef.current.style.overflow = ''
+        }
+    }, [bodyRef, modalRef])
 
     const handleCloseByKeyDown = (e:KeyboardEvent<HTMLInputElement | HTMLDialogElement>) =>{
         if (e.code === 'Escape')

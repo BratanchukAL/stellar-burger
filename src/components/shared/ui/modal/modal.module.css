@@ -29,7 +29,6 @@
     border-radius: var(--common-border-radius-s) var(--common-border-radius-s);
     background-color: var(--background);
 
-    overscroll-behavior: contain;
     pointer-events: auto;
 }
 
