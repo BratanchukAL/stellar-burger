@@ -32,6 +32,7 @@ export const CardPosition: FC<CardPositionProps> = (
             </span>
             <ConstructorElement
                 thumbnail={thumbnail as string}
+                isLocked={isLocked}
                 {...props}
                 />
         </div>

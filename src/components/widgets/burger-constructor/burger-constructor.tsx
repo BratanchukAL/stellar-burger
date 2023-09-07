@@ -2,7 +2,7 @@ import React, {useContext, useMemo} from "react";
 
 import {Button, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
-import {ProductsContext} from "components/entities/products";
+import {useGetProductsQuery} from "components/entities/products";
 
 import {CardPosition} from "./card-position/card-position";
 import {OrderDetails} from "./оrder-details/order-details";
@@ -12,7 +12,7 @@ import styles from './burger-constructor.module.css'
 
 export const BurgerConstructor = () => {
     const price = 610
-    const products = useContext(ProductsContext)
+    const {data: products = []} = useGetProductsQuery()
 
 
      const selectedUser: string[] = useMemo(()=>

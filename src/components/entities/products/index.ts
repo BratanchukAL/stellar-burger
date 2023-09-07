@@ -1,3 +1,3 @@
-export {fetchIngredients} from "./api";
-export  {ProductsContext} from "./context";
-export type {IProduct} from "./context";
+export { useGetProductsQuery } from "./api/api";
+export type { IProduct } from "./models";
+

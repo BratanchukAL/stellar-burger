@@ -5,7 +5,7 @@ import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import {CategoryProduct} from "./category-product/category-product";
 import {CardProduct} from "./card-product/card-product";
 
-import {ProductsContext} from "components/entities/products";
+import { useGetProductsQuery } from "components/entities/products";
 
 import styles from './burger-ingredients.module.css'
 import {IngredientDetails} from "./ingredient-details/ingredient-details";
@@ -15,7 +15,15 @@ export const BurgerIngredients = () => {
     const [current, setCurrent] = useState('bun')
     const categoriesRefs = useRef<Record<string, HTMLDivElement>>({} as any);
 
-    const products = useContext(ProductsContext)
+    const {
+        data: products = [],
+        // isLoading,
+        // isSuccess,
+        // isError,
+        // error
+    } = useGetProductsQuery()
+
+
     const categoriesData = [
         {
             name: 'bun',
