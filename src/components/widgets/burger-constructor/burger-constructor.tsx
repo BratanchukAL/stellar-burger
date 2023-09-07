@@ -1,8 +1,11 @@
-import React, {useContext, useMemo} from "react";
+import React, {useMemo} from "react";
 
 import {Button, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
-import {useGetProductsQuery} from "components/entities/products";
+import {useAppSelector} from "components/providers/store";
+
+import {IProduct, useGetProductsQuery} from "components/entities/products";
+import {selectSelectedProductsState} from "components/entities/basket";
 
 import {CardPosition} from "./card-position/card-position";
 import {OrderDetails} from "./оrder-details/order-details";
@@ -10,39 +13,54 @@ import {OrderDetails} from "./оrder-details/order-details";
 import styles from './burger-constructor.module.css'
 
 
+
+
 export const BurgerConstructor = () => {
     const price = 610
     const {data: products = []} = useGetProductsQuery()
+    const {bun: selectedBun, ingredients: selectedIngredients} = useAppSelector(selectSelectedProductsState)
 
 
-     const selectedUser: string[] = useMemo(()=>
-             products && products
-             .slice(1, products.length > 10? 9: products.length)
-             .reduce<string[]>((prev: string[], current) =>{
-                 prev.push(current._id)
-                 return prev
-         }, [])
-     , [products])
+    // const selectedBunDoc = useMemo(()=>{
+    //     if (products && selectedBun)
+    //         return products.find((p)=>p._id === selectedBun)
+    //     return null
+    // }, [])
 
-    const selectedProducts = products && products.filter((v)=>
-        v._id === selectedUser.find((id)=>id===v._id)
-    )
+    const selectedIngredientsDoc = useMemo(()=>{
+        if (products.length && selectedIngredients.length)
+            return selectedIngredients.reduce((previousValue: IProduct[], currentValue, index: number):IProduct[] => {
+                const found = {
+                    ...products.find((p)=>p._id === currentValue.id)!,
+                    uuid: currentValue.uuid
+                }
+
+                previousValue = previousValue.concat([found])
+                return previousValue
+            }
+            ,[] as IProduct[])
+        return []
+    }, [products, selectedIngredients])
 
    return (
        <section>
            <div className={styles.content + ' pl-4 mb-10'} >
                <div className="pr-4">
-                   <CardPosition
-                       type="top"
-                       isLocked={true}
-                       text="Краторная булка N-200i (верх)"
-                       price={200}
-                   />
+                   {/*<CardPosition*/}
+                   {/*    id={}*/}
+                   {/*    type="top"*/}
+                   {/*    isLocked={true}*/}
+                   {/*    text="Краторная булка N-200i (верх)"*/}
+                   {/*    price={200}*/}
+                   {/*/>*/}
                </div>
                <div className={styles.box + ' pr-2'}>
-                   {selectedProducts && selectedProducts.map((v)=>
+                   {selectedIngredientsDoc.map((v, index)=>
                        <CardPosition
-                           key={v._id}
+                           id={v._id}
+                           index={index}
+                           typeProduct={v.type}
+                           key={v.uuid}
                            text={v.name}
                            price={v.price}
                            thumbnail={v.image}
@@ -50,12 +68,12 @@ export const BurgerConstructor = () => {
                    )}
                </div>
                <div className="pr-4">
-                   <CardPosition
-                       type="bottom"
-                       isLocked={true}
-                       text="Краторная булка N-200i (низ)"
-                       price={200}
-                   />
+                   {/*<CardPosition*/}
+                   {/*    type="bottom"*/}
+                   {/*    isLocked={true}*/}
+                   {/*    text="Краторная булка N-200i (низ)"*/}
+                   {/*    price={200}*/}
+                   {/*/>*/}
                </div>
            </div>
            <div className={styles.button_order}>

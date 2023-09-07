@@ -1,5 +1,6 @@
 export interface IProduct{
     _id: string
+    uuid: string | null
     name: string
     type:"bun" | "main" | "sauce"
     proteins: number
