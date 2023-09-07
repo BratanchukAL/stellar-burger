@@ -6,10 +6,9 @@ import DefaultImage from "@ya.praktikum/react-developer-burger-ui-components/dis
 
 import {useDragDropItem} from "components/shared/hooks/useDragDropItem";
 import {useAppDispatch} from "components/providers/store";
+import {basketActions} from "components/entities/basket";
 
 import styles from './card-position.module.css'
-import {basketActions} from "../../../entities/basket";
-
 
 
 interface CardPositionProps{
@@ -39,19 +38,24 @@ export const CardPosition: FC<CardPositionProps> = (
         dispatch(basketActions.move({fromIndex, toIndex}))
     }, [])
 
-    const [ref, handlerId, isDragging] = useDragDropItem(
-        ['sauce', 'main'],
+    const [dropRef, isDragging] = useDragDropItem(
+        ['sauce+constructor', 'main+constructor'],
         id,
         index,
-        typeProduct,
+        `${typeProduct}+constructor`,
         handleDropItem
     )
+
+    let extraProps = {ref: dropRef }
+    if (isLocked)
+        extraProps = {ref: ()=>{}}
+
     const opacity = isDragging ? 0 : 1
 
     return(
-        <div className={styles.content} style={{opacity}} ref={ref} data-handler-id={handlerId} >
+        <div className={styles.content} style={{opacity}} {...extraProps}>
             <span className={styles.drag_place}>
-                {!isLocked && <DragIcon type="primary" />}
+                {!isLocked && <DragIcon type="primary"/>}
             </span>
             <ConstructorElement
                 thumbnail={thumbnail as string}

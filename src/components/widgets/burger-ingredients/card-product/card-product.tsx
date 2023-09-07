@@ -5,11 +5,14 @@ import DefaultImage from "@ya.praktikum/react-developer-burger-ui-components/dis
 import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import {clx} from "components/shared/utils";
+import {useDragItem} from "components/shared/hooks";
 
 import styles from './card-product.module.css'
 
 
 interface CardProductProps{
+    id: string
+    productType: string
     count?: number
     image?: string
     price: number
@@ -20,18 +23,22 @@ interface CardProductProps{
 
 export const CardProduct: FC<CardProductProps> = (
     {
+        id,
+        productType,
         image = DefaultImage,
         extraClass = '',
         count = 0,
         ...props
     }
 ) => {
+    const [isDragging, dragRef] = useDragItem(id, productType)
+
     let counterElement = undefined
     if (count)
         counterElement = <Counter count={count} size="default" extraClass="m-1" />
 
     return (
-        <div className={clx(styles.card_content, [extraClass])}>
+        <div className={clx(styles.card_content, [extraClass])} ref={dragRef}>
             <div className={styles.image_content}>
                 {counterElement}
                 <img src={image}

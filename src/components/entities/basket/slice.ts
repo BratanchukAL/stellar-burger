@@ -1,4 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import { v4 as uuid4 } from 'uuid';
+
 import {IBasket, ISetIngredient} from "./models";
 
 const initialState = {
@@ -21,8 +23,14 @@ export const basketSlice = createSlice({
     name: 'basket',
     initialState,
     reducers: {
-        add(state, action: PayloadAction<ISetIngredient>){
-            state.data.ingredients = state.data.ingredients.concat([action.payload])
+        add: {
+            reducer: (state, action: PayloadAction<ISetIngredient>)=>{
+                state.data.ingredients = state.data.ingredients.concat([action.payload])
+            },
+            prepare: (id: string) => {
+                const uuid = uuid4()
+                return { payload: { id, uuid } }
+            },
         },
         addBun(state, action: PayloadAction<string>){
             state.data.bun = action.payload

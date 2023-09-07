@@ -1,11 +1,11 @@
 import {useDrag} from "react-dnd";
 
-export const useDragItem = (id: string, index: number, drag_type: string) =>{
+export const useDragItem = (id: string, drag_type: string) =>{
 
     const [{isDragging}, drag] = useDrag({
         type: drag_type,
         item: () => {
-            return {id, index}
+            return {id}
         },
         collect: (monitor: any) => ({
             isDragging: monitor.isDragging(),

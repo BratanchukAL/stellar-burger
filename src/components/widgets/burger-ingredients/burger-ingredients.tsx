@@ -1,4 +1,4 @@
-import React, {useContext, useRef, useState} from "react"
+import React, {useRef, useState} from "react"
 
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -53,6 +53,8 @@ export const BurgerIngredients = () => {
                         return (
                             <IngredientDetails key={prod._id} detail={prod}>
                                 <CardProduct
+                                    id={prod._id}
+                                    productType={prod.type}
                                     count={1}
                                     price={prod.price}
                                     caption={prod.name}
