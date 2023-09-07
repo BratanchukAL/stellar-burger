@@ -86,8 +86,7 @@ export const useDragDropItem = (
         }),
     })
 
-    drag(dropRef)
-    drop(dropRef)
+    drag(drop(dropRef))
 
     return [dropRef, isDragging]
 };

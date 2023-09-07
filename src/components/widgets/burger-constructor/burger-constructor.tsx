@@ -17,11 +17,10 @@ import styles from './burger-constructor.module.css'
 
 
 export const BurgerConstructor = () => {
-    const price = 610
+    const dispatch = useAppDispatch()
     const {data: products = []} = useGetProductsQuery()
     const {bun: selectedBun, ingredients: selectedIngredients} = useAppSelector(selectSelectedProductsState)
 
-    const dispatch = useAppDispatch()
     const handleDropItem = useCallback((id: string)=>{
         const found = products.find((p)=>p._id === id)
 
@@ -29,7 +28,7 @@ export const BurgerConstructor = () => {
             dispatch(basketActions.addBun(id))
         else
             dispatch(basketActions.add(id))
-    }, [])
+    }, [dispatch, products])
 
     const [dropRef] = useDropItem(['bun', 'sauce', 'main'], handleDropItem)
 
@@ -55,6 +54,23 @@ export const BurgerConstructor = () => {
             ,[] as IProduct[])
         return []
     }, [products, selectedIngredients])
+
+    const totalPrice = useMemo(()=>{
+        let total = 0
+        if (!products.length)
+            return total
+
+        if ( selectedBunDoc)
+            total = selectedBunDoc.price
+
+        if (selectedIngredientsDocs.length)
+            total = selectedIngredientsDocs.reduce((previousValue: number, currentProd: IProduct): number=>{
+                previousValue +=  currentProd.price
+                return previousValue
+            }, total)
+
+        return total
+    }, [dispatch, products, selectedIngredientsDocs, selectedBunDoc])
 
    return (
        <section>
@@ -99,7 +115,7 @@ export const BurgerConstructor = () => {
            </div>
            <div className={styles.button_order}>
                <span className="mr-10">
-                   <p className="text text_type_digits-medium">{price}&nbsp;
+                   <p className="text text_type_digits-medium">{totalPrice}&nbsp;
                    <CurrencyIcon type="primary" /></p>
                </span>
                <OrderDetails>
