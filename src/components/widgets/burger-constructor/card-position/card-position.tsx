@@ -21,7 +21,6 @@ interface CardPositionProps{
     type?: 'top' | 'bottom';
     isLocked?: boolean;
     extraClass?: string;
-    handleClose?: () => void;
 }
 
 export const CardPosition: FC<CardPositionProps> = (
@@ -34,16 +33,20 @@ export const CardPosition: FC<CardPositionProps> = (
 )=>{
     const dispatch = useAppDispatch()
 
-    const handleDropItem = useCallback((fromIndex: number, toIndex: number)=>{
+    const handleMoveItem = useCallback((fromIndex: number, toIndex: number)=>{
         dispatch(basketActions.move({fromIndex, toIndex}))
-    }, [])
+    }, [dispatch])
+
+    const handleDelete = useCallback(()=>{
+        dispatch(basketActions.delete(index))
+    }, [dispatch, index])
 
     const [dropRef, isDragging] = useDragDropItem(
         ['sauce+constructor', 'main+constructor'],
         id,
         index,
         `${typeProduct}+constructor`,
-        handleDropItem
+        handleMoveItem
     )
 
     let extraProps = {ref: dropRef }
@@ -60,6 +63,7 @@ export const CardPosition: FC<CardPositionProps> = (
             <ConstructorElement
                 thumbnail={thumbnail as string}
                 isLocked={isLocked}
+                handleClose={handleDelete}
                 {...props}
                 />
         </div>
@@ -74,5 +78,4 @@ CardPosition.propTypes = {
     type: PropTypes.oneOf(['top' , 'bottom']),
     isLocked: PropTypes.bool,
     extraClass: PropTypes.string,
-    handleClose: PropTypes.func,
 }

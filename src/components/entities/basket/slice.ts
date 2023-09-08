@@ -19,6 +19,9 @@ const initialState = {
     } as IBasket
 }
 
+type IDType = string;
+type IndexType = number;
+
 export const basketSlice = createSlice({
     name: 'basket',
     initialState,
@@ -32,7 +35,7 @@ export const basketSlice = createSlice({
                 return { payload: { id, uuid } }
             },
         },
-        addBun(state, action: PayloadAction<string>){
+        addBun(state, action: PayloadAction<IDType>){
             state.data.bun = action.payload
         },
         move(state, action: PayloadAction<{fromIndex: number, toIndex: number}>){
@@ -44,6 +47,10 @@ export const basketSlice = createSlice({
             ingredients.splice(toIndex, 0, fromElement)
             state.data.ingredients = ingredients;
         },
+
+        delete(state, action: PayloadAction<IndexType>) {
+            state.data.ingredients = state.data.ingredients.filter((v, index)=>index !== action.payload)
+        }
     }
 })
 

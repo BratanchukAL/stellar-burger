@@ -78,7 +78,7 @@ export const BurgerConstructor = () => {
                <div className="pr-4">
                    {selectedBunDoc && <CardPosition
                        id={selectedBunDoc._id}
-                       index={0}
+                       index={-1}
                        typeProduct={selectedBunDoc.type}
                        text={`${selectedBunDoc.name} (верх)`}
                        price={selectedBunDoc.price}
@@ -103,7 +103,7 @@ export const BurgerConstructor = () => {
                <div className="pr-4">
                   {selectedBunDoc && <CardPosition
                        id={selectedBunDoc._id}
-                       index={0}
+                       index={-1}
                        typeProduct={selectedBunDoc.type}
                        text={`${selectedBunDoc.name} (низ)`}
                        price={selectedBunDoc.price}
