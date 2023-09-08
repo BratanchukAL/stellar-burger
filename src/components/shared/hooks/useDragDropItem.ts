@@ -76,7 +76,7 @@ export const useDragDropItem = (
         },
     }, [index]);
 
-    const [{isDragging}, drag, previewRef] = useDrag({
+    const [{isDragging}, drag, preview] = useDrag({
         type: drag_type,
         collect: (monitor: any) => ({
             isDragging: monitor.isDragging(),
@@ -94,6 +94,7 @@ export const useDragDropItem = (
 
     drag(dragRef)
     drop(dropRef)
+    preview(dropRef)
 
-    return [dragRef, dropRef, previewRef, isDragging]
+    return [dragRef, dropRef, isDragging]
 };
