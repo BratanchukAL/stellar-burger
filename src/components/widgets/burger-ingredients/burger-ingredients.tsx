@@ -5,14 +5,18 @@ import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import {CategoryProduct} from "./category-product/category-product";
 import {CardProduct} from "./card-product/card-product";
 
+import {useAppSelector} from "components/providers/store";
+import {selectSelectedProductsState} from "components/entities/basket";
 import { useGetProductsQuery } from "components/entities/products";
 
 import styles from './burger-ingredients.module.css'
 import {IngredientDetails} from "./ingredient-details/ingredient-details";
 
 
+
 export const BurgerIngredients = () => {
     const [current, setCurrent] = useState('bun')
+    const {bun: selectedBun, ingredients: selectedIngredients} = useAppSelector(selectSelectedProductsState)
     const categoriesRefs = useRef<Record<string, HTMLDivElement>>({} as any);
 
     const {
@@ -42,20 +46,22 @@ export const BurgerIngredients = () => {
         categoriesRefs.current[tabName].scrollIntoView({ block: "start",  behavior: "smooth" });
     }
 
-    const productsElements = categoriesData && categoriesData.map((category, index)=>{
-        const productsOfCat = products && products.filter((v)=>v.type===category.name)
+    const productsElements = categoriesData.map((category, index)=>{
+        const productsOfCat = products.filter((v)=>v.type===category.name)
 
         return (<React.Fragment key={category.name}>
             <div ref={el => categoriesRefs.current[category.name] = el! }> </div>
             <CategoryProduct  title={category.lang} extraClass={'mb-10'}>
                 {
                     productsOfCat && productsOfCat.map((prod => {
+                        const count = selectedIngredients.filter((v)=>v.id===prod._id).length +
+                            (selectedBun === prod._id ? 1 : 0)
                         return (
                             <IngredientDetails key={prod._id} detail={prod}>
                                 <CardProduct
                                     id={prod._id}
                                     productType={prod.type}
-                                    count={1}
+                                    count={count}
                                     price={prod.price}
                                     caption={prod.name}
                                     image={prod.image_large}
