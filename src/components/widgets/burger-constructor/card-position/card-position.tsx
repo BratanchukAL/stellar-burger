@@ -14,6 +14,7 @@ import styles from './card-position.module.css'
 interface CardPositionProps{
     id: string;
     index: number;
+    uuid: string;
     typeProduct: string;
     text: string;
     thumbnail?: string;
@@ -25,7 +26,7 @@ interface CardPositionProps{
 
 export const CardPosition: FC<CardPositionProps> = (
     {
-        id, index, typeProduct,
+        id, index, uuid, typeProduct,
         thumbnail= DefaultImage,
         isLocked = false,
         ...props
@@ -33,8 +34,8 @@ export const CardPosition: FC<CardPositionProps> = (
 )=>{
     const dispatch = useAppDispatch()
 
-    const handleMoveItem = useCallback((fromIndex: number, toIndex: number)=>{
-        dispatch(basketActions.move({fromIndex, toIndex}))
+    const handleMoveItem = useCallback((fromUUID: string, toIndex: number)=>{
+        dispatch(basketActions.move({fromUUID, toIndex}))
     }, [dispatch])
 
     const handleDelete = useCallback(()=>{
@@ -45,6 +46,7 @@ export const CardPosition: FC<CardPositionProps> = (
         ['sauce+constructor', 'main+constructor'],
         id,
         index,
+        uuid,
         `${typeProduct}+constructor`,
         handleMoveItem
     )

@@ -29,11 +29,13 @@ export const basketSlice = createSlice({
         addBun(state, action: PayloadAction<IDType>){
             state.data.bun = action.payload
         },
-        move(state, action: PayloadAction<{fromIndex: number, toIndex: number}>){
+        move(state, action: PayloadAction<{fromUUID: string, toIndex: number}>){
             const ingredients = [...state.data.ingredients];
-            const {fromIndex, toIndex} = action.payload
+            const {fromUUID, toIndex} = action.payload
 
-            const fromElement = ingredients[fromIndex]
+            const fromElement = ingredients.find((v)=>v.uuid === fromUUID)!
+            const fromIndex = ingredients.indexOf(fromElement)
+
             ingredients.splice(fromIndex, 1);
             ingredients.splice(toIndex, 0, fromElement)
             state.data.ingredients = ingredients;

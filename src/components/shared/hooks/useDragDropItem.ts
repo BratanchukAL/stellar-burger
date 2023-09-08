@@ -4,20 +4,22 @@ import {Identifier, XYCoord} from "dnd-core";
 
 
 interface DragItem {
-  index: number
-  id: string
+    uuid: string
+    index: number
+    hoverIndex: number
+    id: string
 }
 
 export const useDragDropItem = (
     drop_types: string[],
     id: string,
     index: number,
+    uuid: string,
     drag_type: string,
-    onHover: (fromIndex: number, toIndex: number)=>void
+    onHover: (fromUUID: string, toIndex: number)=>void
 ) => {
     const dragRef = useRef<HTMLElement>(null)
     const dropRef = useRef<HTMLElement>(null)
-    // const dropRef = useRef<HTMLElement>(null)
 
     const [{handlerId}, drop] = useDrop<DragItem, void, { handlerId: Identifier | null; }>({
         accept: drop_types,
@@ -30,7 +32,7 @@ export const useDragDropItem = (
             if (!dropRef.current) {
                 return
             }
-            const dragIndex = item.index
+            const dragIndex = item.hoverIndex
             const hoverIndex = index
 
             // Don't replace items with themselves
@@ -66,31 +68,31 @@ export const useDragDropItem = (
             }
 
             // Time to actually perform the action
-            onHover(dragIndex, hoverIndex)
+            onHover(item.uuid, hoverIndex)
 
             // Note: we're mutating the monitor item here!
             // Generally it's better to avoid mutations,
             // but it's good here for the sake of performance
             // to avoid expensive index searches.
-            item.index = hoverIndex
+            item.hoverIndex = hoverIndex
         },
     }, [index]);
 
-    const [{isDragging}, drag, preview] = useDrag({
+    const [{isDragging}, drag, preview] = useDrag(()=>({
         type: drag_type,
         collect: (monitor: any) => ({
             isDragging: monitor.isDragging(),
         }),
-        item: () => {
-            return {id, index}
+        item: (): DragItem => {
+            return {id, index, uuid, hoverIndex: index}
         },
-      //   end: (item, monitor) => {
-      //       const didDrop = monitor.didDrop()
-      //       if (!didDrop) {
-      //           onHover(0, index)
-      //       }
-      // },
-    }, [id, index])
+        end: (item, monitor) => {
+            const didDrop = monitor.didDrop()
+            if (!didDrop) {
+                onHover(uuid, item.index)
+            }
+        },
+    }), [id, index, uuid])
 
     drag(dragRef)
     drop(dropRef)

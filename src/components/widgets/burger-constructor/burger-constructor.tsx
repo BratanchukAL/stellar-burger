@@ -79,6 +79,7 @@ export const BurgerConstructor = () => {
                    {selectedBunDoc && <CardPosition
                        id={selectedBunDoc._id}
                        index={-1}
+                       uuid={selectedBunDoc.uuid!}
                        typeProduct={selectedBunDoc.type}
                        text={`${selectedBunDoc.name} (верх)`}
                        price={selectedBunDoc.price}
@@ -92,6 +93,7 @@ export const BurgerConstructor = () => {
                        <CardPosition
                            id={v._id}
                            index={index}
+                           uuid={v.uuid!}
                            typeProduct={v.type}
                            key={v.uuid}
                            text={v.name}
@@ -104,6 +106,7 @@ export const BurgerConstructor = () => {
                   {selectedBunDoc && <CardPosition
                        id={selectedBunDoc._id}
                        index={-1}
+                       uuid={selectedBunDoc.uuid!}
                        typeProduct={selectedBunDoc.type}
                        text={`${selectedBunDoc.name} (низ)`}
                        price={selectedBunDoc.price}
