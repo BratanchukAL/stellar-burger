@@ -1,6 +1,5 @@
-import {useDrop} from "react-dnd";
-import type { Identifier } from 'dnd-core'
 import {useRef} from "react";
+import {useDrop} from "react-dnd";
 
 interface DragItem {
   id: string
@@ -10,13 +9,13 @@ export const useDropItem = (
     drag_types: string[],
     onDrop: (id: string)=>void
 ) => {
-    const ref = useRef<HTMLElement>(null)
+    const dropRef = useRef<HTMLElement>(null)
 
-    const [{handlerId}, drop] = useDrop<DragItem, void, { handlerId: Identifier | null; }>({
+    const [{canDrop}, drop] = useDrop<DragItem, void, { canDrop: boolean; }>({
         accept: drag_types,
         collect(monitor) {
             return {
-                handlerId: monitor.getHandlerId(),
+                canDrop: monitor.canDrop()
             }
         },
         drop(item: DragItem, monitor) {
@@ -24,7 +23,7 @@ export const useDropItem = (
         },
     });
 
-    drop(ref)
+    drop(dropRef)
 
-    return [ref, drop, handlerId]
+    return [dropRef, canDrop]
 };

@@ -4,6 +4,7 @@ import {Button, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-comp
 
 import {useAppDispatch, useAppSelector} from "components/providers/store";
 
+import {clx} from "components/shared/utils";
 import {useDropItem} from "components/shared/hooks";
 
 import {IProduct, useGetProductsQuery} from "components/entities/products";
@@ -13,6 +14,7 @@ import {CardPosition} from "./card-position/card-position";
 import {OrderDetails} from "./оrder-details/order-details";
 
 import styles from './burger-constructor.module.css'
+
 
 
 
@@ -30,7 +32,7 @@ export const BurgerConstructor = () => {
             dispatch(basketActions.add(id))
     }, [dispatch, products])
 
-    const [dropRef] = useDropItem(['bun', 'sauce', 'main'], handleDropItem)
+    const [dropRef, canDrop] = useDropItem(['bun', 'sauce', 'main'], handleDropItem)
 
     const selectedBunDoc = useMemo(()=>{
         if (products && selectedBun)
@@ -75,6 +77,12 @@ export const BurgerConstructor = () => {
    return (
        <section>
            <div className={styles.content + ' pl-4 mb-10'} ref={dropRef as React.RefObject<HTMLDivElement>}>
+               {!selectedBunDoc &&
+                   <p className={clx('text text_type_main-medium', [], {'text_color_inactive': !canDrop})}
+                      style={{margin:'auto'}}>
+                       Выберите булку
+                   </p>
+               }
                <div className="pr-4">
                    {selectedBunDoc && <CardPosition
                        id={selectedBunDoc._id}
@@ -89,6 +97,12 @@ export const BurgerConstructor = () => {
                    />}
                </div>
                <div className={styles.box + ' pr-2'}>
+                   {!selectedIngredientsDocs.length &&
+                       <p className={clx('text text_type_main-medium', [], {'text_color_inactive': !canDrop})}
+                          style={{margin:'auto'}}>
+                           Перетащите сюда ингредиент
+                       </p>
+                   }
                    {selectedIngredientsDocs.map((v, index)=>
                        <CardPosition
                            id={v._id}

@@ -16,6 +16,9 @@
 .box {
     composes: content;
     max-height: 60vh; /* TODO: var from react? */
-    /*width: 600px; !*TODO: Tabs fixed? *!*/
+
+    min-height: 100px;
+    width: 600px;
+
     overflow-y: scroll;
 }
