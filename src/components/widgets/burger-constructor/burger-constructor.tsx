@@ -61,7 +61,7 @@ export const BurgerConstructor = () => {
             return total
 
         if ( selectedBunDoc)
-            total = selectedBunDoc.price
+            total = selectedBunDoc.price * 2
 
         if (selectedIngredientsDocs.length)
             total = selectedIngredientsDocs.reduce((previousValue: number, currentProd: IProduct): number=>{
@@ -70,7 +70,7 @@ export const BurgerConstructor = () => {
             }, total)
 
         return total
-    }, [dispatch, products, selectedIngredientsDocs, selectedBunDoc])
+    }, [products, selectedIngredientsDocs, selectedBunDoc])
 
    return (
        <section>
