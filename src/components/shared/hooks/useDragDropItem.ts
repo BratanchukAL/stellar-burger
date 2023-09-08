@@ -15,9 +15,9 @@ export const useDragDropItem = (
     drag_type: string,
     onHover: (fromIndex: number, toIndex: number)=>void
 ) => {
-    // const dragRef = useRef<HTMLElement>(null)
-    // const dropRef = useRef<HTMLElement>(null)
+    const dragRef = useRef<HTMLElement>(null)
     const dropRef = useRef<HTMLElement>(null)
+    // const dropRef = useRef<HTMLElement>(null)
 
     const [{handlerId}, drop] = useDrop<DragItem, void, { handlerId: Identifier | null; }>({
         accept: drop_types,
@@ -74,19 +74,26 @@ export const useDragDropItem = (
             // to avoid expensive index searches.
             item.index = hoverIndex
         },
-    });
+    }, [index]);
 
-    const [{isDragging}, drag] = useDrag({
+    const [{isDragging}, drag, previewRef] = useDrag({
         type: drag_type,
-        item: () => {
-            return {id, index}
-        },
         collect: (monitor: any) => ({
             isDragging: monitor.isDragging(),
         }),
-    })
+        item: () => {
+            return {id, index}
+        },
+      //   end: (item, monitor) => {
+      //       const didDrop = monitor.didDrop()
+      //       if (!didDrop) {
+      //           onHover(0, index)
+      //       }
+      // },
+    }, [id, index])
 
-    drag(drop(dropRef))
+    drag(dragRef)
+    drop(dropRef)
 
-    return [dropRef, isDragging]
+    return [dragRef, dropRef, previewRef, isDragging]
 };

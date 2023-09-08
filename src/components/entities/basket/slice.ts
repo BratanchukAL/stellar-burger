@@ -6,16 +6,7 @@ import {IBasket, ISetIngredient} from "./models";
 const initialState = {
     data: {
         bun: null,
-        ingredients: [
-            {
-                id:"643d69a5c3f7b9001cfa0945",
-                uuid:"643d69a5c3f7b9001cfa09450",
-            },
-            {
-                id:"643d69a5c3f7b9001cfa0944",
-                uuid:"643d69a5c3f7b9001cfa09441",
-            },
-        ],
+        ingredients: [],
     } as IBasket
 }
 

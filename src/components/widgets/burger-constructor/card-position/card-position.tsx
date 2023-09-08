@@ -41,7 +41,7 @@ export const CardPosition: FC<CardPositionProps> = (
         dispatch(basketActions.delete(index))
     }, [dispatch, index])
 
-    const [dropRef, isDragging] = useDragDropItem(
+    const [dragRef, dropRef, previewRef, isDragging] = useDragDropItem(
         ['sauce+constructor', 'main+constructor'],
         id,
         index,
@@ -49,23 +49,29 @@ export const CardPosition: FC<CardPositionProps> = (
         handleMoveItem
     )
 
-    let extraProps = {ref: dropRef }
+    let extraDragDropProps = {ref: (r: any)=>{
+        dropRef.current = r
+        previewRef(r)
+    } }
+
     if (isLocked)
-        extraProps = {ref: ()=>{}}
+        extraDragDropProps = {ref: ()=>{}}
 
     const opacity = isDragging ? 0 : 1
 
     return(
-        <div className={styles.content} style={{opacity}} {...extraProps}>
+        <div className={styles.content} style={{opacity}} {...extraDragDropProps}>
             <span className={styles.drag_place}>
-                {!isLocked && <DragIcon type="primary"/>}
+                {!isLocked && <span ref={dragRef}><DragIcon type="primary"/></span>}
             </span>
+
             <ConstructorElement
                 thumbnail={thumbnail as string}
                 isLocked={isLocked}
                 handleClose={handleDelete}
                 {...props}
-                />
+            />
+
         </div>
     )
 }
