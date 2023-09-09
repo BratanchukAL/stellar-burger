@@ -31,7 +31,7 @@ export const CardProduct: FC<CardProductProps> = (
         ...props
     }
 ) => {
-    const [isDragging, dragRef] = useDragItem(id, productType)
+    const [dragRef] = useDragItem(id, productType)
 
     let counterElement = undefined
     if (count)

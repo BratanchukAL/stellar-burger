@@ -12,5 +12,5 @@ export const useDragItem = (id: string, drag_type: string) =>{
         }),
     })
 
-    return [isDragging, drag]
+    return [drag, isDragging]
 }
