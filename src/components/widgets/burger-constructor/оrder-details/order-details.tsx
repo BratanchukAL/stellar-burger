@@ -32,7 +32,7 @@ export const OrderDetails: FC<PropsWithChildren>= ({children}) =>{
             ingredients = ingredients.concat([selectedBun])
 
         if (ingredients.length) {
-            postOrder({ingredients})
+            await postOrder({ingredients})
             handleOpen()
         }
     }, [selectedIngredients, selectedBun, handleOpen, postOrder])
