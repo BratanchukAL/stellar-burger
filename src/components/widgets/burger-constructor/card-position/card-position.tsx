@@ -77,6 +77,9 @@ export const CardPosition: FC<CardPositionProps> = (
 
 
 CardPosition.propTypes = {
+    id: PropTypes.string.isRequired,
+    uuid: PropTypes.string.isRequired,
+    typeProduct: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
     thumbnail: PropTypes.string,
     price: PropTypes.number.isRequired,
