@@ -56,7 +56,7 @@ export const CardPosition: FC<CardPositionProps> = (
     if (isLocked)
         extraDragDropProps = {ref: ()=>{}}
 
-    const opacity = isDragging ? 0 : 1
+    const opacity = isDragging ? 0.2 : 1
 
     return(
         <div className={styles.content} style={{opacity}} {...extraDragDropProps}>
