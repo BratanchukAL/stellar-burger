@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {FC, useCallback} from "react";
 import PropTypes from "prop-types";
 
 import DefaultImage from "@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png";
@@ -6,6 +6,10 @@ import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-com
 
 import {clx} from "components/shared/utils";
 import {useDragItem} from "components/shared/hooks";
+
+import {useAppDispatch} from "components/providers/store";
+import {IProduct} from "components/entities/products";
+import {ingredientDetailsActions} from "components/entities/products/ingredient-details";
 
 import styles from './card-product.module.css'
 
@@ -19,6 +23,8 @@ interface CardProductProps{
     caption: string
 
     extraClass?: string
+
+    details: IProduct
 }
 
 export const CardProduct: FC<CardProductProps> = (
@@ -28,17 +34,27 @@ export const CardProduct: FC<CardProductProps> = (
         image = DefaultImage,
         extraClass = '',
         count = 0,
+        details,
         ...props
     }
 ) => {
+    const dispatch = useAppDispatch()
     const [dragRef] = useDragItem(id, productType)
+
+    const handleClick = useCallback(()=>{
+         dispatch(ingredientDetailsActions.add(details))
+    }, [dispatch, details])
+
 
     let counterElement = undefined
     if (count)
         counterElement = <Counter count={count} size="default" extraClass="m-1" />
 
     return (
-        <div className={clx(styles.card_content, [extraClass])} ref={dragRef}>
+        <div className={clx(styles.card_content, [extraClass, styles.drag_place])}
+             ref={dragRef}
+             onClick={handleClick}
+        >
             <div className={styles.image_content}>
                 {counterElement}
                 <img src={image}

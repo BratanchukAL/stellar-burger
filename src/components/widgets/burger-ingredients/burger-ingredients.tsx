@@ -54,17 +54,16 @@ export const BurgerIngredients = () => {
                                 (selectedBun === prod._id ? 1 : 0)
 
                             return (
-                                <IngredientDetails key={prod._id} detail={prod}>
-                                    <CardProduct
-                                        id={prod._id}
-                                        productType={prod.type}
-                                        count={count}
-                                        price={prod.price}
-                                        caption={prod.name}
-                                        image={prod.image_large}
-                                        extraClass={'mr-3 ml-3 mb-4 mt-4'}
-                                    />
-                                </IngredientDetails>
+                                <CardProduct key={prod._id}
+                                    id={prod._id}
+                                    productType={prod.type}
+                                    count={count}
+                                    price={prod.price}
+                                    caption={prod.name}
+                                    image={prod.image_large}
+                                    details={prod}
+                                    extraClass={'mr-3 ml-3 mb-4 mt-4'}
+                                />
                             )
                         }))
                     }
@@ -75,6 +74,8 @@ export const BurgerIngredients = () => {
 
     return (
         <section>
+            <IngredientDetails  />
+
             <div className={styles.tabs_content}>
                 {
                     categoriesData.map((v)=>

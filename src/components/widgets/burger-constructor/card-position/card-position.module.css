@@ -6,4 +6,5 @@
 
 .drag_place{
     width: 32px;
+    cursor: pointer;
 }
