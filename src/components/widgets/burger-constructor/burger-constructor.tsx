@@ -16,8 +16,6 @@ import {OrderDetails} from "./оrder-details/order-details";
 import styles from './burger-constructor.module.css'
 
 
-
-
 export const BurgerConstructor = () => {
     const dispatch = useAppDispatch()
     const {data: products = []} = useGetProductsQuery()
