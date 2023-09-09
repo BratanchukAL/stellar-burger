@@ -74,9 +74,29 @@ export const CardProduct: FC<CardProductProps> = (
 
 
 CardProduct.propTypes = {
+    id: PropTypes.string.isRequired,
+    productType: PropTypes.string.isRequired,
     count: PropTypes.number,
     price: PropTypes.number.isRequired,
     caption: PropTypes.string.isRequired,
     image: PropTypes.string,
-    extraClass: PropTypes.string
+    extraClass: PropTypes.string,
+    details: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        type: PropTypes.oneOf([
+            "bun" as const,
+            "main" as const,
+            "sauce" as const
+        ]).isRequired,
+        proteins: PropTypes.number.isRequired,
+        fat: PropTypes.number.isRequired,
+        carbohydrates: PropTypes.number.isRequired,
+        calories:PropTypes.number.isRequired,
+        price: PropTypes.number.isRequired,
+        image: PropTypes.string.isRequired,
+        image_mobile: PropTypes.string.isRequired,
+        image_large: PropTypes.string.isRequired,
+        __v: PropTypes.number.isRequired
+    }).isRequired
 }

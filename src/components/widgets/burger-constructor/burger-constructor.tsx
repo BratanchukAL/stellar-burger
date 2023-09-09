@@ -45,8 +45,6 @@ export const BurgerConstructor = () => {
                     ...products.find((p)=>p._id === currentValue.id)!,
                     uuid: currentValue.uuid
                 }
-                if(found.type === 'bun')
-                    return previousValue
 
                 previousValue = previousValue.concat([found])
                 return previousValue
@@ -90,7 +88,7 @@ export const BurgerConstructor = () => {
                    {selectedBunDoc && <CardPosition
                        id={selectedBunDoc._id}
                        index={-1}
-                       uuid={selectedBunDoc.uuid!}
+                       uuid={''}
                        typeProduct={selectedBunDoc.type}
                        text={`${selectedBunDoc.name} (верх)`}
                        price={selectedBunDoc.price}
@@ -123,7 +121,7 @@ export const BurgerConstructor = () => {
                   {selectedBunDoc && <CardPosition
                        id={selectedBunDoc._id}
                        index={-1}
-                       uuid={selectedBunDoc.uuid!}
+                       uuid={''}
                        typeProduct={selectedBunDoc.type}
                        text={`${selectedBunDoc.name} (низ)`}
                        price={selectedBunDoc.price}
