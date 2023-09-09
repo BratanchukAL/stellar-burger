@@ -11,18 +11,18 @@ interface DragItem {
 }
 
 export const useDragDropItem = (
-    drop_types: string[],
+    dropTypes: string[],
     id: string,
     index: number,
     uuid: string,
-    drag_type: string,
+    dragType: string,
     onHover: (fromUUID: string, toIndex: number)=>void
 ) => {
     const dragRef = useRef<HTMLElement>(null)
     const dropRef = useRef<HTMLElement>(null)
 
     const [{handlerId}, drop] = useDrop<DragItem, void, { handlerId: Identifier | null; }>({
-        accept: drop_types,
+        accept: dropTypes,
         collect(monitor) {
             return {
                 handlerId: monitor.getHandlerId(),
@@ -79,7 +79,7 @@ export const useDragDropItem = (
     }, [index]);
 
     const [{isDragging}, drag, preview] = useDrag(()=>({
-        type: drag_type,
+        type: dragType,
         collect: (monitor: any) => ({
             isDragging: monitor.isDragging(),
         }),

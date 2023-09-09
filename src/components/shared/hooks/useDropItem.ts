@@ -6,13 +6,13 @@ interface DragItem {
 }
 
 export const useDropItem = (
-    drag_types: string[],
+    dragTypes: string[],
     onDrop: (id: string)=>void
 ) => {
     const dropRef = useRef<HTMLElement>(null)
 
     const [{canDrop}, drop] = useDrop<DragItem, void, { canDrop: boolean; }>({
-        accept: drag_types,
+        accept: dragTypes,
         collect(monitor) {
             return {
                 canDrop: monitor.canDrop()
