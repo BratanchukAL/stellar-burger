@@ -1,4 +1,3 @@
-// utils
 import {IProduct} from "../models";
 import {ProductDto} from "./types";
 

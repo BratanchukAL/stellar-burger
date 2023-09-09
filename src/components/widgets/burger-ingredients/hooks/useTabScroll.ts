@@ -39,12 +39,16 @@ export const useTabScroll = (defaultTabName: string, shiftBox=0):
             }
 
         }
-    }, [categoriesRefs])
+    }, [categoriesRefs, shiftBox])
 
     useEffect(() => {
-        scrollRef.current && scrollRef.current.addEventListener('scroll', handleScroll)
+        const memScrollRef = scrollRef.current
+
+        if(scrollRef.current)
+            scrollRef.current.addEventListener('scroll', handleScroll)
+
         return () => {
-            scrollRef.current && scrollRef.current.removeEventListener('scroll', handleScroll)
+            memScrollRef && memScrollRef.removeEventListener('scroll', handleScroll)
         }
     }, [scrollRef, handleScroll])
 
