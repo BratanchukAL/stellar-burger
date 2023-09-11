@@ -1,21 +1,46 @@
-import React, {FC, PropsWithChildren} from "react";
+import React, {FC, PropsWithChildren, useCallback} from "react";
 
 import {clx} from "components/shared/utils";
 import {Modal} from "components/shared/ui";
 import {useVisible} from "components/shared/hooks";
 
-import CheckImage from 'images/check.png'
+import {useAppSelector} from "components/providers/store";
+
+import {selectSelectedProductsState} from "components/entities/basket";
+import {usePostOrderMutation} from "components/features/order";
+
 import styles from './order-details.module.css'
+import CheckImage from 'images/check.png'
 
 
 
 export const OrderDetails: FC<PropsWithChildren>= ({children}) =>{
     const [isOpen, handleClose, handleOpen] = useVisible(false)
-    const order_id = '034536'
+
+    const {bun: selectedBun, ingredients: selectedIngredients} = useAppSelector(selectSelectedProductsState)
+    const [postOrder, response]= usePostOrderMutation()
+
+    const order_id = response.data?.number
+
+
+    const handleFetch = useCallback(async ()=>{
+        let ingredients = selectedIngredients.reduce((prev: string[], current): string[]=>{
+            prev = prev.concat([current.id])
+            return prev
+        }, [] as string[])
+        if (selectedBun)
+            ingredients = ingredients.concat([selectedBun])
+
+        if (ingredients.length) {
+            await postOrder({ingredients})
+            handleOpen()
+        }
+    }, [selectedIngredients, selectedBun, handleOpen, postOrder])
+
 
     return(
         <>
-            <div className={styles.click_children} onClick={handleOpen}>
+            <div className={styles.click_children} onClick={handleFetch}>
                 {children}
             </div>
             { isOpen &&

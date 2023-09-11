@@ -1,22 +1,34 @@
-import React, {useContext, useRef, useState} from "react"
+import React, {useMemo} from "react"
 
 import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import {CategoryProduct} from "./category-product/category-product";
 import {CardProduct} from "./card-product/card-product";
 
-import {ProductsContext} from "components/entities/products";
+import {useAppSelector} from "components/providers/store";
+import {selectSelectedProductsState} from "components/entities/basket";
+import { useGetProductsQuery } from "components/entities/products";
+
+import {IngredientDetails} from "./ingredient-details/ingredient-details";
+import {useTabScroll} from "./hooks/useTabScroll";
 
 import styles from './burger-ingredients.module.css'
-import {IngredientDetails} from "./ingredient-details/ingredient-details";
+
 
 
 export const BurgerIngredients = () => {
-    const [current, setCurrent] = useState('bun')
-    const categoriesRefs = useRef<Record<string, HTMLDivElement>>({} as any);
+    const [currentTab, scrollRef, categoriesRefs, onClickTabCategory] = useTabScroll('bun', 70)
+    const {bun: selectedBun, ingredients: selectedIngredients} = useAppSelector(selectSelectedProductsState)
 
-    const products = useContext(ProductsContext)
-    const categoriesData = [
+    const {
+        data: products = [],
+        // isLoading,
+        // isSuccess,
+        // isError,
+        // error
+    } = useGetProductsQuery()
+
+    const categoriesData = useMemo(()=>[
         {
             name: 'bun',
             lang: 'Булки'
@@ -27,54 +39,57 @@ export const BurgerIngredients = () => {
             name: 'main',
             lang: 'Начинки'
         },
-    ]
+    ], [])
 
-    const OnClickTabCategory = (tabName: string)=>{
-        setCurrent(tabName)
-        categoriesRefs.current[tabName].scrollIntoView({ block: "start",  behavior: "smooth" });
-    }
+    const productsElements = useMemo(()=> categoriesData.map((category, index)=>{
+        const productsOfCat = products.filter((v)=>v.type===category.name)
 
-    const productsElements = categoriesData && categoriesData.map((category, index)=>{
-        const productsOfCat = products && products.filter((v)=>v.type===category.name)
+        return (
+            <div key={category.name} ref={el => categoriesRefs.current[category.name] = el! }>
+                <CategoryProduct  title={category.lang} extraClass={'mb-10'}>
+                    {
+                        productsOfCat.map((prod => {
+                            // Counter products
+                            const count = selectedIngredients.filter((v)=>v.id===prod._id).length +
+                                (selectedBun === prod._id ? 1 : 0)
 
-        return (<React.Fragment key={category.name}>
-            <div ref={el => categoriesRefs.current[category.name] = el! }> </div>
-            <CategoryProduct  title={category.lang} extraClass={'mb-10'}>
-                {
-                    productsOfCat.map((prod => {
-                        return (
-                            <IngredientDetails key={prod._id} detail={prod}>
-                                <CardProduct
-                                    count={1}
+                            return (
+                                <CardProduct key={prod._id}
+                                    id={prod._id}
+                                    productType={prod.type}
+                                    count={count}
                                     price={prod.price}
                                     caption={prod.name}
                                     image={prod.image_large}
+                                    details={prod}
                                     extraClass={'mr-3 ml-3 mb-4 mt-4'}
                                 />
-                            </IngredientDetails>
-                        )
-                    }))
-                }
-            </CategoryProduct>
-        </React.Fragment>)
-    })
+                            )
+                        }))
+                    }
+                </CategoryProduct>
+            </div>
+        )
+    }), [categoriesData, products, categoriesRefs, selectedBun, selectedIngredients])
 
     return (
         <section>
-            <div className={styles.tabs_content} >
+            <IngredientDetails  />
+
+            <div className={styles.tabs_content}>
                 {
-                    categoriesData && categoriesData.map((v)=>
+                    categoriesData.map((v)=>
                         <Tab key={v.name}
                              value={v.name}
-                             active={current === v.name}
-                             onClick={OnClickTabCategory}>
+                             active={currentTab === v.name}
+                             onClick={onClickTabCategory}>
                             {v.lang}
                         </Tab>
                     )
                 }
             </div>
 
-            <div className={styles.box + ' mt-10'}>
+            <div className={styles.box + ' mt-10'} ref={scrollRef}>
                 { productsElements }
             </div>
         </section>
