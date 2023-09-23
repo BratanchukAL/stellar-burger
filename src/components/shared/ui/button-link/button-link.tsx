@@ -1,8 +1,11 @@
 import React, {FC, HTMLProps, SyntheticEvent} from "react";
 
+import { NavLink } from "react-router-dom";
+
 import {clx} from "components/shared/utils";
 
 import styles  from './button-link.module.css';
+
 
 
 interface ButtonLinkProps extends Omit<HTMLProps<HTMLLinkElement>, 'type' | 'size'> {
@@ -34,10 +37,10 @@ export const ButtonLink: FC<ButtonLinkProps> = ({
     })
 
     return (
-        <a className={buttonStyle} onClick={onClick} href={to}>
+        <NavLink className={buttonStyle} onClick={onClick} to={to}>
             <div className={styles.caption}>
                 {children}
             </div>
-        </a>
+        </NavLink>
     )
 };
