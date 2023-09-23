@@ -8,12 +8,12 @@ import {IProduct} from "../models";
 
 
 const productAPI = baseApi.injectEndpoints({
-  endpoints: builder => ({
-      getProducts: builder.query<IProduct[], void>({
-          query: () => API_PATH_INGREDIENTS,
-          transformResponse: (response: ProductDto) => mapProducts(response),
-      })
-  })
+    endpoints: builder => ({
+        getProducts: builder.query<IProduct[], void>({
+            query: () => API_PATH_INGREDIENTS,
+            transformResponse: (response: ProductDto) => mapProducts(response),
+        })
+    })
 })
 
 
