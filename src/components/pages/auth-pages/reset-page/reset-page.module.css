@@ -1,0 +1,11 @@
+.container{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-self: center;
+}
+
+.title{
+    text-align: center;
+}

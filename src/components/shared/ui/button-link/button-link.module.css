@@ -77,6 +77,11 @@
 	font-weight: normal;
 	padding: 10px 20px;
 }
+
+.buttonLink_type_secondary:is(.buttonLink_size_small, .buttonLink_size_medium, .buttonLink_size_large){
+	padding: 0 8px;
+}
+
 .buttonLink_type_primary[disabled] {
 	color: var(--text-inactive-color);
 	background: inherit;
