@@ -1,1 +1,1 @@
-export {invalidateAccessTokenListener} from "./middleware";
+export { invalidateAccessTokenListener } from "./middleware";
