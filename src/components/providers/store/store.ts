@@ -21,6 +21,6 @@ export const store = configureStore({
         .concat(
             logger,
             baseApi.middleware,
-            invalidateAccessTokenListener.middleware
+            invalidateAccessTokenListener.middleware  // needs redux-saga
         ),
 })
