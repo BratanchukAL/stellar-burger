@@ -1,1 +1,1 @@
-export { usePostRegisterMutation } from "./api/api"
+export {useHandleRegister} from "./hooks";

@@ -1,15 +1,16 @@
 import {baseApi} from "components/shared/api";
+
 import {API_PATH_REGISTER} from "components/shared/configs/api";
 
-import {ITokens} from "components/entities/session";
+import {ICrendentials} from "components/entities/session";
 
 import {mapCrendentials} from "./maps";
 import {RegisterBody, CrendentialsDto} from "./types";
 
 
-const registerAPI = baseApi.injectEndpoints({
+export const registerAPI = baseApi.injectEndpoints({
     endpoints: builder => ({
-        postRegister: builder.mutation<ITokens, RegisterBody>({
+        postRegister: builder.query<ICrendentials, RegisterBody>({
             query: (body: RegisterBody) => ({
                 url: API_PATH_REGISTER,
                 body,
@@ -19,6 +20,3 @@ const registerAPI = baseApi.injectEndpoints({
         })
     })
 })
-
-
-export const { usePostRegisterMutation } = registerAPI
