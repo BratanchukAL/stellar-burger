@@ -28,6 +28,8 @@ export const Pages = () =>{
                     <Route path={RoutesURL.register} element={<SignupPage/>} />
                     <Route path={RoutesURL.forgot} element={<ForgotPage/>} />
                     <Route path={RoutesURL.reset} element={<ResetPage/>} />
+
+                {/* TODO    Страницу 404 */}
                 </Routes>
             </Content>
         </>
