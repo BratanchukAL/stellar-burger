@@ -1,13 +1,13 @@
-import {fetchBaseQuery} from "@reduxjs/toolkit/dist/query/react";
+import {fetchBaseQuery, retry} from "@reduxjs/toolkit/dist/query/react";
 
 import {API_URL} from "../configs/api";
 
 import {selectAccessToken} from "./selectors";
 
 
-export const baseQuery = fetchBaseQuery({
+export const baseQuery = retry(fetchBaseQuery({
     baseUrl: API_URL,
-    credentials: 'include',
+    // credentials: 'include',  //Access-Control-Allow-Origin
     prepareHeaders: (headers, api) => {
         const token = selectAccessToken(api.getState())
 
@@ -16,4 +16,5 @@ export const baseQuery = fetchBaseQuery({
         }
         return headers
     }
-})
+}),
+    {maxRetries:10})
