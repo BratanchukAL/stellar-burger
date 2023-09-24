@@ -1,6 +1,6 @@
-import {createListenerMiddleware, TypedStartListening} from "@reduxjs/toolkit";
+import {createListenerMiddleware} from "@reduxjs/toolkit";
 
-import {AppDispatch, RootStateType} from "components/providers/store";
+import {TypedListening} from "components/providers/store";
 
 import {invalidateAccessTokenAction} from "components/shared/api/actions";
 import {ITokens} from "components/entities/session";
@@ -13,8 +13,6 @@ import {refreshTokenAPI} from "./api/api";
 // Create the middleware instance and methods
 export const invalidateAccessTokenListener = createListenerMiddleware()
 
-// @see https://redux-toolkit.js.org/api/createListenerMiddleware#typescript-usage
-type TypedListening = TypedStartListening<RootStateType, AppDispatch> // TODO move in providers
 
 const startInvalidateAccessTokenListener = invalidateAccessTokenListener.startListening as TypedListening
 

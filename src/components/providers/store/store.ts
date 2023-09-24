@@ -8,7 +8,7 @@ import {invalidateAccessTokenListener} from "components/features/auth/refresh-to
 
 
 //Reducers
-const rootReducers = combineReducers({
+export const rootReducers = combineReducers({
     [baseApi.reducerPath]: baseApi.reducer,
     ...reducersEntities
 })
@@ -24,9 +24,3 @@ export const store = configureStore({
             invalidateAccessTokenListener.middleware
         ),
 })
-
-
-//Typing
-// Infer the `RootStateType` and `AppDispatch` types from the store itself
-export type RootStateType = ReturnType<typeof rootReducers>
-export type AppDispatch = typeof store.dispatch
