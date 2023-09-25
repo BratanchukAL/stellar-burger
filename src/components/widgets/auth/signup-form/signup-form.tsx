@@ -1,8 +1,11 @@
-import React, {ChangeEvent} from 'react'
+import React from 'react'
 
-import {Button, EmailInput, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components"
+import {Button, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components"
 
-import {ButtonLink} from "components/shared/ui";
+import {
+    ButtonLink,
+    EmailInput
+} from "components/shared/ui";
 import {useForm} from "components/shared/hooks";
 
 import {useHandleRegister} from "components/features/auth/register";
@@ -21,7 +24,7 @@ export const SignupForm = ()=> {
     const [onRegister] = useHandleRegister(state)
 
     return(
-        <>
+        <form onSubmit={onRegister}>
             <Input
               type={'text'}
               placeholder={'Имя'}
@@ -34,19 +37,17 @@ export const SignupForm = ()=> {
               errorText={'Ошибка'}
               size={'default'}
               extraClass="mt-6"
+              required
             />
-            <Input
-              type={'text'}
+            <EmailInput
               placeholder={'E-mail'}
               onChange={onChange}
 
               value={state.email}
               name={'email'}
-              error={false}
-
-              errorText={'Ошибка'}
               size={'default'}
               extraClass="mt-6"
+              required
             />
             <PasswordInput
                 placeholder={'Пароль'}
@@ -54,13 +55,13 @@ export const SignupForm = ()=> {
                 value={state.password}
                 name={'password'}
                 extraClass="mt-6"
+                required
             />
             <Button
-                htmlType="button"
+                htmlType="submit"
                 type="primary"
                 size="medium"
                 extraClass={styles.submit + " mt-6"}
-                onClick={onRegister}
             >
                 Зарегистрироваться
             </Button>
@@ -73,6 +74,6 @@ export const SignupForm = ()=> {
                     </ButtonLink>
                 </p>
             </div>
-        </>
+        </form>
     )
 }
