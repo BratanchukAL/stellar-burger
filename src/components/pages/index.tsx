@@ -18,22 +18,22 @@ import {ForgotPage} from "./auth-pages/forgot-page";
 import {ResetPage} from "./auth-pages/reset-page";
 
 
-export const Pages = () =>{
-    return(
+export const Pages = () => {
+    return (
         <>
             <AppHeader/>
             <Content>
                 <Routes>
-                    <Route path='/' element={<BurgerConstructorPage/>} />
+                    <Route path='/' element={<BurgerConstructorPage/>}/>
 
                     {/*Auth pages*/}
-                    <Route element={<RequireGuest />}>
-                        <Route path={RoutesPath.login} element={<LoginPage/>} />
-                        <Route path={RoutesPath.register} element={<SignupPage/>} />
-                        <Route path={RoutesPath.forgot} element={<ForgotPage/>} />
-                        <Route path={RoutesPath.reset} element={<ResetPage/>} />
+                    <Route element={<RequireGuest/>}>
+                        <Route path={RoutesPath.login} element={<LoginPage/>}/>
+                        <Route path={RoutesPath.register} element={<SignupPage/>}/>
+                        <Route path={RoutesPath.forgot} element={<ForgotPage/>}/>
+                        <Route path={RoutesPath.reset} element={<ResetPage/>}/>
                     </Route>
-                {/* TODO    Страницу 404 */}
+                    {/* TODO    Страницу 404 */}
                 </Routes>
             </Content>
         </>
