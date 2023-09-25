@@ -10,7 +10,7 @@ import {RegisterBody, CrendentialsDto} from "./types";
 
 export const registerAPI = baseApi.injectEndpoints({
     endpoints: builder => ({
-        postRegister: builder.query<ICrendentials, RegisterBody>({
+        postRegister: builder.mutation<ICrendentials, RegisterBody>({
             query: (body: RegisterBody) => ({
                 url: API_PATH_REGISTER,
                 body,
@@ -20,3 +20,5 @@ export const registerAPI = baseApi.injectEndpoints({
         })
     })
 })
+
+export const { usePostRegisterMutation } = registerAPI

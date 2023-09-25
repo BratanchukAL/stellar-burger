@@ -4,7 +4,8 @@ import {Button, Input, PasswordInput} from "@ya.praktikum/react-developer-burger
 
 import {
     ButtonLink,
-    EmailInput
+    EmailInput,
+    ErrorText
 } from "components/shared/ui";
 import {useForm} from "components/shared/hooks";
 
@@ -21,59 +22,62 @@ export const SignupForm = ()=> {
         password: '',
     })
 
-    const [onRegister] = useHandleRegister(state)
+    const [onRegister, response] = useHandleRegister(state)
 
-    return(
-        <form onSubmit={onRegister}>
-            <Input
-              type={'text'}
-              placeholder={'Имя'}
-              onChange={onChange}
+    return (
+        <>
+            <ErrorText message={response.error?.data?.message} extraClass="mt-6"/>
+            <form onSubmit={onRegister}>
+                <Input
+                    type={'text'}
+                    placeholder={'Имя'}
+                    onChange={onChange}
 
-              value={state.name}
-              name={'name'}
-              error={false}
+                    value={state.name}
+                    name={'name'}
+                    error={false}
 
-              errorText={'Ошибка'}
-              size={'default'}
-              extraClass="mt-6"
-              required
-            />
-            <EmailInput
-              placeholder={'E-mail'}
-              onChange={onChange}
+                    errorText={'Ошибка'}
+                    size={'default'}
+                    extraClass="mt-6"
+                    required
+                />
+                <EmailInput
+                    placeholder={'E-mail'}
+                    onChange={onChange}
 
-              value={state.email}
-              name={'email'}
-              size={'default'}
-              extraClass="mt-6"
-              required
-            />
-            <PasswordInput
-                placeholder={'Пароль'}
-                onChange={onChange}
-                value={state.password}
-                name={'password'}
-                extraClass="mt-6"
-                required
-            />
-            <Button
-                htmlType="submit"
-                type="primary"
-                size="medium"
-                extraClass={styles.submit + " mt-6"}
-            >
-                Зарегистрироваться
-            </Button>
+                    value={state.email}
+                    name={'email'}
+                    size={'default'}
+                    extraClass="mt-6"
+                    required
+                />
+                <PasswordInput
+                    placeholder={'Пароль'}
+                    onChange={onChange}
+                    value={state.password}
+                    name={'password'}
+                    extraClass="mt-6"
+                    required
+                />
+                <Button
+                    htmlType="submit"
+                    type="primary"
+                    size="medium"
+                    extraClass={styles.submit + " mt-6"}
+                >
+                    Зарегистрироваться
+                </Button>
 
-            <div className={styles.footer + " mt-20"}>
-                <p className="text text_type_main-default text_color_inactive">
-                    Уже зарегистрированы?
-                    <ButtonLink  type="secondary" size="large" to="/login">
-                        Войти
-                    </ButtonLink>
-                </p>
-            </div>
-        </form>
-    )
+                <div className={styles.footer + " mt-20"}>
+                    <p className="text text_type_main-default text_color_inactive">
+                        Уже зарегистрированы?
+                        <ButtonLink type="secondary" size="large" to="/login">
+                            Войти
+                        </ButtonLink>
+                    </p>
+                </div>
+            </form>
+        </>
+    );
 }

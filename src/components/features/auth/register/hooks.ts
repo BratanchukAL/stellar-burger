@@ -2,18 +2,27 @@ import React, {useCallback} from "react"
 
 import {useAppDispatch} from "components/providers/store"
 
+import {sessionActions} from "components/entities/session";
+
 import {RegisterBody} from "./api/types"
-import {registerThunk} from "./thunk"
+import {usePostRegisterMutation} from "./api/api";
 
 
-export const useHandleRegister = (state: RegisterBody): [(e: React.SyntheticEvent<HTMLFormElement> )=>void] => {
+
+export const useHandleRegister = (state: RegisterBody): [((e: React.SyntheticEvent<HTMLFormElement>) => Promise<void>), any] => {
+    const [fetchRegister, response] = usePostRegisterMutation()
     const dispatch = useAppDispatch()
 
-    const onRegister = useCallback((e:React.SyntheticEvent<HTMLFormElement>)=>{
+    const onRegister = useCallback(async (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault()
-        if (e.currentTarget.checkValidity())
-            dispatch(registerThunk(state))
+        if (e.currentTarget.checkValidity()) {
+            const res = await fetchRegister(state)
+            if ('data' in res)
+                dispatch(sessionActions.login(res.data))
+            // dispatch(registerThunk(state))
+        }
+
     }, [state, dispatch])
 
-    return [onRegister]
-}
+    return [onRegister, response]
+};
