@@ -3,13 +3,16 @@ import React from 'react'
 import {Button, Input, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components"
 
 import {
-    ButtonLink,
     EmailInput,
     ErrorText
-} from "components/shared/ui";
-import {useForm} from "components/shared/hooks";
+} from "components/shared/ui"
+import {useForm} from "components/shared/hooks"
+import {RoutesPath} from "components/shared/configs"
 
-import {useHandleRegister} from "components/features/auth/register";
+import {useHandleRegister} from "components/features/auth/register"
+
+import {Footer} from "../ui/footer";
+import {TextNavLink} from "../ui/text-nav-link";
 
 import styles from './signup-form.module.css'
 
@@ -26,6 +29,7 @@ export const SignupForm = ()=> {
 
     return (
         <>
+            {response.isLoading && <div>Loading...</div>}
             <ErrorText message={response.error?.data?.message} extraClass="mt-6"/>
             <form onSubmit={onRegister} className={styles.container_form}>
                 <Input
@@ -35,7 +39,6 @@ export const SignupForm = ()=> {
 
                     value={state.name}
                     name={'name'}
-                    error={false}
 
                     errorText={'Ошибка'}
                     size={'default'}
@@ -69,14 +72,13 @@ export const SignupForm = ()=> {
                     Зарегистрироваться
                 </Button>
             </form>
-            <div className={styles.footer + " mt-20"}>
-                <p className="text text_type_main-default text_color_inactive">
-                    Уже зарегистрированы?
-                    <ButtonLink type="secondary" size="large" to="/login">
-                        Войти
-                    </ButtonLink>
-                </p>
-            </div>
+            <Footer>
+                <TextNavLink
+                    pretext={"Уже зарегистрированы?"}
+                    to={RoutesPath.login}
+                    text={'Войти'}
+                />
+            </Footer>
         </>
     );
 }
