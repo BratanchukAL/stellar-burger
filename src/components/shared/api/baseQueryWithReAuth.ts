@@ -33,6 +33,8 @@ export async function baseQueryWithReAuth(
      * See example in @/features/authentication/InvalidateAccessToken
      */
 
+    //TODO configure retry 200-499
+    //TODO 401: email or password are incorrect
     if (
         typeof result?.error?.status === 'number'
         && AUTH_ERROR_CODES.has(result.error!.status)

@@ -1,8 +1,5 @@
-.footer p{
-    text-align: center;
-}
-
-.submit{
-    margin-left: auto;
-    margin-right: auto;
+.container_form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

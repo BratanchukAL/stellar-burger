@@ -67,7 +67,7 @@ export const SignupForm = ()=> {
                     htmlType="submit"
                     type="primary"
                     size="medium"
-                    extraClass={styles.submit + " mt-6"}
+                    extraClass="mt-6"
                 >
                     Зарегистрироваться
                 </Button>
