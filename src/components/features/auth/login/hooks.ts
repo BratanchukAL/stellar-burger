@@ -4,12 +4,12 @@ import {useAppDispatch} from "components/providers/store"
 
 import {sessionActions} from "components/entities/session";
 
-import {RegisterBody} from "./api/types"
-import {usePostRegisterMutation} from "./api/api";
+import {LoginBody} from "./api/types"
+import {usePostLoginMutation} from "./api/api";
 
 
-export const useHandleRegister = (state: RegisterBody): [((e: React.SyntheticEvent<HTMLFormElement>) => Promise<void>), any] => {
-    const [fetchRegister, response] = usePostRegisterMutation()
+export const useHandleLogin = (state: LoginBody): [((e: React.SyntheticEvent<HTMLFormElement>) => Promise<void>), any] => {
+    const [fetchRegister, response] = usePostLoginMutation()
     const dispatch = useAppDispatch()
 
     const onHandle = useCallback(async (e: React.SyntheticEvent<HTMLFormElement>) => {
