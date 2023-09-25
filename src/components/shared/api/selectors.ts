@@ -1,1 +1,1 @@
-export const selectAccessToken = (state: any) => state?.session?.credentials?.accessToken
+export const selectAccessToken = (state: any) => state.session.credentials.accessToken

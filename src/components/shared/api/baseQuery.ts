@@ -17,4 +17,4 @@ export const baseQuery = retry(fetchBaseQuery({
         return headers
     }
 }),
-    {maxRetries:10})
+    {maxRetries:3})
