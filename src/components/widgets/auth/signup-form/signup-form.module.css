@@ -1,3 +1,10 @@
+.container_form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-self: center;
+}
+
 .footer p{
     text-align: center;
 }

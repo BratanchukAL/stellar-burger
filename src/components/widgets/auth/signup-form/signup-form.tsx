@@ -27,7 +27,7 @@ export const SignupForm = ()=> {
     return (
         <>
             <ErrorText message={response.error?.data?.message} extraClass="mt-6"/>
-            <form onSubmit={onRegister}>
+            <form onSubmit={onRegister} className={styles.container_form}>
                 <Input
                     type={'text'}
                     placeholder={'Имя'}
@@ -68,16 +68,15 @@ export const SignupForm = ()=> {
                 >
                     Зарегистрироваться
                 </Button>
-
-                <div className={styles.footer + " mt-20"}>
-                    <p className="text text_type_main-default text_color_inactive">
-                        Уже зарегистрированы?
-                        <ButtonLink type="secondary" size="large" to="/login">
-                            Войти
-                        </ButtonLink>
-                    </p>
-                </div>
             </form>
+            <div className={styles.footer + " mt-20"}>
+                <p className="text text_type_main-default text_color_inactive">
+                    Уже зарегистрированы?
+                    <ButtonLink type="secondary" size="large" to="/login">
+                        Войти
+                    </ButtonLink>
+                </p>
+            </div>
         </>
     );
 }

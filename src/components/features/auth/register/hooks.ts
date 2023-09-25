@@ -8,7 +8,6 @@ import {RegisterBody} from "./api/types"
 import {usePostRegisterMutation} from "./api/api";
 
 
-
 export const useHandleRegister = (state: RegisterBody): [((e: React.SyntheticEvent<HTMLFormElement>) => Promise<void>), any] => {
     const [fetchRegister, response] = usePostRegisterMutation()
     const dispatch = useAppDispatch()
@@ -19,7 +18,6 @@ export const useHandleRegister = (state: RegisterBody): [((e: React.SyntheticEve
             const res = await fetchRegister(state)
             if ('data' in res)
                 dispatch(sessionActions.login(res.data))
-            // dispatch(registerThunk(state))
         }
 
     }, [state, dispatch])
