@@ -4,20 +4,20 @@ import {useAppDispatch} from "components/providers/store"
 
 import {sessionActions} from "components/entities/session";
 
-import {LoginBody} from "./api/types"
-import {usePostLoginMutation} from "./api/api";
+import {LogoutBody} from "./api/types"
+import {usePostLogoutMutation} from "./api/api";
 
 
-export const useHandleLogin = (state: LoginBody): [((e: React.SyntheticEvent<HTMLFormElement>) => Promise<void>), any] => {
-    const [fetchLogin, response] = usePostLoginMutation()
+export const useHandleLogout = (state: LogoutBody): [((e: React.SyntheticEvent<HTMLFormElement>) => Promise<void>), any] => {
+    const [fetchLogout, response] = usePostLogoutMutation()
     const dispatch = useAppDispatch()
 
     const onHandle = useCallback(async (e: React.SyntheticEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (e.currentTarget.checkValidity()) {
-            const res = await fetchLogin(state)
+            const res = await fetchLogout(state)
             if ('data' in res)
-                dispatch(sessionActions.login(res.data))
+                dispatch(sessionActions.logout())
         }
 
     }, [state, dispatch])
