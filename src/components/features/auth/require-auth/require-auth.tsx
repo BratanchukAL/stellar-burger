@@ -13,6 +13,14 @@ export const RequireAuth = () => {
     const isAuthed = useSelector(selectIsAuthed)
     const location = useLocation()
 
+    //TODO do it ???
+  //    if (!isAuthChecked) {
+  //   // Запрос еще выполняется
+  //   // Выводим прелоадер в ПР
+  //   // Здесь возвращается просто null для экономии времени
+  //   return null;
+  // }
+
     return (
         isAuthed
             ? <Outlet />
