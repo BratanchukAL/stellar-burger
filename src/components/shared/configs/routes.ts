@@ -1,4 +1,6 @@
-export const RoutesURL = {
+export const RoutesPath = {
+    home: "/",
+
     // Auth
     login: "/login",
     logout: "/logout",

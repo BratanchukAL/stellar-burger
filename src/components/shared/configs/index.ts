@@ -1,1 +1,1 @@
-export {RoutesURL} from "./routes";
+export {RoutesPath} from "./routes";

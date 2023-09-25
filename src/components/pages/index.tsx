@@ -2,7 +2,10 @@ import React from "react";
 
 import { Route, Routes} from 'react-router-dom'
 
-import {RoutesURL} from "components/shared/configs";
+import {RoutesPath} from "components/shared/configs";
+
+import {RequireGuest} from "components/features/auth/require-guest";
+import {RequireAuth} from "components/features/auth/require-auth";
 
 import {AppHeader} from "components/widgets/app-header";
 import {Content} from "components/widgets/content";
@@ -24,11 +27,12 @@ export const Pages = () =>{
                     <Route path='/' element={<BurgerConstructorPage/>} />
 
                     {/*Auth pages*/}
-                    <Route path={RoutesURL.login} element={<LoginPage/>} />
-                    <Route path={RoutesURL.register} element={<SignupPage/>} />
-                    <Route path={RoutesURL.forgot} element={<ForgotPage/>} />
-                    <Route path={RoutesURL.reset} element={<ResetPage/>} />
-
+                    <Route element={<RequireGuest />}>
+                        <Route path={RoutesPath.login} element={<LoginPage/>} />
+                        <Route path={RoutesPath.register} element={<SignupPage/>} />
+                        <Route path={RoutesPath.forgot} element={<ForgotPage/>} />
+                        <Route path={RoutesPath.reset} element={<ResetPage/>} />
+                    </Route>
                 {/* TODO    Страницу 404 */}
                 </Routes>
             </Content>
