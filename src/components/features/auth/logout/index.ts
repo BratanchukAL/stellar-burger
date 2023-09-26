@@ -1,1 +1,1 @@
-export {useHandleLogout} from "./hooks";
+export {Logout} from "./logout";

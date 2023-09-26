@@ -5,9 +5,11 @@ import {TypedListening} from "components/providers/store";
 import {invalidateAccessTokenAction} from "components/shared/api/actions";
 import {ITokens} from "components/entities/session";
 import {sessionActions} from "components/entities/session";
+import {selectRefreshToken} from "components/entities/session";
 
 import {RefreshTokenBody} from "./api/types";
 import {refreshTokenAPI} from "./api/api";
+
 
 
 // Create the middleware instance and methods
@@ -20,7 +22,7 @@ startInvalidateAccessTokenListener({
     actionCreator: invalidateAccessTokenAction,
     effect: async (action, api) => {
         const dispatch = api.dispatch
-        const refreshToken = api.getState().session.credentials.refreshToken
+        const refreshToken = selectRefreshToken(api.getState())
 
          // send refresh token to get new access token
         const body:RefreshTokenBody ={

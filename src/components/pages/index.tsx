@@ -6,6 +6,7 @@ import {RoutesPath} from "components/shared/configs";
 
 import {RequireGuest} from "components/features/auth/require-guest";
 import {RequireAuth} from "components/features/auth/require-auth";
+import {Logout} from "components/features/auth/logout";
 
 import {AppHeader} from "components/widgets/app-header";
 import {Content} from "components/widgets/content";
@@ -16,6 +17,7 @@ import {LoginPage} from "./auth-pages/login-page";
 import {SignupPage} from "./auth-pages/signup-page";
 import {ForgotPage} from "./auth-pages/forgot-page";
 import {ResetPage} from "./auth-pages/reset-page";
+
 
 
 export const Pages = () => {
@@ -33,6 +35,7 @@ export const Pages = () => {
                         <Route path={RoutesPath.forgot} element={<ForgotPage/>}/>
                         <Route path={RoutesPath.reset} element={<ResetPage/>}/>
                     </Route>
+                    <Route path={RoutesPath.logout} element={<Logout/>}/>
                     {/* TODO    Страницу 404 */}
                 </Routes>
             </Content>
