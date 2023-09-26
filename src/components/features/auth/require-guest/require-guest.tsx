@@ -17,6 +17,6 @@ export const RequireGuest = () => {
     return (
         !isAuthed
             ? <Outlet />
-            : <Navigate to={from} />
+            : <Navigate to={from} replace/>
    )
 }
