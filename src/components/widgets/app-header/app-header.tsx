@@ -18,7 +18,7 @@ export const AppHeader = ()=>{
                     <ButtonLink to={RoutesPath.home} extraClass={'mr-2'} active>
                         <BurgerIcon type="primary" />Конструктор
                     </ButtonLink>
-                    <ButtonLink to={RoutesPath.orders}>
+                    <ButtonLink to={RoutesPath.application_tape}>
                         <ListIcon type="secondary" />Лента заявок
                     </ButtonLink>
                 </div>

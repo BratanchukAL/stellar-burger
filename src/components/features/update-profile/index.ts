@@ -1,1 +1,2 @@
-export {useUpdateProfileMutation} from "./api/api";
+export {useUpdateProfile} from "./hooks";
+

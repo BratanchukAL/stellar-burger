@@ -11,6 +11,9 @@ import {Logout} from "components/features/auth/logout";
 import {AppHeader} from "components/widgets/app-header";
 import {Content} from "components/widgets/content";
 
+import {LeftHeader} from "components/widgets/profile/left-header";
+import {ProfileForm} from "components/widgets/profile/profile-form";
+
 import {BurgerConstructorPage} from "./burger-constructor-page";
 
 import {LoginPage} from "./auth-pages/login-page";
@@ -38,10 +41,13 @@ export const Pages = () => {
                     <Route path={RoutesPath.logout} element={<Logout/>}/>
 
                     {/*Only Auth*/}
-                    <Route element={<RequireAuth/>}>
-                        <Route path={RoutesPath.profile} element={<p>В разработке...</p>}/>
-                        <Route path={RoutesPath.orders} element={<p>В разработке...</p>}/>
-                    </Route>
+                    {/*<Route element={<RequireAuth/>}>*/}
+                        <Route path={RoutesPath.application_tape} element={<p>В разработке...</p>}/>
+                        <Route element={<LeftHeader/>}>
+                            <Route path={RoutesPath.profile} element={<ProfileForm/>}/>
+                            <Route path={RoutesPath.orders_in_profile} element={<p>В разработке...</p>}/>
+                        </Route>
+                    {/*</Route>*/}
 
                     <Route path={"*"} element={<p>404 : (</p>}/>
                 </Routes>

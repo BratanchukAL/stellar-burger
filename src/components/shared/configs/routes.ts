@@ -9,8 +9,9 @@ export const RoutesPath = {
     reset: "/reset-password",
 
     //
-    orders: "/orders",
+    application_tape: "/application_tape",
 
     // Profile
     profile: "/profile",
+    orders_in_profile: "/profile/orders",
 }

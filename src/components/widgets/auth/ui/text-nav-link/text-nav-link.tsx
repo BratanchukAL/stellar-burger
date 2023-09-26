@@ -17,7 +17,7 @@ export const TextNavLink: FC<TextNavLinkProps> = ({pretext, to, text, extraClass
             <span className="text text_type_main-default text_color_inactive">
                 {pretext}
             </span>
-            <ButtonLink type="secondary" size="large" to={to}>
+            <ButtonLink type="secondary" size="medium" to={to}>
                 {text}
             </ButtonLink>
         </div>

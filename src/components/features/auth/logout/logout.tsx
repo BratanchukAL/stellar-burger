@@ -19,6 +19,6 @@ export const Logout = () => {
     return (
         refreshToken
             ? null
-            : <Navigate to={RoutesPath.home} replace/>
+            : <Navigate to={RoutesPath.login} replace/>
     )
 }
