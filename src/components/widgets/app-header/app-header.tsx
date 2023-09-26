@@ -4,6 +4,7 @@ import {
     Logo, ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
+import {RoutesPath} from "components/shared/configs";
 import { ButtonLink } from "components/shared/ui";
 
 import styles from './app-header.module.css'
@@ -14,17 +15,17 @@ export const AppHeader = ()=>{
         <header>
             <nav  className={styles.navbar + ' ' + 'pt-4 pb-4'}>
                 <div>
-                    <ButtonLink extraClass={'mr-2'} active>
+                    <ButtonLink to={RoutesPath.home} extraClass={'mr-2'} active>
                         <BurgerIcon type="primary" />Конструктор
                     </ButtonLink>
-                    <ButtonLink >
+                    <ButtonLink to={RoutesPath.orders}>
                         <ListIcon type="secondary" />Лента заявок
                     </ButtonLink>
                 </div>
                 <div className={styles.brand}>
                     <Logo />
                 </div>
-                 <ButtonLink >
+                 <ButtonLink to={RoutesPath.profile}>
                     <ProfileIcon type="secondary" />Личный кабинет
                  </ButtonLink>
             </nav>

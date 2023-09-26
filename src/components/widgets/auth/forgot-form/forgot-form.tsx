@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from 'react'
 
-import {Button, EmailInput, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components"
+import {Button, EmailInput} from "@ya.praktikum/react-developer-burger-ui-components"
 
 import {ButtonLink} from "components/shared/ui";
 

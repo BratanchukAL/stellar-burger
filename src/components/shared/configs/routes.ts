@@ -7,4 +7,10 @@ export const RoutesPath = {
     register: "/register",
     forgot: "/forgot-password",
     reset: "/reset-password",
+
+    //
+    orders: "/orders",
+
+    // Profile
+    profile: "/profile",
 }

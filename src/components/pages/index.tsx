@@ -28,7 +28,7 @@ export const Pages = () => {
                 <Routes>
                     <Route path='/' element={<BurgerConstructorPage/>}/>
 
-                    {/*Auth pages*/}
+                    {/*Guest pages*/}
                     <Route element={<RequireGuest/>}>
                         <Route path={RoutesPath.login} element={<LoginPage/>}/>
                         <Route path={RoutesPath.register} element={<SignupPage/>}/>
@@ -36,7 +36,14 @@ export const Pages = () => {
                         <Route path={RoutesPath.reset} element={<ResetPage/>}/>
                     </Route>
                     <Route path={RoutesPath.logout} element={<Logout/>}/>
-                    {/* TODO    Страницу 404 */}
+
+                    {/*Only Auth*/}
+                    <Route element={<RequireAuth/>}>
+                        <Route path={RoutesPath.profile} element={<p>В разработке...</p>}/>
+                        <Route path={RoutesPath.orders} element={<p>В разработке...</p>}/>
+                    </Route>
+
+                    <Route path={"*"} element={<p>404 : (</p>}/>
                 </Routes>
             </Content>
         </>
