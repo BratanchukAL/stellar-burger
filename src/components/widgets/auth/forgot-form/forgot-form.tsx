@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {Navigate} from "react-router-dom";
 import {Button} from "@ya.praktikum/react-developer-burger-ui-components"
 
 import {RoutesPath} from "components/shared/configs";
@@ -12,7 +12,6 @@ import {TextNavLink} from "../ui/text-nav-link";
 import {Footer} from "../ui/footer";
 
 import styles from './forgot-form.module.css'
-import {Navigate} from "react-router-dom";
 
 
 export const ForgotForm = ()=>{
@@ -25,7 +24,8 @@ export const ForgotForm = ()=>{
         <>
             {response.isLoading && <div>Loading...</div>}
             {response.data?.success &&
-                <Navigate to={RoutesPath.reset} state={{ success: response.data?.success }}/>
+                <Navigate to={RoutesPath.reset}
+                          state={{ sentEmail:  response.data?.success}} replace/>
             }
             <WarningText message={response.data?.message} extraClass="mt-6"/>
             <ErrorText message={response.error?.data?.message} extraClass="mt-6"/>
