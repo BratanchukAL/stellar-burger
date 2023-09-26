@@ -1,44 +1,61 @@
-import React, {ChangeEvent} from 'react'
+import React from 'react'
 
-import {Button, EmailInput} from "@ya.praktikum/react-developer-burger-ui-components"
+import {Button} from "@ya.praktikum/react-developer-burger-ui-components"
 
-import {ButtonLink} from "components/shared/ui";
+import {RoutesPath} from "components/shared/configs";
+import {ErrorText, EmailInput, WarningText} from "components/shared/ui";
+import {useForm} from "components/shared/hooks";
+
+import {useHandleForgot} from "components/features/auth/forgot";
+
+import {TextNavLink} from "../ui/text-nav-link";
+import {Footer} from "../ui/footer";
 
 import styles from './forgot-form.module.css'
+import {Navigate} from "react-router-dom";
 
 
 export const ForgotForm = ()=>{
-    const [value, setValue] = React.useState('')
-    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setValue(e.target.value)
-    }
+    const [state, onChange] = useForm({
+        email: "",
+    })
+    const [onForgot, response] = useHandleForgot(state)
+
     return(
         <>
-            <EmailInput
-                placeholder={'Укажите e-mail'}
-                onChange={onChange}
-                value={value}
-                name={'email'}
-                isIcon={false}
-                extraClass="mt-6"
-            />
-            <Button
-                htmlType="button"
-                type="primary"
-                size="medium"
-                extraClass={styles.submit + " mt-6"}
-            >
-                Восстановить
-            </Button>
+            {response.isLoading && <div>Loading...</div>}
+            {response.data?.success &&
+                <Navigate to={RoutesPath.reset} state={{ success: response.data?.success }}/>
+            }
+            <WarningText message={response.data?.message} extraClass="mt-6"/>
+            <ErrorText message={response.error?.data?.message} extraClass="mt-6"/>
+            <form onSubmit={onForgot} className={styles.container_form}>
+                <EmailInput
+                    placeholder={'Укажите e-mail'}
+                    onChange={onChange}
+                    value={state.email}
+                    name={'email'}
+                    size={'default'}
+                    extraClass="mt-6"
+                    required
+                />
+                <Button
+                    htmlType="submit"
+                    type="primary"
+                    size="medium"
+                    extraClass="mt-6"
+                >
+                    Восстановить
+                </Button>
+            </form>
 
-            <div className={styles.footer + " mt-20"}>
-                <p className="text text_type_main-default text_color_inactive mt-4">
-                    Вспомнили пароль?
-                    <ButtonLink  type="secondary" size="large" to="/login">
-                        Войти
-                    </ButtonLink>
-                </p>
-            </div>
+            <Footer>
+                <TextNavLink
+                    pretext={'Вспомнили пароль?'}
+                    to={RoutesPath.login}
+                    text={'Войти'}
+                />
+            </Footer>
         </>
     )
 }
