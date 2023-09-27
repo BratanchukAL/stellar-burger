@@ -16,7 +16,7 @@ import CheckImage from 'images/check.png'
 
 export const OrderDetails: FC<PropsWithChildren>= ({children}) =>{
     const [isOpen, handleClose, handleOpen] = useVisible(false)
-
+    //TODO: required Auth user
     const {bun: selectedBun, ingredients: selectedIngredients} = useAppSelector(selectSelectedProductsState)
     const [postOrder, response]= usePostOrderMutation()
 
