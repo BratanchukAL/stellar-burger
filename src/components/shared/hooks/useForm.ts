@@ -7,7 +7,6 @@ export function useForm<Type>(initialState: Type, deps?: any): [Type, OnChangeTy
     const [state, setState] = useState<Type>(initialState)
 
     useEffect(()=>{
-        console.log(initialState, deps)
         if (initialState && deps)
             setState({...state, ...initialState})
     }, deps ? deps: [true])
