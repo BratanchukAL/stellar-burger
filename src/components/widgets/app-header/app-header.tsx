@@ -22,9 +22,9 @@ export const AppHeader = ()=>{
                 <div className={styles.brand}>
                     <Logo />
                 </div>
-                 <ButtonLink to={RoutesPath.profile} icon="profile" isParentLink>
+                <ButtonLink to={RoutesPath.profile} icon="profile" isParentLink>
                     Личный кабинет
-                 </ButtonLink>
+                </ButtonLink>
             </nav>
         </header>
     )
