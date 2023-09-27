@@ -1,10 +1,16 @@
-import {ChangeEvent, useCallback, useState} from "react";
+import {ChangeEvent, useCallback, useEffect, useState} from "react";
 
 
 type OnChangeType = (e: ChangeEvent<HTMLInputElement>) => void;
 
-export function useForm<Type>(inputs: Type): [Type, OnChangeType] {
-    const [state, setState] = useState<Type>(inputs)
+export function useForm<Type>(initialState: Type, deps?: any): [Type, OnChangeType] {
+    const [state, setState] = useState<Type>(initialState)
+
+    useEffect(()=>{
+        console.log(initialState, deps)
+        if (initialState && deps)
+            setState({...state, ...initialState})
+    }, deps ? deps: [true])
 
     const onChange = useCallback((e: ChangeEvent<HTMLInputElement>)=>{
         const name = e.target.name
