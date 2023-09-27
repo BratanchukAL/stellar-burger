@@ -1,6 +1,7 @@
 export interface ProfileBody {
     email: string,
-    name: string
+    name: string,
+    password: string
 }
 
 export interface ProfileDto {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 import {Button, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components"
 
@@ -9,25 +9,37 @@ import {
 } from "components/shared/ui"
 import {useForm} from "components/shared/hooks"
 
+import {useGetProfileQuery} from "components/entities/profile";
 import {useUpdateProfile} from "components/features/update-profile";
 
 import styles from './profile-form.module.css'
 
 
-export const ProfileForm = ()=> {
-    const [state, onChange] = useForm({
-        name: '',
-        email: '',
-        password: '',
-    })
 
-    //TODO useUpdateProfile and useGetProfileQuery
-    const [updateProfile, response] = useUpdateProfile(state)
+export const ProfileForm = ()=> {
+    const {data: profile, isLoading, error, refetch: refetchProfile} = useGetProfileQuery()
+
+    const [state, onChange] = useForm(
+        {
+            name: '',
+            email: '',
+            password: '',
+            ...profile
+        }
+    , [isLoading]);
+
+    const [updateProfile, responseUpdate] = useUpdateProfile(state)
+
+    useEffect(()=>{
+        if (!responseUpdate.isLoading)
+            refetchProfile()
+    }, [responseUpdate])
 
     return (
         <>
-            {response.isLoading && <div>Loading...</div>}
-            <ErrorText message={response.error?.data?.message} extraClass="mb-6"/>
+            {(isLoading || responseUpdate.isLoading) && <div>Loading...</div>}
+            <ErrorText message={(error as any)?.data?.message} extraClass="mt-6 mb-6"/>
+            <ErrorText message={responseUpdate.error?.data?.message} extraClass="mb-6"/>
             <form onSubmit={updateProfile} className={styles.container_form}>
                 <EditInput
                     placeholder={'Имя'}
