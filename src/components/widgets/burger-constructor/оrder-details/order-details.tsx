@@ -1,22 +1,29 @@
 import React, {FC, PropsWithChildren, useCallback} from "react";
+import { useNavigate } from "react-router-dom";
+
+import {useAppSelector} from "components/providers/store";
 
 import {clx} from "components/shared/utils";
 import {Modal} from "components/shared/ui";
 import {useVisible} from "components/shared/hooks";
 
-import {useAppSelector} from "components/providers/store";
+import {selectIsAuthed} from "components/entities/session";
 
 import {selectSelectedProductsState} from "components/entities/basket";
 import {usePostOrderMutation} from "components/features/order";
 
 import styles from './order-details.module.css'
 import CheckImage from 'images/check.png'
+import {RoutesPath} from "../../../shared/configs";
 
 
 
 export const OrderDetails: FC<PropsWithChildren>= ({children}) =>{
     const [isOpen, handleClose, handleOpen] = useVisible(false)
-    //TODO: required Auth user
+
+    const navigate = useNavigate()
+    const isAuthed = useAppSelector(selectIsAuthed)
+
     const {bun: selectedBun, ingredients: selectedIngredients} = useAppSelector(selectSelectedProductsState)
     const [postOrder, response]= usePostOrderMutation()
 
@@ -24,6 +31,9 @@ export const OrderDetails: FC<PropsWithChildren>= ({children}) =>{
 
 
     const handleFetch = useCallback(async ()=>{
+        if (!isAuthed) //TODO wrap in protected Button
+            navigate(RoutesPath.login)
+
         let ingredients = selectedIngredients.reduce((prev: string[], current): string[]=>{
             prev = prev.concat([current.id])
             return prev
@@ -35,7 +45,7 @@ export const OrderDetails: FC<PropsWithChildren>= ({children}) =>{
             await postOrder({ingredients})
             handleOpen()
         }
-    }, [selectedIngredients, selectedBun, handleOpen, postOrder])
+    }, [selectedIngredients, selectedBun, handleOpen, postOrder, isAuthed, navigate])
 
 
     return(

@@ -41,13 +41,13 @@ export const Pages = () => {
                     <Route path={RoutesPath.logout} element={<Logout/>}/>
 
                     {/*Only Auth*/}
-                    {/*<Route element={<RequireAuth/>}>*/}
+                    <Route element={<RequireAuth/>}>
                         <Route path={RoutesPath.application_tape} element={<p>В разработке...</p>}/>
                         <Route element={<LeftHeader/>}>
                             <Route path={RoutesPath.profile} element={<ProfileForm/>}/>
                             <Route path={RoutesPath.orders_in_profile} element={<p>В разработке...</p>}/>
                         </Route>
-                    {/*</Route>*/}
+                    </Route>
 
                     <Route path={"*"} element={<p>404 : (</p>}/>
                 </Routes>
