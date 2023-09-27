@@ -1,8 +1,10 @@
 import {fetchBaseQuery, retry} from "@reduxjs/toolkit/dist/query/react";
+import {FetchBaseQueryError} from "@reduxjs/toolkit/query";
 
 import {API_URL} from "../configs/api";
 
 import {selectAccessToken} from "./selectors";
+
 
 
 export const baseQuery = retry(fetchBaseQuery({
@@ -17,4 +19,12 @@ export const baseQuery = retry(fetchBaseQuery({
         return headers
     }
 }),
-    {maxRetries:3})
+    {
+        retryCondition(error: FetchBaseQueryError, args: any, extraArgs: { attempt: number }): boolean {
+            const attempt = extraArgs.attempt
+            if (typeof error?.status === 'number' && attempt < 4)
+                return error?.status > 499
+
+            return false;
+        }
+    })

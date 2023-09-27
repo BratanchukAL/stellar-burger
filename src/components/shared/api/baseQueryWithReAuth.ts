@@ -12,7 +12,7 @@ import {baseQuery} from "./baseQuery";
 
 import {invalidateAccessTokenAction} from "./actions"
 
-const AUTH_ERROR_CODES = new Set([401])
+const AUTH_ERROR_CODES = new Set([403])
 
 
 export async function baseQueryWithReAuth(
@@ -33,8 +33,6 @@ export async function baseQueryWithReAuth(
      * See example in @/features/authentication/InvalidateAccessToken
      */
 
-    //TODO configure retry 200-499
-    //TODO 401: email or password are incorrect
     if (
         typeof result?.error?.status === 'number'
         && AUTH_ERROR_CODES.has(result.error!.status)
@@ -45,15 +43,6 @@ export async function baseQueryWithReAuth(
 
         // retry with new access token
         result = await baseQuery(args, api, extraOptions)
-        // console.log(refreshResult) //TODO drop
-        // if (refreshResult) {
-        //     // store the new token
-        //     api.dispatch(setCredentialsAction(refreshResult))
-        //     // retry the original query with new access token
-        //
-        // } else {
-        //     api.dispatch(logoutAction())
-        // }
     }
 
     return result
