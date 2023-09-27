@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 
 import {Button, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components"
 
@@ -17,6 +17,7 @@ import styles from './profile-form.module.css'
 
 
 export const ProfileForm = ()=> {
+    const [toggleResetForm, setResetForm] = useState(false)
     const {data: profile, isLoading, error, refetch: refetchProfile} = useGetProfileQuery()
 
     const [state, onChange] = useForm(
@@ -26,7 +27,7 @@ export const ProfileForm = ()=> {
             password: '',
             ...profile
         }
-    , [isLoading]);
+    , [isLoading, toggleResetForm]);
 
     const [updateProfile, responseUpdate] = useUpdateProfile(state)
 
@@ -69,6 +70,7 @@ export const ProfileForm = ()=> {
                 />
                 <div className={styles.buttons}>
                     <Button
+                        onClick={()=>setResetForm(!toggleResetForm)}
                         htmlType="button"
                         type="secondary"
                         size="medium"
