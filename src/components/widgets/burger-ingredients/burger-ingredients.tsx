@@ -9,7 +9,6 @@ import {useAppSelector} from "components/providers/store";
 import {selectSelectedProductsState} from "components/entities/basket";
 import { useGetProductsQuery } from "components/entities/products";
 
-import {IngredientDetails} from "./ingredient-details/ingredient-details";
 import {useTabScroll} from "./hooks/useTabScroll";
 
 import styles from './burger-ingredients.module.css'
@@ -74,8 +73,6 @@ export const BurgerIngredients = () => {
 
     return (
         <section>
-            <IngredientDetails  />
-
             <div className={styles.tabs_content}>
                 {
                     categoriesData.map((v)=>
