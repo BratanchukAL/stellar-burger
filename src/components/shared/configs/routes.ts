@@ -10,6 +10,7 @@ export const RoutesPath = {
 
     //
     application_tape: "/application_tape",
+    ingredient_detail: "ingredients/:id",
 
     // Profile
     profile: "/profile",
