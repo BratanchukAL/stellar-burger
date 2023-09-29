@@ -18,7 +18,7 @@ export const refreshTokenThunk = createAsyncThunk<
     async (_,  api) => {
         const dispatch = api.dispatch
         const refreshToken = selectRefreshToken(api.getState())
-        api.dispatch(sessionActions.loading())
+        dispatch(sessionActions.loading())
 
          // send refresh token to get new access token
         const body:RefreshTokenBody ={
@@ -33,9 +33,9 @@ export const refreshTokenThunk = createAsyncThunk<
 
         if (response.isSuccess && refreshResult) {
             // store the new token
-            api.dispatch(sessionActions.refresh(refreshResult))
+            dispatch(sessionActions.refresh(refreshResult))
         } else {
-            api.dispatch(sessionActions.logout())
+            dispatch(sessionActions.logout())
         }
     }
 )
