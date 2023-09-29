@@ -3,7 +3,7 @@ import {Provider} from "react-redux";
 import {store} from "./store";
 
 
-
+// not uses
 export const withStore = (component: () => React.ReactNode) => () =>(
     <Provider store={store}>
         {component()}
