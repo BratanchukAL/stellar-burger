@@ -8,6 +8,7 @@ import {RequireGuest} from "components/features/auth/require-guest";
 import {RequireAuth} from "components/features/auth/require-auth";
 import {Logout} from "components/features/auth/logout";
 
+import {SpinnerWidget} from "components/widgets/spinner-widget";
 import {AppHeader} from "components/widgets/app-header";
 import {Content} from "components/widgets/content";
 
@@ -27,6 +28,7 @@ import {ResetPage} from "./auth-pages/reset-page";
 export const Pages = () => {
     return (
         <>
+            <SpinnerWidget/>
             <AppHeader/>
             <Content>
                 <Routes>

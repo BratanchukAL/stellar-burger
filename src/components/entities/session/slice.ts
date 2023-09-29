@@ -39,14 +39,5 @@ export const slice = createSlice({
             }
             state.isLoading = false
         }
-    },
-    // extraReducers: (builder) =>
-    //     builder
-    //         .addCase(logoutAction.type, () => initialState)
-    //         .addCase(setCredentialsAction(null).type, (state, payload:PayloadAction<ITokens>) => {
-    //             state.credentials = {
-    //                 ...state.credentials,
-    //                 ...payload.payload
-    //             }
-    //         }),
+    }
 })
