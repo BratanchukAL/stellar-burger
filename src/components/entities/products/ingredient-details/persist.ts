@@ -1,11 +1,11 @@
-import storage from "redux-persist/lib/storage";
+import sessionStorage from "redux-persist/lib/storage/session";
 import {persistReducer} from "redux-persist";
 
 import {slice} from "./slice";
 
 export const persistConfig = {
     key: slice.name,
-    storage,
+    storage: sessionStorage,
     // blacklist:['error','isLoading']
 }
 
