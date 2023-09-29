@@ -1,6 +1,6 @@
-import React, {useCallback, useMemo} from "react";
+import React, {useCallback, useEffect, useMemo} from "react";
 
-import {useNavigate, useParams} from "react-router-dom";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 
 import {Modal} from "components/shared/ui";
 import {RoutesPath} from "components/shared/configs";
@@ -22,8 +22,11 @@ import styles from './ingredient-details-page.module.css'
 
 export const IngredientDetailsPage = () => {
     const dispatch = useAppDispatch()
+
     const navigate = useNavigate()
+    const location = useLocation();
     const id_param = useParams().id
+    const background = location.state && location.state.background;
 
     const {isOpen: isOpenModal, details: currentDetails} = useAppSelector(selectCurrentIngredientDetailsState)
 
@@ -42,6 +45,13 @@ export const IngredientDetailsPage = () => {
         return currentDetails
     },[currentDetails, products, isOpenModal])
 
+
+    useEffect(()=>{
+        return ()=> {
+            if (!background)
+                dispatch(ingredientDetailsActions.clean())
+        }
+    },[dispatch, background])
 
     const handleClose = useCallback(()=>{
             dispatch(ingredientDetailsActions.clean())

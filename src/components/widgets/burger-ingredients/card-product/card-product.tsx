@@ -1,7 +1,7 @@
 import React, {FC, useCallback} from "react";
 import PropTypes from "prop-types";
 
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 import DefaultImage from "@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png";
 import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
@@ -44,11 +44,13 @@ export const CardProduct: FC<CardProductProps> = (
 ) => {
     const dispatch = useAppDispatch()
     const [dragRef] = useDragItem(id, productType)
+
     const navigate = useNavigate()
+    const location = useLocation();
 
     const handleClick = useCallback(()=>{
         dispatch(ingredientDetailsActions.add(details))
-        navigate(RoutesPath.ingredient_detail.replace(':id', details._id))
+        navigate(RoutesPath.ingredient_detail.replace(':id', details._id), {state:{ background: location }})
     }, [dispatch, details, navigate])
 
 
