@@ -6,6 +6,7 @@ import {useAppSelector} from "components/providers/store";
 import {clx} from "components/shared/utils";
 import {ErrorText, Modal} from "components/shared/ui";
 import {useVisible} from "components/shared/hooks";
+import {RoutesPath} from "components/shared/configs";
 
 import {selectIsAuthed} from "components/entities/session";
 
@@ -14,7 +15,6 @@ import {usePostOrderMutation} from "components/features/order";
 
 import styles from './order-details.module.css'
 import CheckImage from 'images/check.png'
-import {RoutesPath} from "../../../shared/configs";
 
 
 
@@ -55,11 +55,13 @@ export const OrderDetails: FC<PropsWithChildren>= ({children}) =>{
             </div>
             { isOpen &&
                 <Modal onClose={handleClose} extraClassContent="pt-20 pb-20">
-                    <ErrorText message={(response?.error as any)?.message} extraClass="mb-6"/>
+                    <ErrorText message={(response?.error as any)?.data?.message} extraClass="mb-6"/>
 
                     <p className={'text text_type_digits-large'}>{order_id}</p>
                     <p className={'text text_type_main-medium mt-8'}>идентификатор заказа</p>
-                    <img className={clx(styles.img, ['mt-15', 'mb-15'])} src={CheckImage} alt={'check'}/>
+                    {response.isSuccess &&
+                        <img className={clx(styles.img, ['mt-15', 'mb-15'])} src={CheckImage} alt={'check'}/>
+                    }
                     <p className={'text text_type_main-default mb-2'}>Ваш заказ начали готовить</p>
                     <p className={'text text_type_main-default text_color_inactive'}>
                         Дождитесь готовности на орбитальной станции
