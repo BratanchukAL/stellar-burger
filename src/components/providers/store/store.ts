@@ -13,8 +13,6 @@ import {
 import {baseApi} from "components/shared/api";
 import {reducersEntities} from "components/entities";
 
-import {invalidateAccessTokenListener} from "components/features/auth/refresh-token";
-
 
 
 //Reducers
@@ -35,7 +33,6 @@ export const store = configureStore({
         }).concat(
             logger,
             baseApi.middleware,
-            invalidateAccessTokenListener.middleware  // needs redux-saga
         ),
 })
 
