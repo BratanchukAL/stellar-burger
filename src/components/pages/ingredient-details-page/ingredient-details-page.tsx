@@ -32,7 +32,7 @@ export const IngredientDetailsPage = () => {
 
     const {
         data: products = [],
-        // isLoading,
+        isLoading,
         // isSuccess,
         // isError,
         // error
@@ -47,10 +47,8 @@ export const IngredientDetailsPage = () => {
 
 
     useEffect(()=>{
-        return ()=> {
-            if (!background)
-                dispatch(ingredientDetailsActions.clean())
-        }
+        if (!background)
+            dispatch(ingredientDetailsActions.clean())
     },[dispatch, background])
 
     const handleClose = useCallback(()=>{
@@ -60,16 +58,18 @@ export const IngredientDetailsPage = () => {
 
     return(
         <>
-            {isOpenModal &&
+            {isLoading && <span>Загрузка...</span>}
+            {!details && <div>Не найден такой ингредиент</div>}
+            {isOpenModal && background && details?._id &&
                 <Modal onClose={handleClose} extraClassContent="pb-5">
                     <IngredientDetails details={details}/>
                 </Modal>
             }
-            <section className={styles.page}>
-                {!isOpenModal &&
+            {!isOpenModal && details?._id &&
+                <section className={styles.page}>
                     <IngredientDetails details={details}/>
-                }
-            </section>
+                </section>
+            }
         </>
     )
 }
