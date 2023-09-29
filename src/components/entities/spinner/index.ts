@@ -1,2 +1,2 @@
 export {spinnerSlice, spinnerActions} from "./slice";
-export {selectIsLoading} from "./selectors";
+export {selectIsLoading, selectText} from "./selectors";

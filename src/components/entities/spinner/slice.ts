@@ -1,16 +1,18 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 
 const initialState = {
     isLoading: false,
+    text: 'Загрузка...'
 };
 
 export const spinnerSlice = createSlice({
     name: 'spinner',
     initialState,
     reducers: {
-        start: (state) => {
+        start: (state, action?: PayloadAction<string>) => {
             state.isLoading = true
+            state.text = action?.payload || ""
         },
 
         stop: () => initialState,
