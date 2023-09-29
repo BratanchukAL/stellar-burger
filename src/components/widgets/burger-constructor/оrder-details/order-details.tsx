@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import {useAppSelector} from "components/providers/store";
 
 import {clx} from "components/shared/utils";
-import {Modal} from "components/shared/ui";
+import {ErrorText, Modal} from "components/shared/ui";
 import {useVisible} from "components/shared/hooks";
 
 import {selectIsAuthed} from "components/entities/session";
@@ -55,6 +55,8 @@ export const OrderDetails: FC<PropsWithChildren>= ({children}) =>{
             </div>
             { isOpen &&
                 <Modal onClose={handleClose} extraClassContent="pt-20 pb-20">
+                    <ErrorText message={(response?.error as any)?.message} extraClass="mb-6"/>
+
                     <p className={'text text_type_digits-large'}>{order_id}</p>
                     <p className={'text text_type_main-medium mt-8'}>идентификатор заказа</p>
                     <img className={clx(styles.img, ['mt-15', 'mb-15'])} src={CheckImage} alt={'check'}/>
