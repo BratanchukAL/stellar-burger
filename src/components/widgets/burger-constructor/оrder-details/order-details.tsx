@@ -1,7 +1,7 @@
 import React, {FC, PropsWithChildren, useCallback} from "react";
 import { useNavigate } from "react-router-dom";
 
-import {useAppSelector} from "components/providers/store";
+import {useAppDispatch, useAppSelector} from "components/providers/store";
 
 import {clx} from "components/shared/utils";
 import {ErrorText, Modal} from "components/shared/ui";
@@ -9,6 +9,7 @@ import {useVisible} from "components/shared/hooks";
 import {RoutesPath} from "components/shared/configs";
 
 import {selectIsAuthed} from "components/entities/session";
+import {spinnerActions} from "components/entities/spinner";
 
 import {selectSelectedProductsState} from "components/entities/basket";
 import {usePostOrderMutation} from "components/features/order";
@@ -20,6 +21,7 @@ import CheckImage from 'images/check.png'
 
 export const OrderDetails: FC<PropsWithChildren>= ({children}) =>{
     const [isOpen, handleClose, handleOpen] = useVisible(false)
+    const dispatch = useAppDispatch()
 
     const navigate = useNavigate()
     const isAuthed = useAppSelector(selectIsAuthed)
@@ -42,6 +44,7 @@ export const OrderDetails: FC<PropsWithChildren>= ({children}) =>{
             ingredients = ingredients.concat([selectedBun])
 
         if (ingredients.length) {
+            dispatch(spinnerActions.start("Ваш заказ готовят. Подождите..."))
             await postOrder({ingredients})
             handleOpen()
         }

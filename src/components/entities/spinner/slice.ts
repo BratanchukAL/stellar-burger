@@ -10,7 +10,7 @@ export const spinnerSlice = createSlice({
     name: 'spinner',
     initialState,
     reducers: {
-        start: (state, action?: PayloadAction<string>) => {
+        start: (state, action: PayloadAction<string>) => {
             state.isLoading = true
             state.text = action?.payload || ""
         },
@@ -22,12 +22,8 @@ export const spinnerSlice = createSlice({
             .addMatcher((action)=> action.type.endsWith('/pending'), (state) => {
                 state.isLoading = true
             })
-            .addMatcher((action)=> action.type.endsWith('/fulfilled'), (state) => {
-                state.isLoading = false
-            })
-            .addMatcher((action)=> action.type.endsWith('/rejected'), (state) => {
-                state.isLoading = false
-            })
+            .addMatcher((action)=> action.type.endsWith('/fulfilled'), () => initialState)
+            .addMatcher((action)=> action.type.endsWith('/rejected'), () => initialState)
 })
 
 export const {actions: spinnerActions} = spinnerSlice

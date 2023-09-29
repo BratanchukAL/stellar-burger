@@ -14,7 +14,7 @@ export const SpinnerWidget = () => {
 
     return (
         <>
-            {!isLoading && <Spinner text={text}/>}
+            {isLoading && <Spinner text={text}/>}
         </>
     )
 }

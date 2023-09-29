@@ -7,8 +7,6 @@
     z-index: 10;
     width: 100%;
     height: 100%;
-    background-color: black;
-    opacity: 0.6;
 }
 .lds_spinner {
     color: official;
