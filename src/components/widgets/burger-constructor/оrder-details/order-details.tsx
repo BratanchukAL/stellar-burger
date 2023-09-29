@@ -44,7 +44,7 @@ export const OrderDetails: FC<PropsWithChildren>= ({children}) =>{
             ingredients = ingredients.concat([selectedBun])
 
         if (ingredients.length) {
-            dispatch(spinnerActions.start("Ваш заказ готовят. Подождите..."))
+            dispatch(spinnerActions.start("Ваш заказ оформляется. Подождите..."))
             await postOrder({ingredients})
             handleOpen()
         }
