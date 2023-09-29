@@ -37,6 +37,7 @@ export const slice = createSlice({
                 ...state.credentials,
                 ...payload.payload
             }
+            state.isLoading = false
         }
     },
     // extraReducers: (builder) =>
