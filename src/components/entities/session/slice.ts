@@ -18,7 +18,7 @@ const initialState = {
 };
 
 
-export const sessionSlice = createSlice({
+export const slice = createSlice({
     name: 'session',
     initialState,
     reducers: {
@@ -49,5 +49,3 @@ export const sessionSlice = createSlice({
     //             }
     //         }),
 })
-
-export const { actions: sessionActions } = sessionSlice;
