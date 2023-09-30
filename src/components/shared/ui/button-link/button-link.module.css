@@ -58,7 +58,7 @@
 
 .buttonLink_size_large {
 	font-family: 'Jet Brains Mono', sans-serif;
-	font-size: 16px;
+	font-size: 24px;
 	line-height: 1.5;
 	font-weight: normal;
 	padding: 20px 40px;
@@ -77,6 +77,11 @@
 	font-weight: normal;
 	padding: 10px 20px;
 }
+
+.buttonLink_type_secondary:is(.buttonLink_size_small, .buttonLink_size_medium, .buttonLink_size_large){
+	padding: 0 8px;
+}
+
 .buttonLink_type_primary[disabled] {
 	color: var(--text-inactive-color);
 	background: inherit;

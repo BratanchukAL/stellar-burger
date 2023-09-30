@@ -1,4 +1,4 @@
-import {IngredientDetailsSlice} from "./ingredient-details/slice";
+import {IngredientDetailsSlice} from "./ingredient-details/persist";
 
 export { useGetProductsQuery } from "./api/api";
 export type { IProduct } from "./models";

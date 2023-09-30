@@ -3,6 +3,7 @@ import {IIngredientDetails} from "./models";
 import {IProduct} from "../index";
 
 
+// Persisted
 const initialState = {
     data: {
         isOpen: false,
@@ -11,7 +12,7 @@ const initialState = {
 }
 
 
-export const IngredientDetailsSlice = createSlice({
+export const slice = createSlice({
     name: 'ingredientDetails',
     initialState,
     reducers: {
@@ -27,4 +28,4 @@ export const IngredientDetailsSlice = createSlice({
 })
 
 
-export const { actions: ingredientDetailsActions } = IngredientDetailsSlice;
+export const { actions: ingredientDetailsActions } = slice;
