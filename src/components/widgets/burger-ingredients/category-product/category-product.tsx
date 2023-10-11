@@ -27,9 +27,3 @@ export const CategoryProduct: FC<PropsWithChildren<CategoryProductProps>> = (
         </div>
     )
 };
-
-CategoryProduct.propTypes = {
-    title: PropTypes.string.isRequired,
-    children: PropTypes.node.isRequired,
-    extraClass: PropTypes.string
-}

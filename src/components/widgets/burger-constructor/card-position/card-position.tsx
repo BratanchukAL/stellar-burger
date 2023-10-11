@@ -74,16 +74,3 @@ export const CardPosition: FC<CardPositionProps> = (
         </div>
     )
 }
-
-
-CardPosition.propTypes = {
-    id: PropTypes.string.isRequired,
-    uuid: PropTypes.string.isRequired,
-    typeProduct: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
-    thumbnail: PropTypes.string,
-    price: PropTypes.number.isRequired,
-    type: PropTypes.oneOf(['top' , 'bottom']),
-    isLocked: PropTypes.bool,
-    extraClass: PropTypes.string,
-}
