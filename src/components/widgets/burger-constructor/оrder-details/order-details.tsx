@@ -6,7 +6,7 @@ import {useAppDispatch, useAppSelector} from "components/providers/store";
 import {clx} from "components/shared/utils";
 import {ErrorText, Modal} from "components/shared/ui";
 import {useVisible} from "components/shared/hooks";
-import {RoutesPath} from "components/shared/configs";
+import {ROUTES} from "components/shared/configs";
 
 import {selectIsAuthed} from "components/entities/session";
 import {spinnerActions} from "components/entities/spinner";
@@ -34,7 +34,7 @@ export const OrderDetails: FC<PropsWithChildren>= ({children}) =>{
 
     const handleFetch = useCallback(async ()=>{
         if (!isAuthed) //TODO wrap in protected Button
-            navigate(RoutesPath.login)
+            navigate(ROUTES.LOGIN)
 
         let ingredients = selectedIngredients.reduce((prev: string[], current): string[]=>{
             prev = prev.concat([current.id])

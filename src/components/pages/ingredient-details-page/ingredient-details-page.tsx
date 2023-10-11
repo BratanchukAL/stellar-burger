@@ -3,7 +3,7 @@ import React, {useCallback, useEffect, useMemo} from "react";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 
 import {Modal} from "components/shared/ui";
-import {RoutesPath} from "components/shared/configs";
+import {ROUTES} from "components/shared/configs";
 
 import {useAppDispatch, useAppSelector} from "components/providers/store";
 
@@ -53,7 +53,7 @@ export const IngredientDetailsPage = () => {
 
     const handleClose = useCallback(()=>{
             dispatch(ingredientDetailsActions.clean())
-            navigate(RoutesPath.home)
+            navigate(ROUTES.HOME)
     }, [dispatch, navigate])
 
     return(

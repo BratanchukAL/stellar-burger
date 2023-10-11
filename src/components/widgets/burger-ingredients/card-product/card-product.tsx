@@ -6,7 +6,7 @@ import DefaultImage from "@ya.praktikum/react-developer-burger-ui-components/dis
 import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import {clx} from "components/shared/utils";
-import {RoutesPath} from "components/shared/configs";
+import {ROUTES} from "components/shared/configs";
 import {useDragItem} from "components/shared/hooks";
 
 import {useAppDispatch} from "components/providers/store";
@@ -49,7 +49,7 @@ export const CardProduct: FC<CardProductProps> = (
 
     const handleClick = useCallback(()=>{
         dispatch(ingredientDetailsActions.add(details))
-        navigate(RoutesPath.ingredient_detail.replace(':id', details._id), {state:{ background: location }})
+        navigate(ROUTES.INGREDIENT_DETAIL.replace(':id', details._id), {state:{ background: location }})
     }, [dispatch, details, navigate])
 
 

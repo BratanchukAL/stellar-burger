@@ -7,7 +7,7 @@ import {
     ErrorText
 } from "components/shared/ui"
 import {useForm} from "components/shared/hooks"
-import {RoutesPath} from "components/shared/configs"
+import {ROUTES} from "components/shared/configs"
 
 import {useHandleRegister} from "components/features/auth/register"
 
@@ -75,7 +75,7 @@ export const SignupForm = ()=> {
             <Footer>
                 <TextNavLink
                     pretext={"Уже зарегистрированы?"}
-                    to={RoutesPath.login}
+                    to={ROUTES.LOGIN}
                     text={'Войти'}
                 />
             </Footer>
