@@ -19,6 +19,3 @@ export const refreshTokenAPI = baseApi.injectEndpoints({
         })
     })
 })
-
-
-// export const { useGetProductsQuery } = productAPI

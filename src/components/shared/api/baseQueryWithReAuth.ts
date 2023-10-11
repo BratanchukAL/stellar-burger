@@ -28,7 +28,6 @@ export async function baseQueryWithReAuth(
         typeof result?.error?.status === 'number'
         && AUTH_ERROR_CODES.has(result.error!.status)
     ){
-        // console.log('sending invalidateAccessTokenAction')
         // send refresh token to get new access token
         await api.dispatch(refreshTokenAction())
 
