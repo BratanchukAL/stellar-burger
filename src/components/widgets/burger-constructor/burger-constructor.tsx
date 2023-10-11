@@ -72,7 +72,7 @@ export const BurgerConstructor = () => {
 
    return (
        <section>
-           <div className={styles.content + ' pl-4 mb-10'} ref={dropRef as React.RefObject<HTMLDivElement>}>
+           <div className={styles.content + ' pl-4 mb-10'} ref={dropRef}>
                {canDrop && <div className={styles.drop_place}>
                    <p className={clx('text text_type_main-medium', [], {'text_color_inactive': !canDrop})}>
                        Перетащите сюда ингредиент

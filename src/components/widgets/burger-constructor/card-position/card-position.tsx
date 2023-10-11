@@ -10,7 +10,7 @@ import {basketActions} from "components/entities/basket";
 import styles from './card-position.module.css'
 
 
-interface CardPositionProps{
+interface ICardPositionProps{
     id: string;
     index: number;
     uuid: string;
@@ -23,7 +23,7 @@ interface CardPositionProps{
     extraClass?: string;
 }
 
-export const CardPosition: FC<CardPositionProps> = (
+export const CardPosition: FC<ICardPositionProps> = (
     {
         id, index, uuid, typeProduct,
         thumbnail= DefaultImage,
@@ -50,10 +50,10 @@ export const CardPosition: FC<CardPositionProps> = (
         handleMoveItem
     )
 
-    let extraDragDropProps = {ref: dropRef}
+    let extraDragDropProps: {ref?: (typeof dropRef)} = {ref: dropRef}
 
     if (isLocked)
-        extraDragDropProps = {ref: ()=>{}}
+        extraDragDropProps = {}
 
     const opacity = isDragging ? 0.2 : 1
 

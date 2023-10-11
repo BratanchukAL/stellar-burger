@@ -1,6 +1,6 @@
-import {useDrag} from "react-dnd";
+import {ConnectDragSource, useDrag} from "react-dnd";
 
-export const useDragItem = (id: string, dragOfType: string) =>{
+export const useDragItem = (id: string, dragOfType: string): [ConnectDragSource, boolean] =>{
 
     const [{isDragging}, drag] = useDrag({
         type: dragOfType,
