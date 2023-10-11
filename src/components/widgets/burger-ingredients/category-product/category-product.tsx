@@ -1,5 +1,4 @@
 import React, {FC, PropsWithChildren} from "react";
-import PropTypes from "prop-types";
 
 import styles from './category-product.module.css'
 

@@ -1,5 +1,4 @@
 import React, {FC, useCallback} from "react";
-import PropTypes from "prop-types";
 
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import DefaultImage from "@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png";
