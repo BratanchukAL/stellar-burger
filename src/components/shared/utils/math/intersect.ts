@@ -15,7 +15,7 @@ export const defaultRectShift = {
 export function intersectRect(
     r1:DOMRect, r2:DOMRect,
     shift:RectShift=defaultRectShift
-) {
+): boolean {
   return !(
       r2.left + shift.r2.x >= r1.right + shift.r1.x ||
       r2.right + shift.r2.x <= r1.left + shift.r1.x ||
