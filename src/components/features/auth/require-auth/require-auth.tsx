@@ -1,16 +1,17 @@
 import React from 'react'
-import { useSelector } from "react-redux"
 import { useLocation, Navigate, Outlet } from "react-router-dom"
 
 import {ROUTES} from "components/shared/configs";
+
+import {useAppSelector} from "components/providers/store";
 
 import {selectIsAuthChecked, selectIsAuthed} from "components/entities/session";
 
 
 
 export const RequireAuth = () => {
-    const isAuthChecked = useSelector(selectIsAuthChecked)
-    const isAuthed = useSelector(selectIsAuthed)
+    const isAuthChecked = useAppSelector(selectIsAuthChecked)
+    const isAuthed = useAppSelector(selectIsAuthed)
     const location = useLocation()
 
     if (!isAuthChecked) {
