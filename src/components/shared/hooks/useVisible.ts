@@ -1,10 +1,10 @@
 import {useCallback, useState} from "react";
 
-type TypeHandleClose = () => void;
-type TypeHandleOpen = () => void;
-type TypeIsOpen = boolean;
+type THandleClose = () => void;
+type THandleOpen = () => void;
+type TIsOpen = boolean;
 
-export const useVisible = (isOpenDefault: boolean):[TypeIsOpen,TypeHandleClose, TypeHandleOpen] =>{
+export const useVisible = (isOpenDefault: boolean):[TIsOpen,THandleClose, THandleOpen] =>{
     const [isOpen, setVisible] = useState(isOpenDefault)
 
     const handleClose = useCallback((): void =>{
