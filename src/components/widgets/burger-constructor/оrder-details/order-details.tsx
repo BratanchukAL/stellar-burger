@@ -36,6 +36,9 @@ export const OrderDetails: FC<PropsWithChildren>= ({children}) =>{
         if (!isAuthed) //TODO wrap in protected Button
             navigate(ROUTES.LOGIN)
 
+        if (!Boolean(selectedBun && selectedIngredients.length))
+            return
+
         let ingredients = selectedIngredients.reduce((prev: string[], current): string[]=>{
             prev = prev.concat([current.id])
             return prev
@@ -48,7 +51,7 @@ export const OrderDetails: FC<PropsWithChildren>= ({children}) =>{
             await postOrder({ingredients})
             handleOpen()
         }
-    }, [selectedIngredients, selectedBun, handleOpen, postOrder, isAuthed, navigate])
+    }, [selectedIngredients, selectedBun, handleOpen, postOrder, isAuthed, navigate, dispatch])
 
 
     return(

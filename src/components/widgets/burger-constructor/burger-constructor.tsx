@@ -32,6 +32,10 @@ export const BurgerConstructor = () => {
 
     const [dropRef, canDrop] = useDropItem(['bun', 'sauce', 'main'], handleDropItem)
 
+    const isFillBasket = useMemo(
+        ()=>!Boolean(selectedBun && selectedIngredients.length),
+    [selectedBun, selectedIngredients])
+
     const selectedBunDoc = useMemo(()=>{
         if (products && selectedBun)
             return products.find((p)=>p._id === selectedBun)
@@ -137,7 +141,7 @@ export const BurgerConstructor = () => {
                    <CurrencyIcon type="primary" /></p>
                </span>
                <OrderDetails>
-                   <Button htmlType={'button'}>Оформить заказ</Button>
+                   <Button htmlType={'button'} disabled={isFillBasket}>Оформить заказ</Button>
                </OrderDetails>
            </div>
        </section>
