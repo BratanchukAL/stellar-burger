@@ -6,7 +6,7 @@ type TOnChange = (e: ChangeEvent<HTMLInputElement>) => void;
 export function useForm<Type>(initialState: Type, deps: any[] = [true]): [Type, TOnChange] {
     const [state, setState] = useState<Type>(initialState)
 
-    useEffect(()=>{
+    useEffect((): void =>{
         if (initialState)
             setState({...state, ...initialState})
     }, deps)
