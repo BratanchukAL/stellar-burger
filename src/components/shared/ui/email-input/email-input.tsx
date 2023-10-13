@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import {Input} from "@ya.praktikum/react-developer-burger-ui-components";
 
 
-const validateEmail = (email: string) => {
+const validateEmail = (email: string): boolean => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
 };
@@ -37,7 +37,7 @@ export const EmailInput: React.FC<TEmailInputInterface> = ({
         setTimeout(() => inputRef.current?.focus(), 0);
     };
 
-    const validateField = (value: string) => {
+    const validateField = (value: string): void => {
         const isNotValidEmail = !validateEmail(value)
         setError(isNotValidEmail);
         if (isNotValidEmail)
@@ -46,11 +46,11 @@ export const EmailInput: React.FC<TEmailInputInterface> = ({
             inputRef.current?.setCustomValidity("")
     };
 
-    const onFocus = () => {
+    const onFocus = (): void => {
         setError(false);
     };
 
-    const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const onBlur = (e: React.FocusEvent<HTMLInputElement>): void => {
         if (e.target.value) {
             validateField(e.target.value);
         } else {
@@ -58,6 +58,7 @@ export const EmailInput: React.FC<TEmailInputInterface> = ({
         }
         isIcon && setDisabled(true);
     };
+
     return (
         <Input
             type="email"
