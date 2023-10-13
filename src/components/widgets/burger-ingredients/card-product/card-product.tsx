@@ -50,7 +50,7 @@ export const CardProduct: FC<CardProductProps> = (
     const handleClick = useCallback(()=>{
         dispatch(ingredientDetailsActions.add(details))
         navigate(ROUTES.INGREDIENT_DETAIL.replace(':id', details._id), {state:{ background: location }})
-    }, [dispatch, details, navigate])
+    }, [dispatch, details, navigate, location])
 
 
     let counterElement = undefined
