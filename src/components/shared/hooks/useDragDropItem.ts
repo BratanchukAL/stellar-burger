@@ -1,5 +1,5 @@
 import React, {useRef} from "react";
-import {useDrag, useDrop} from "react-dnd";
+import {DragSourceMonitor, useDrag, useDrop} from "react-dnd";
 import {XYCoord} from "dnd-core";
 
 
@@ -84,7 +84,7 @@ export const useDragDropItem = (
 
     const [{isDragging}, drag, preview] = useDrag(()=>({
         type: dragType,
-        collect: (monitor: any) => ({
+        collect: (monitor: DragSourceMonitor<IDragItem, unknown>) => ({
             isDragging: monitor.isDragging(),
         }),
         item: (): IDragItem => {

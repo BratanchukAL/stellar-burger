@@ -1,4 +1,4 @@
-import {ConnectDragSource, useDrag} from "react-dnd";
+import {ConnectDragSource, DragSourceMonitor, useDrag} from "react-dnd";
 
 export const useDragItem = (id: string, dragOfType: string): [ConnectDragSource, boolean] =>{
 
@@ -7,7 +7,7 @@ export const useDragItem = (id: string, dragOfType: string): [ConnectDragSource,
         item: () => {
             return {id}
         },
-        collect: (monitor: any) => ({
+        collect: (monitor: DragSourceMonitor<{id: string}, unknown>) => ({
             isDragging: monitor.isDragging(),
         }),
     })

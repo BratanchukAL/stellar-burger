@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {ChangeEvent, FormEvent, useState} from 'react'
 
 import {Button, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-components"
 
@@ -33,13 +33,13 @@ export const ProfileForm = ()=> {
 
     const [updateProfile, responseUpdate] = useUpdateProfile(state)
 
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         await updateProfile(e)
         refetchProfile()
         setVisibleEditButtons(false)
     }
 
-    const handleChange = (e: any) => {
+    const handleChange = (e:  ChangeEvent<HTMLInputElement>) => {
         onChange(e)
         if(!visibleEditButtons)
             setVisibleEditButtons(true)
