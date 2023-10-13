@@ -24,7 +24,6 @@ export const ResetForm = ()=>{
 
     return(
         <>
-            {response.isLoading && <div>Loading...</div>}
             {stateLocation?.sentEmail ||
                 <Navigate to={ROUTES.FORGOT} replace/>
             }

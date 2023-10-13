@@ -23,7 +23,6 @@ export const LoginForm = ()=>{
 
     return(
         <>
-            {response.isLoading && <div>Loading...</div>}
             <ErrorText message={response.error?.data?.message} extraClass="mt-6"/>
             <form onSubmit={onLogin} className={styles.container_form}>
                 <EmailInput

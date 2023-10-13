@@ -22,7 +22,6 @@ export const ForgotForm = ()=>{
 
     return(
         <>
-            {response.isLoading && <div>Loading...</div>}
             {response.data?.success &&
                 <Navigate to={ROUTES.RESET}
                           state={{ sentEmail:  response.data?.success}} replace/>
