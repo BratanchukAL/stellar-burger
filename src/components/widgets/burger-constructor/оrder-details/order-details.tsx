@@ -54,7 +54,7 @@ export const OrderDetails: FC<PropsWithChildren>= ({children}) =>{
     return(
         <>
             <div className={styles.click_children} onClick={handleFetch}>
-                {response.isLoading && <span>Загрузка...</span>}{children}
+                {children}
             </div>
             { isOpen &&
                 <Modal onClose={handleClose} extraClassContent="pt-20 pb-20">
