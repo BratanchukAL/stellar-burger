@@ -52,7 +52,6 @@ export const ProfileForm = ()=> {
 
     return (
         <>
-            {(isLoading || responseUpdate.isLoading) && <div className="mb-6">Loading...</div>}
             <ErrorText message={(error as any)?.data?.message} extraClass="mb-6"/>
             <ErrorText message={responseUpdate.error?.data?.message} extraClass="mb-6"/>
             <form onSubmit={handleSubmit} className={styles.container_form}>
