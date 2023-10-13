@@ -32,7 +32,7 @@ export const IngredientDetailsPage = () => {
 
     const {
         data: products = [],
-        isLoading,
+        // isLoading,
         // isSuccess,
         // isError,
         // error
@@ -58,7 +58,6 @@ export const IngredientDetailsPage = () => {
 
     return(
         <>
-            {isLoading && <span>Загрузка...</span>}
             {!details && <div>Не найден такой ингредиент</div>}
             {isOpenModal && background && details?._id &&
                 <Modal onClose={handleClose} extraClassContent="pb-5">
