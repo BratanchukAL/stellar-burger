@@ -1,5 +1,5 @@
 import React from "react";
-import {Outlet } from "react-router-dom"
+import {Outlet, useMatch} from "react-router-dom"
 
 import {ButtonLink} from "components/shared/ui";
 import {ROUTES} from "components/shared/configs";
@@ -8,6 +8,9 @@ import styles from './left-header.module.css'
 
 
 export const LeftHeader = () => {
+    const isMatchProfile = Boolean(useMatch(ROUTES.PROFILE))
+    const isMatchOrdersInProfile = Boolean(useMatch(ROUTES.ORDERS_IN_PROFILE))
+
     return (
         <section className={styles.container + " p-10"}>
             <section>
@@ -22,9 +25,15 @@ export const LeftHeader = () => {
                         Выход
                     </ButtonLink>
                 </nav>
-                <p className="text text_type_main-default text_color_inactive mt-20">
-                    В этом разделе вы можете <br/> изменить свои персональные данные
-                </p>
+                {isMatchProfile &&
+                    <p className="text text_type_main-default text_color_inactive mt-20">
+                        В этом разделе вы можете <br/> изменить свои персональные данные
+                    </p>
+                }{isMatchOrdersInProfile &&
+                    <p className="text text_type_main-default text_color_inactive mt-20">
+                        В разработке...
+                    </p>
+                }
             </section>
             <section className={styles.right + " ml-15"}>
                 <Outlet/>
