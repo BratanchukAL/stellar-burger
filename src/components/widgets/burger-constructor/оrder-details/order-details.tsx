@@ -11,7 +11,7 @@ import {ROUTES} from "components/shared/configs";
 import {selectIsAuthed} from "components/entities/session";
 import {spinnerActions} from "components/entities/spinner";
 
-import {selectSelectedProductsState} from "components/entities/basket";
+import {basketActions, selectSelectedProductsState} from "components/entities/basket";
 import {usePostOrderMutation} from "components/features/order";
 
 import styles from './order-details.module.css'
@@ -48,7 +48,7 @@ export const OrderDetails: FC<PropsWithChildren>= ({children}) =>{
 
         if (ingredients.length) {
             dispatch(spinnerActions.start("Ваш заказ оформляется. Подождите..."))
-            await postOrder({ingredients})
+            await postOrder({ingredients}).then(()=>dispatch(basketActions.clean()))
             handleOpen()
         }
     }, [selectedIngredients, selectedBun, handleOpen, postOrder, isAuthed, navigate, dispatch])
