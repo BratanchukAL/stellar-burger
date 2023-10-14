@@ -33,8 +33,10 @@ export const OrderDetails: FC<PropsWithChildren>= ({children}) =>{
 
 
     const handleFetch = useCallback(async ()=>{
-        if (!isAuthed) //TODO wrap in protected Button
+        if (!isAuthed) { //TODO wrap in protected Button
             navigate(ROUTES.LOGIN)
+            return
+        }
 
         if (!Boolean(selectedBun && selectedIngredients.length))
             return
