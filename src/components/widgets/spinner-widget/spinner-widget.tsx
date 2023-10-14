@@ -1,7 +1,8 @@
 import React from 'react'
-import {useSelector} from "react-redux";
 
 import {Spinner} from "components/shared/ui";
+
+import {useAppSelector} from "components/providers/store";
 
 import {selectIsLoading} from "components/entities/spinner";
 import {selectText} from "components/entities/spinner";
@@ -9,8 +10,8 @@ import {selectText} from "components/entities/spinner";
 
 
 export const SpinnerWidget = () => {
-    const isLoading = useSelector(selectIsLoading)
-    const text = useSelector(selectText)
+    const isLoading = useAppSelector(selectIsLoading)
+    const text = useAppSelector(selectText)
 
     return (
         <>

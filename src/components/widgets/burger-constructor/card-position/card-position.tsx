@@ -1,5 +1,4 @@
 import React, {FC, useCallback} from "react";
-import PropTypes from "prop-types";
 
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import DefaultImage from "@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png";
@@ -11,7 +10,7 @@ import {basketActions} from "components/entities/basket";
 import styles from './card-position.module.css'
 
 
-interface CardPositionProps{
+interface ICardPositionProps{
     id: string;
     index: number;
     uuid: string;
@@ -24,7 +23,7 @@ interface CardPositionProps{
     extraClass?: string;
 }
 
-export const CardPosition: FC<CardPositionProps> = (
+export const CardPosition: FC<ICardPositionProps> = (
     {
         id, index, uuid, typeProduct,
         thumbnail= DefaultImage,
@@ -51,10 +50,10 @@ export const CardPosition: FC<CardPositionProps> = (
         handleMoveItem
     )
 
-    let extraDragDropProps = {ref: dropRef}
+    let extraDragDropProps: {ref?: (typeof dropRef)} = {ref: dropRef}
 
     if (isLocked)
-        extraDragDropProps = {ref: ()=>{}}
+        extraDragDropProps = {}
 
     const opacity = isDragging ? 0.2 : 1
 
@@ -73,17 +72,4 @@ export const CardPosition: FC<CardPositionProps> = (
 
         </div>
     )
-}
-
-
-CardPosition.propTypes = {
-    id: PropTypes.string.isRequired,
-    uuid: PropTypes.string.isRequired,
-    typeProduct: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired,
-    thumbnail: PropTypes.string,
-    price: PropTypes.number.isRequired,
-    type: PropTypes.oneOf(['top' , 'bottom']),
-    isLocked: PropTypes.bool,
-    extraClass: PropTypes.string,
 }

@@ -1,5 +1,4 @@
 import React, {FC, PropsWithChildren} from "react";
-import PropTypes from "prop-types";
 
 import styles from './category-product.module.css'
 
@@ -27,9 +26,3 @@ export const CategoryProduct: FC<PropsWithChildren<CategoryProductProps>> = (
         </div>
     )
 };
-
-CategoryProduct.propTypes = {
-    title: PropTypes.string.isRequired,
-    children: PropTypes.node.isRequired,
-    extraClass: PropTypes.string
-}

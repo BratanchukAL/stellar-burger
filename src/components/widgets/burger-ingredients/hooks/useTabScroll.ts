@@ -18,7 +18,7 @@ export const useTabScroll = (defaultTabName: string, shiftBox=0):
 
     const onClickTabCategory = useCallback((tabName: string) => {
         setCurrentTab(tabName)
-        categoriesRefs.current[tabName].scrollIntoView({block: "start", behavior: "smooth"});
+        categoriesRefs.current[tabName]?.scrollIntoView({block: "start", behavior: "smooth"});
     }, [categoriesRefs])
 
 

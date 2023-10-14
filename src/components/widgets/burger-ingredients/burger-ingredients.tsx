@@ -12,6 +12,7 @@ import { useGetProductsQuery } from "components/entities/products";
 import {useTabScroll} from "./hooks/useTabScroll";
 
 import styles from './burger-ingredients.module.css'
+import {ErrorText} from "../../shared/ui";
 
 
 
@@ -23,8 +24,8 @@ export const BurgerIngredients = () => {
         data: products = [],
         // isLoading,
         // isSuccess,
-        // isError,
-        // error
+        isError,
+        error
     } = useGetProductsQuery()
 
     const categoriesData = useMemo(()=>[
@@ -40,7 +41,7 @@ export const BurgerIngredients = () => {
         },
     ], [])
 
-    const productsElements = useMemo(()=> categoriesData.map((category, index)=>{
+    const productsElements = useMemo(()=> products.length && categoriesData.map((category, index)=>{
         const productsOfCat = products.filter((v)=>v.type===category.name)
 
         return (
@@ -87,7 +88,7 @@ export const BurgerIngredients = () => {
             </div>
 
             <div className={styles.box + ' mt-10'} ref={scrollRef}>
-                { productsElements }
+                { isError ?  <ErrorText message={(error as any)?.error} extraClass="mt-6"/> : productsElements}
             </div>
         </section>
     );

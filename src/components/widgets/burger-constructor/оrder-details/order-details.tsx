@@ -6,12 +6,12 @@ import {useAppDispatch, useAppSelector} from "components/providers/store";
 import {clx} from "components/shared/utils";
 import {ErrorText, Modal} from "components/shared/ui";
 import {useVisible} from "components/shared/hooks";
-import {RoutesPath} from "components/shared/configs";
+import {ROUTES} from "components/shared/configs";
 
 import {selectIsAuthed} from "components/entities/session";
 import {spinnerActions} from "components/entities/spinner";
 
-import {selectSelectedProductsState} from "components/entities/basket";
+import {basketActions, selectSelectedProductsState} from "components/entities/basket";
 import {usePostOrderMutation} from "components/features/order";
 
 import styles from './order-details.module.css'
@@ -34,7 +34,10 @@ export const OrderDetails: FC<PropsWithChildren>= ({children}) =>{
 
     const handleFetch = useCallback(async ()=>{
         if (!isAuthed) //TODO wrap in protected Button
-            navigate(RoutesPath.login)
+            navigate(ROUTES.LOGIN)
+
+        if (!Boolean(selectedBun && selectedIngredients.length))
+            return
 
         let ingredients = selectedIngredients.reduce((prev: string[], current): string[]=>{
             prev = prev.concat([current.id])
@@ -45,16 +48,16 @@ export const OrderDetails: FC<PropsWithChildren>= ({children}) =>{
 
         if (ingredients.length) {
             dispatch(spinnerActions.start("Ваш заказ оформляется. Подождите..."))
-            await postOrder({ingredients})
+            await postOrder({ingredients}).then(()=>dispatch(basketActions.clean()))
             handleOpen()
         }
-    }, [selectedIngredients, selectedBun, handleOpen, postOrder, isAuthed, navigate])
+    }, [selectedIngredients, selectedBun, handleOpen, postOrder, isAuthed, navigate, dispatch])
 
 
     return(
         <>
             <div className={styles.click_children} onClick={handleFetch}>
-                {response.isLoading && <span>Загрузка...</span>}{children}
+                {children}
             </div>
             { isOpen &&
                 <Modal onClose={handleClose} extraClassContent="pt-20 pb-20">

@@ -26,12 +26,13 @@ export const Modal: FC<React.PropsWithChildren<ModalProps>> = ({
     const bodyRef = useRef(bodyElement)
 
     useEffect(() => {
-        bodyRef.current.style.overflow = 'hidden'
+        const bodyRefCurrent = bodyRef.current
+        bodyRefCurrent.style.overflow = 'hidden'
         modalRef.current?.showModal()
         modalRef.current?.focus()
 
         return () => {
-            bodyRef.current.style.overflow = ''
+            bodyRefCurrent.style.overflow = ''
         }
     }, [bodyRef, modalRef])
 
@@ -40,16 +41,17 @@ export const Modal: FC<React.PropsWithChildren<ModalProps>> = ({
             onClose()
     }
 
-    const handleClose = (e?: SyntheticEvent<HTMLDialogElement>) =>{
+    const handleClose = () =>{
         onClose()
         modalRef.current?.close()
     }
 
-    const handleClickBackdrop = (e: any) =>{
-        const rect = e?.currentTarget.getBoundingClientRect();
+    const handleClickBackdrop = (e:  SyntheticEvent<HTMLDialogElement>) =>{
+        const target = e.currentTarget
+        const rect = target.getBoundingClientRect();
         if (rect)
-            if (e?.clientY < rect.top || e?.clientY > rect.bottom ||
-                e?.clientX < rect.left || e?.clientX > rect.right) {
+            if (target.clientTop < rect.top || target.clientTop > rect.bottom ||
+                target.clientLeft < rect.left || target.clientLeft > rect.right) {
                 modalRef.current?.close();
                 onClose()
             }

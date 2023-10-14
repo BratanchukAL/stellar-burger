@@ -32,6 +32,10 @@ export const BurgerConstructor = () => {
 
     const [dropRef, canDrop] = useDropItem(['bun', 'sauce', 'main'], handleDropItem)
 
+    const isFillBasket = useMemo(
+        ()=>!Boolean(selectedBun && selectedIngredients.length),
+    [selectedBun, selectedIngredients])
+
     const selectedBunDoc = useMemo(()=>{
         if (products && selectedBun)
             return products.find((p)=>p._id === selectedBun)
@@ -72,8 +76,8 @@ export const BurgerConstructor = () => {
 
    return (
        <section>
-           <div className={styles.content + ' pl-4 mb-10'} ref={dropRef as React.RefObject<HTMLDivElement>}>
-               {canDrop && <div className={styles.drop_place}>
+           <div className={styles.content + ' pl-4 mb-10'} ref={dropRef}>
+               {!selectedIngredientsDocs.length && canDrop && <div className={styles.drop_place}>
                    <p className={clx('text text_type_main-medium', [], {'text_color_inactive': !canDrop})}>
                        Перетащите сюда ингредиент
                    </p>
@@ -137,7 +141,7 @@ export const BurgerConstructor = () => {
                    <CurrencyIcon type="primary" /></p>
                </span>
                <OrderDetails>
-                   <Button htmlType={'button'}>Оформить заказ</Button>
+                   <Button htmlType={'button'} disabled={isFillBasket}>Оформить заказ</Button>
                </OrderDetails>
            </div>
        </section>

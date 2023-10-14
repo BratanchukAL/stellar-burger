@@ -7,7 +7,7 @@ import {
     ErrorText
 } from "components/shared/ui"
 import {useForm} from "components/shared/hooks"
-import {RoutesPath} from "components/shared/configs"
+import {ROUTES} from "components/shared/configs"
 
 import {useHandleRegister} from "components/features/auth/register"
 
@@ -29,7 +29,6 @@ export const SignupForm = ()=> {
 
     return (
         <>
-            {response.isLoading && <div>Loading...</div>}
             <ErrorText message={response.error?.data?.message} extraClass="mt-6"/>
             <form onSubmit={onRegister} className={styles.container_form}>
                 <Input
@@ -75,7 +74,7 @@ export const SignupForm = ()=> {
             <Footer>
                 <TextNavLink
                     pretext={"Уже зарегистрированы?"}
-                    to={RoutesPath.login}
+                    to={ROUTES.LOGIN}
                     text={'Войти'}
                 />
             </Footer>

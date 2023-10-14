@@ -27,8 +27,8 @@ export async function baseQueryWithReAuth(
     if (
         typeof result?.error?.status === 'number'
         && AUTH_ERROR_CODES.has(result.error!.status)
+        && (result.error?.data as {message: string}).message === 'jwt expired'
     ){
-        // console.log('sending invalidateAccessTokenAction')
         // send refresh token to get new access token
         await api.dispatch(refreshTokenAction())
 

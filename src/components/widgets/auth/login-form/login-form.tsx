@@ -4,7 +4,7 @@ import {Button, PasswordInput} from "@ya.praktikum/react-developer-burger-ui-com
 
 import {EmailInput, ErrorText} from "components/shared/ui"
 import {useForm} from "components/shared/hooks"
-import {RoutesPath} from "components/shared/configs";
+import {ROUTES} from "components/shared/configs";
 
 import {useHandleLogin} from "components/features/auth/login"
 
@@ -23,7 +23,6 @@ export const LoginForm = ()=>{
 
     return(
         <>
-            {response.isLoading && <div>Loading...</div>}
             <ErrorText message={response.error?.data?.message} extraClass="mt-6"/>
             <form onSubmit={onLogin} className={styles.container_form}>
                 <EmailInput
@@ -56,12 +55,12 @@ export const LoginForm = ()=>{
             <Footer>
                 <TextNavLink
                     pretext={'Вы — новый пользователь?'}
-                    to={RoutesPath.register}
+                    to={ROUTES.REGISTER}
                     text={'Зарегистрироваться'}
                 />
                 <TextNavLink
                     pretext={'Забыли пароль?'}
-                    to={RoutesPath.forgot}
+                    to={ROUTES.FORGOT}
                     text={'Восстановить пароль'}
                     extraClass="mt-4"
                 />

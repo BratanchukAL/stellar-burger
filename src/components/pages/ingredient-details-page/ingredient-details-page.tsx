@@ -3,7 +3,7 @@ import React, {useCallback, useEffect, useMemo} from "react";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 
 import {Modal} from "components/shared/ui";
-import {RoutesPath} from "components/shared/configs";
+import {ROUTES} from "components/shared/configs";
 
 import {useAppDispatch, useAppSelector} from "components/providers/store";
 
@@ -32,7 +32,7 @@ export const IngredientDetailsPage = () => {
 
     const {
         data: products = [],
-        isLoading,
+        // isLoading,
         // isSuccess,
         // isError,
         // error
@@ -53,12 +53,11 @@ export const IngredientDetailsPage = () => {
 
     const handleClose = useCallback(()=>{
             dispatch(ingredientDetailsActions.clean())
-            navigate(RoutesPath.home)
+            navigate(ROUTES.HOME)
     }, [dispatch, navigate])
 
     return(
         <>
-            {isLoading && <span>Загрузка...</span>}
             {!details && <div>Не найден такой ингредиент</div>}
             {isOpenModal && background && details?._id &&
                 <Modal onClose={handleClose} extraClassContent="pb-5">

@@ -1,5 +1,4 @@
 import React, {FC, useCallback} from "react";
-import PropTypes from "prop-types";
 
 import {useLocation, useNavigate} from "react-router-dom";
 
@@ -7,7 +6,7 @@ import DefaultImage from "@ya.praktikum/react-developer-burger-ui-components/dis
 import {Counter, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import {clx} from "components/shared/utils";
-import {RoutesPath} from "components/shared/configs";
+import {ROUTES} from "components/shared/configs";
 import {useDragItem} from "components/shared/hooks";
 
 import {useAppDispatch} from "components/providers/store";
@@ -50,8 +49,8 @@ export const CardProduct: FC<CardProductProps> = (
 
     const handleClick = useCallback(()=>{
         dispatch(ingredientDetailsActions.add(details))
-        navigate(RoutesPath.ingredient_detail.replace(':id', details._id), {state:{ background: location }})
-    }, [dispatch, details, navigate])
+        navigate(ROUTES.INGREDIENT_DETAIL.replace(':id', details._id), {state:{ background: location }})
+    }, [dispatch, details, navigate, location])
 
 
     let counterElement = undefined
@@ -78,33 +77,4 @@ export const CardProduct: FC<CardProductProps> = (
             <p className={clx(styles.caption, ['text', 'text_type_main-small'])}>{props.caption}</p>
         </div>
     )
-}
-
-
-CardProduct.propTypes = {
-    id: PropTypes.string.isRequired,
-    productType: PropTypes.string.isRequired,
-    count: PropTypes.number,
-    price: PropTypes.number.isRequired,
-    caption: PropTypes.string.isRequired,
-    image: PropTypes.string,
-    extraClass: PropTypes.string,
-    details: PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        type: PropTypes.oneOf([
-            "bun" as const,
-            "main" as const,
-            "sauce" as const
-        ]).isRequired,
-        proteins: PropTypes.number.isRequired,
-        fat: PropTypes.number.isRequired,
-        carbohydrates: PropTypes.number.isRequired,
-        calories:PropTypes.number.isRequired,
-        price: PropTypes.number.isRequired,
-        image: PropTypes.string.isRequired,
-        image_mobile: PropTypes.string.isRequired,
-        image_large: PropTypes.string.isRequired,
-        __v: PropTypes.number.isRequired
-    }).isRequired
 }
