@@ -36,6 +36,8 @@ export const Pages = () => {
                         <Route path={ROUTES.INGREDIENT_DETAIL} element={<IngredientDetailsPage  />}/>
                     </Route>
 
+                    <Route path={ROUTES.FEED} element={<p>В разработке...</p>}/>
+
                     {/*Guest pages*/}
                     <Route element={<RequireGuest/>}>
                         <Route path={ROUTES.LOGIN} element={<LoginPage/>}/>
@@ -47,7 +49,6 @@ export const Pages = () => {
 
                     {/*Only Auth*/}
                     <Route element={<RequireAuth/>}>
-                        <Route path={ROUTES.APPLICATION_TAPE} element={<p>В разработке...</p>}/>
                         <Route element={<LeftHeader/>}>
                             <Route path={ROUTES.PROFILE} element={<ProfileForm/>}/>
                             <Route path={ROUTES.ORDERS_IN_PROFILE} element={<p>В разработке...</p>}/>

@@ -15,7 +15,7 @@ export const AppHeader = ()=>{
                     <ButtonLink to={ROUTES.HOME} extraClass={'mr-2'} icon="burger" isParentLink>
                         Конструктор
                     </ButtonLink>
-                    <ButtonLink to={ROUTES.APPLICATION_TAPE} icon="list" isParentLink>
+                    <ButtonLink to={ROUTES.FEED} icon="list" isParentLink>
                         Лента заявок
                     </ButtonLink>
                 </div>
