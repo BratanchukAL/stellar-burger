@@ -14,6 +14,7 @@ import {Content} from "components/widgets/content";
 
 import {LeftHeader} from "components/widgets/profile/left-header";
 import {ProfileForm} from "components/widgets/profile/profile-form";
+import {ListOrders as ProfileListOrders} from "components/widgets/profile/list-orders";
 
 import {BurgerConstructorPage} from "./burger-constructor-page";
 import {IngredientDetailsPage} from "./ingredient-details-page";
@@ -51,7 +52,7 @@ export const Pages = () => {
                     <Route element={<RequireAuth/>}>
                         <Route element={<LeftHeader/>}>
                             <Route path={ROUTES.PROFILE} element={<ProfileForm/>}/>
-                            <Route path={ROUTES.ORDERS_IN_PROFILE} element={<p>В разработке...</p>}/>
+                            <Route path={ROUTES.ORDERS_IN_PROFILE} element={<ProfileListOrders/>}/>
                         </Route>
                     </Route>
 

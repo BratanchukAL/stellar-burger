@@ -1,0 +1,81 @@
+.content{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+
+    width: calc(100% - var(--offset-base-size) * 6 * 2);
+
+    border-radius: var(--common-border-radius-s) var(--common-border-radius-s);
+    background-color: var(--background);
+}
+
+.item_info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+}
+
+
+.content_images{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+
+.images_border_wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative; /* для z-index порядка отрисовки imgs*/
+
+    width: 68px;
+    height: 68px;
+
+    border-radius: 50%;
+    background: linear-gradient(to right, rgba(53,12,130,1) 30%, rgba(130,9,154,1) 70%, rgba(0,212,255,1) 100%);
+}
+.images_black_wrap{
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: #131316;
+}
+
+.images{
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+}
+
+.content_price > p{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.content_images > .images_border_wrap:nth-child(n + 2){
+    margin-left: -20px;
+}
+
+.images_border_wrap .overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    background-color: black;
+    opacity: 0.6;
+    border-radius: 50%;
+}
+
+.images_border_wrap .digits_not_show_items{
+    position: absolute;
+    margin: auto;
+    font-size: 16px;
+}
