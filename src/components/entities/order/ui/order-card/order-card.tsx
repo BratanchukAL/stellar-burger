@@ -24,9 +24,6 @@ export const OrderCard = () => {
     const thumbnailsOfIngredients = useMemo(()=>{
         const images: string[] | [] = [DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage]
 
-        if (!images)
-            return undefined
-
         const maxShowItems = 6
 
         const notShowItems = images.length - maxShowItems
