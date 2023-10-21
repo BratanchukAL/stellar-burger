@@ -22,7 +22,7 @@ export const OrderCard = () => {
     )
 
     const thumbnailsOfIngredients = useMemo(()=>{
-        const images: string[] | never[] = [DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage]
+        const images: string[] | [] = [DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage]
 
         if (!images)
             return undefined
@@ -40,7 +40,7 @@ export const OrderCard = () => {
                 {
                     (notShowItems > 0) && (index === items.length-1) &&
                     <>
-                        <div className={styles.overlay}></div>
+                        <div className={styles.overlay}> </div>
                         <p className={clx(styles.digits_not_show_items, ["text text_type_main-default"])}>
                             +{notShowItems}
                         </p>
