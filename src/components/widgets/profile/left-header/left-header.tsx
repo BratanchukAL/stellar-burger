@@ -12,7 +12,7 @@ export const LeftHeader = () => {
     const isMatchOrdersInProfile = Boolean(useMatch(ROUTES.ORDERS_IN_PROFILE))
 
     return (
-        <section className={styles.container + " p-10"}>
+        <section className={styles.container + " pt-10"}>
             <section>
                 <nav className={styles.header}>
                     <ButtonLink to={ROUTES.PROFILE} size="large">
