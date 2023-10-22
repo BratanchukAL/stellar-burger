@@ -1,6 +1,6 @@
 import React, {useCallback, useMemo} from "react";
 
-import {Button, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Button} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import {useAppDispatch, useAppSelector} from "components/providers/store";
 

@@ -1,6 +1,6 @@
 import React, {useMemo} from 'react'
 
-import {CurrencyIcon, FormattedDate} from "@ya.praktikum/react-developer-burger-ui-components";
+import {FormattedDate} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import {clx} from "components/shared/utils";
 import {PriceWithCurrency} from "components/shared/ui";
