@@ -3,6 +3,7 @@ import React, {useMemo} from 'react'
 import {CurrencyIcon, FormattedDate} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import {clx} from "components/shared/utils";
+import {PriceWithCurrency} from "components/shared/ui";
 
 import styles from './order-card.module.css'
 
@@ -70,9 +71,8 @@ export const OrderCard = () => {
                 <div className={styles.content_images}>
                     {thumbnailsOfIngredients}
                 </div>
-                <div className={clx(styles.content_price, ['ml-6'])}>
-                    <p className="text text_type_digits-default">{556}&nbsp;
-                    <CurrencyIcon type="primary" /></p>
+                <div className="ml-6">
+                    <PriceWithCurrency price={557}/>
                 </div>
             </div>
         </div>
