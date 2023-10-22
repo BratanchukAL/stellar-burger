@@ -51,7 +51,7 @@ export const OrderCard = () => {
                 <p className="text text_type_main-medium">Death Star Starship Main бургер</p>
             </div>
             <div className={clx(styles.item_info, ['pt-2'])}>
-                <p className="text text_type_main-small">Создан</p>
+                <p className="text text_type_main-default">Создан</p>
             </div>
             <div className={clx(styles.item_info, ['pt-6'])}>
                 <div className={styles.content_images}>
