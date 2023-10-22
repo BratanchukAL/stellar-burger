@@ -53,13 +53,6 @@
     object-fit: cover;
 }
 
-.content_price > p{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-}
-
 .content_images > .images_border_wrap:nth-child(n + 2){
     margin-left: -20px;
 }
