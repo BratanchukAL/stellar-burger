@@ -5,6 +5,7 @@ import {Button, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-comp
 import {useAppDispatch, useAppSelector} from "components/providers/store";
 
 import {clx} from "components/shared/utils";
+import {PriceWithCurrency} from "components/shared/ui";
 import {useDropItem} from "components/shared/hooks";
 
 import {IProduct, useGetProductsQuery} from "components/entities/products";
@@ -14,6 +15,7 @@ import {CardPosition} from "./card-position/card-position";
 import {OrderDetails} from "./оrder-details/order-details";
 
 import styles from './burger-constructor.module.css'
+
 
 
 export const BurgerConstructor = () => {
@@ -137,8 +139,7 @@ export const BurgerConstructor = () => {
            </div>
            <div className={styles.button_order}>
                <span className="mr-10">
-                   <p className="text text_type_digits-medium">{totalPrice}&nbsp;
-                   <CurrencyIcon type="primary" /></p>
+                   <PriceWithCurrency price={totalPrice} size="medium"/>
                </span>
                <OrderDetails>
                    <Button htmlType={'button'} disabled={isFillBasket}>Оформить заказ</Button>
