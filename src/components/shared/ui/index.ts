@@ -1,3 +1,4 @@
+export {ThumbnailInCircle} from "./thumbnail-in-circle/thumbnail-in-circle";
 export { ButtonLink } from "./button-link/button-link";
 export {EditInput} from "./edit-input/edit-input";
 export {EmailInput} from "./email-input/email-input";
