@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 
-import {RootStateType} from "components/providers/store";
+import {TAsyncThunk} from "components/providers/store";
 
 import {ITokens, selectRefreshToken, sessionActions} from "components/entities/session";
 import {selectText, spinnerActions} from "components/entities/spinner";
@@ -13,7 +13,7 @@ import {refreshTokenAPI} from "./api/api";
 export const refreshTokenThunk = createAsyncThunk<
     void,
     void,
-    { state: RootStateType }
+    TAsyncThunk
 > (
     'session/refreshToken',
     async (_,  api) => {
