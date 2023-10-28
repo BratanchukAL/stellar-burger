@@ -1,6 +1,6 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IIngredientDetails} from "./models";
-import {IProduct} from "../index";
+import {IProduct} from "../models";
 
 
 // Persisted
