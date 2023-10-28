@@ -19,7 +19,7 @@ export const websocketMiddlewareBase =
 
         onSuccessAction:  ActionCreatorWithPayload<Event, any> | AsyncThunk<void, Event, any>,
         onErrorAction:  ActionCreatorWithPayload<Event, any> | AsyncThunk<void, Event, any>,
-        onMessageAction:  ActionCreatorWithPayload<Event, any> | AsyncThunk<void, Event, any>,
+        onMessageAction:  ActionCreatorWithPayload<MessageEvent, any> | AsyncThunk<void, MessageEvent, any>,
         onClosedAction:  ActionCreatorWithPayload<CloseEvent, any> | AsyncThunk<void, CloseEvent, any>,
     ): Middleware => {
 
@@ -28,8 +28,8 @@ export const websocketMiddlewareBase =
         // let closing: boolean = false
 
         return next => (action: PayloadAction) => {
-            const {dispatch, getState} = store;
-            const {type, payload} = action;
+            const {dispatch} = store;  //{getState}
+            // const {type, payload} = action;
 
             if (wsStartAction.match(action)) {
                 // объект класса WebSocket
@@ -49,7 +49,7 @@ export const websocketMiddlewareBase =
 
                 // функция, которая вызывается при получения события от сервера
                 socket.onmessage = (event:  MessageEvent) => {
-                    const {data} = event; //JSON.load(data)
+                    // const {data} = event; //JSON.load(data)
                     dispatch(onMessageAction(event));
                 };
                 // функция, которая вызывается при закрытии соединения
