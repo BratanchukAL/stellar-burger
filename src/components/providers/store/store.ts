@@ -12,6 +12,7 @@ import {
 
 import {baseApi} from "components/shared/api";
 import {reducersEntities} from "components/entities";
+import {ordersWSMiddleware} from "../../entities/order";
 
 
 
@@ -33,6 +34,7 @@ export const store = configureStore({
         }).concat(
             logger,
             baseApi.middleware,
+            ordersWSMiddleware
         ),
 })
 
