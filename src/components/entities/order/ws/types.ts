@@ -8,8 +8,8 @@ export type TOrdersDto = {
         _id: string
         status: 'done' | 'created' | 'pending' | 'cancelled'
         number: number
-        createdAt: Date
-        updatedAt: Date
+        createdAt: string
+        updatedAt: string
     }[]
     total: number
     totalToday: number
