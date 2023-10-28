@@ -33,6 +33,9 @@ export const onErrorActionThunk= createAsyncThunk<
 > (
     'WS/Orders/all/onErrorActionThunk',
     async (e,  api) => {
+        const dispatch = api.dispatch
+        dispatch(ordersAllFeedActions.error(e.type))
+
         console.log('WS/Orders/all/onErrorActionThunk')
         console.log(e)
     }
