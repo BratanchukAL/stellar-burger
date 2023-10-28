@@ -25,7 +25,6 @@ export const websocketMiddlewareBase =
 
     return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
         let socket: WebSocket | null = null;
-        // let closing: boolean = false
 
         return next => (action: PayloadAction) => {
             const {dispatch} = store;  //{getState}
@@ -54,15 +53,14 @@ export const websocketMiddlewareBase =
                 };
                 // функция, которая вызывается при закрытии соединения
                 socket.onclose = (event: CloseEvent) => {
-                    if (event.code === 0 && event.reason === 'closing')
+                    if (socket === null)
                         dispatch(onClosedAction(event));
                     else
                         dispatch(wsStartAction())
                 };
 
                 if (wsDisconnectAction.match(action)) {
-                    // closing = true
-                    socket.close(0, 'closing')
+                    socket.close()
                     socket = null
                 }
             }
