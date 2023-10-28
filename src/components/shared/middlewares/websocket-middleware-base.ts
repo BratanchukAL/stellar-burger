@@ -30,7 +30,7 @@ export const websocketMiddlewareBase =
             const {dispatch} = store;  //{getState}
             // const {type, payload} = action;
 
-            if (wsStartAction.match(action)) {
+            if (wsStartAction.match(action) && socket === null) {
                 // объект класса WebSocket
                 socket = new WebSocket(baseUrl+path);
             }
@@ -55,8 +55,11 @@ export const websocketMiddlewareBase =
                 socket.onclose = (event: CloseEvent) => {
                     if (socket === null)
                         dispatch(onClosedAction(event));
-                    else
+                    else {
+                        socket = null
                         dispatch(wsStartAction())
+                    }
+
                 };
 
                 if (wsDisconnectAction.match(action)) {
