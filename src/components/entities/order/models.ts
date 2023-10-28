@@ -1,6 +1,6 @@
 type TIngredientsIDs = string
 
-interface IOrder{
+export interface IOrder{
     name: string
     ingredients: TIngredientsIDs[]
     _id: string
