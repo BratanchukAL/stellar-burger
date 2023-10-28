@@ -5,6 +5,7 @@ import {reducersProducts, TypedActionsFromProducts} from "./products";
 import {sessionSlice} from "./session";
 import {spinnerSlice} from "./spinner";
 
+import {ordersAllFeedSlice} from "./order";
 import {ordersAllWSDisconnectAction, ordersAllWSStartAction} from "./order";
 
 
@@ -13,6 +14,7 @@ export const reducersEntities = {
     [spinnerSlice.name]: spinnerSlice.reducer,
     [basketSlice.name]:  basketSlice.reducer,
     [sessionSlice.name]: sessionSlice.reducer,
+    [ordersAllFeedSlice.name]: ordersAllFeedSlice.reducer,
     ...reducersProducts,
 }
 
@@ -24,5 +26,7 @@ export type TypedActionsFromEntities =
     ReturnSliceActionsType<typeof basketSlice.actions> |
     ReturnSliceActionsType<typeof sessionSlice.actions> |
 
+
+    ReturnSliceActionsType<typeof ordersAllFeedSlice.actions> |
     ReturnType<typeof ordersAllWSStartAction> |
     ReturnType<typeof ordersAllWSDisconnectAction>

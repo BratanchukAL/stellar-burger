@@ -1,6 +1,7 @@
 type TIngredientsIDs = string
 
 interface IOrder{
+    name: string
     ingredients: TIngredientsIDs[]
     _id: string
     status: 'done' | 'created' | 'pending' | 'cancelled'
