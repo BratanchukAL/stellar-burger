@@ -59,7 +59,6 @@ export const websocketMiddlewareBase =
                         socket = null
                         dispatch(wsStartAction())
                     }
-
                 };
 
                 if (wsDisconnectAction.match(action)) {
