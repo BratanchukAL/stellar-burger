@@ -19,8 +19,8 @@ interface ICalcPriceProps {
 
 export const CalcPrice:FC<ICalcPriceProps> = ({ids, products, size}) => {
 
-    const {selectedBunDoc, selectedIngredientsDocs} = useMemo(()=>{
-        const initial = {selectedBunDoc: {} as IProduct, selectedIngredientsDocs: [] as IProduct[]}
+    const {bunDoc, ingredientsDocs} = useMemo(()=>{
+        const initial = {bunDoc: null as IProduct | null , ingredientsDocs: [] as IProduct[]}
 
         if (products.length && ids.length)
             return ids.reduce((previousValue, currentValue, index: number) => {
@@ -30,9 +30,9 @@ export const CalcPrice:FC<ICalcPriceProps> = ({ids, products, size}) => {
                     return previousValue
 
                 if (product.type === 'bun')
-                    previousValue.selectedBunDoc = product
+                    previousValue.bunDoc = product
                 else
-                    previousValue.selectedIngredientsDocs = previousValue.selectedIngredientsDocs.concat([product])
+                    previousValue.ingredientsDocs.push(product)
 
                 return previousValue
             }
@@ -42,7 +42,7 @@ export const CalcPrice:FC<ICalcPriceProps> = ({ids, products, size}) => {
     }, [products, ids])
 
 
-    const totalPrice = useCalcPrice(selectedBunDoc, selectedIngredientsDocs)
+    const totalPrice = useCalcPrice(bunDoc, ingredientsDocs)
 
 
     return(

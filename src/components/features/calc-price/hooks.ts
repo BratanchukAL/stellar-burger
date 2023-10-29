@@ -3,21 +3,22 @@ import {useMemo} from "react";
 import {IProduct} from "components/entities/products";
 
 
-export const useCalcPrice = (selectedBunDoc:IProduct | null, selectedIngredientsDocs:IProduct[], deps:any = []):number => {
+
+export const useCalcPrice = (bunDoc:IProduct | null, ingredientsDocs:IProduct[]):number => {
     return useMemo(() => {
         let total = 0
-        if (!selectedBunDoc && !selectedIngredientsDocs.length)
+        if (!(bunDoc) && !ingredientsDocs.length)
             return total
 
-        if (selectedBunDoc)
-            total = selectedBunDoc.price * 2
+        if (bunDoc)
+            total = bunDoc.price * 2
 
-        if (selectedIngredientsDocs.length)
-            total = selectedIngredientsDocs.reduce((previousValue: number, currentProd: IProduct): number => {
+        if (ingredientsDocs.length)
+            total = ingredientsDocs.reduce((previousValue: number, currentProd: IProduct): number => {
                 previousValue += currentProd.price
                 return previousValue
             }, total)
 
         return total
-    }, [selectedIngredientsDocs, selectedBunDoc])
+    }, [ingredientsDocs, bunDoc])
 }
