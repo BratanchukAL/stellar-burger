@@ -7,8 +7,7 @@ import {ActionCreatorWithPayload, AsyncThunk, PayloadAction, ThunkDispatch} from
 export const websocketMiddlewareBase =
     <
         AppDispatch extends ThunkDispatch<RootState, unknown, AnyAction>,
-        RootState,
-        AppActions extends PayloadAction
+        RootState
     >
     (
         baseUrl: string,
