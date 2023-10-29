@@ -20,7 +20,7 @@ export const websocketMiddlewareBase =
         onErrorAction:  ActionCreatorWithPayload<Event, any> | AsyncThunk<void, Event, any>,
         onMessageAction:  ActionCreatorWithPayload<MessageEvent, any> | AsyncThunk<void, MessageEvent, any>,
         onClosedAction:  ActionCreatorWithPayload<CloseEvent, any> | AsyncThunk<void, CloseEvent, any>,
-    ): Middleware => {
+    ): Middleware<{}, RootState, AppDispatch> => {
 
     return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
         let socket: WebSocket | null = null;
@@ -68,5 +68,5 @@ export const websocketMiddlewareBase =
 
             next(action);
         };
-    }) as Middleware;
+    });
 }; 

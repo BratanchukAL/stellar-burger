@@ -1,2 +1,2 @@
-export type { RootStateType, TAsyncThunk } from "./types";
+export type { RootStateType, AppDispatch, TAsyncThunk } from "./types";
 export {useAppDispatch, useAppSelector} from "./hooks";
