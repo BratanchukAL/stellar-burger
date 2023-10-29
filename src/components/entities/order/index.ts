@@ -1,7 +1,7 @@
 import {ReturnSliceActionsType} from "components/shared/utils";
 
 //OrdersAll
-import { selectIsStreamingOrdersAll, selectOrdersAll } from "./orders-all/selectors";
+import { selectOrdersAll } from "./orders-all/selectors";
 
 import {ordersAllSlice, ordersAllActions} from "./orders-all/slice";
 import {ordersAllWSDisconnectAction, ordersAllWSStartAction} from "./orders-all/ws/actions";
@@ -23,7 +23,6 @@ export {ordersAllSlice}
 export {ordersAllActions}
 export {ordersAllWSStartAction}
 export {ordersAllWSDisconnectAction}
-export {selectIsStreamingOrdersAll}
 export {selectOrdersAll}
 export {ordersAllWSMiddleware} from "./orders-all/ws/ws";
 
