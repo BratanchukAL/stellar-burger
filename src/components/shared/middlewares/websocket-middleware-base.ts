@@ -2,6 +2,9 @@ import type {AnyAction, Middleware, MiddlewareAPI} from 'redux';
 
 import {ActionCreatorWithPayload, AsyncThunk, PayloadAction, ThunkDispatch} from "@reduxjs/toolkit";
 
+import {printf} from "../utils";
+
+
 
 
 export const websocketMiddlewareBase =
@@ -20,18 +23,33 @@ export const websocketMiddlewareBase =
         onErrorAction:  ActionCreatorWithPayload<Event, any> | AsyncThunk<void, Event, any>,
         onMessageAction:  ActionCreatorWithPayload<MessageEvent, any> | AsyncThunk<void, MessageEvent, any>,
         onClosedAction:  ActionCreatorWithPayload<CloseEvent, any> | AsyncThunk<void, CloseEvent, any>,
+
+        //optionals
+        wsReconnectAction?:  ActionCreatorWithPayload<void, any>,
+        selectAccessToken?:  (state: RootState)=>Record<string,string>
+
     ): Middleware<{}, RootState, AppDispatch> => {
 
     return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
         let socket: WebSocket | null = null;
 
         return next => (action: PayloadAction) => {
-            const {dispatch} = store;  //{getState}
+            const {dispatch, getState} = store;  //{getState}
             // const {type, payload} = action;
 
             if (wsStartAction.match(action) && socket === null) {
+                let fullUrl = baseUrl+path
+
+                if (selectAccessToken) {
+                    const params = selectAccessToken(getState())
+                    if(params)
+                        fullUrl = printf(fullUrl, params)
+                }
+
+                console.log('fullUrl')
+                console.log(fullUrl)
                 // объект класса WebSocket
-                socket = new WebSocket(baseUrl+path);
+                socket = new WebSocket(fullUrl);
             }
 
             if (socket) {
@@ -61,8 +79,14 @@ export const websocketMiddlewareBase =
                 };
 
                 if (wsDisconnectAction.match(action)) {
-                    socket.close()
+                    socket.close(1000)
                     socket = null
+                }
+
+                if (wsReconnectAction && wsReconnectAction.match(action)){
+                    socket && socket.close()
+                    socket = null
+                    dispatch(wsStartAction())
                 }
             }
 
