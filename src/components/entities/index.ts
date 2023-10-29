@@ -4,7 +4,12 @@ import {basketSlice} from "./basket";
 import {reducersProducts, TypedActionsFromProducts} from "./products";
 import {sessionSlice} from "./session";
 import {spinnerSlice} from "./spinner";
-import {ordersAllFeedSlice, TypedActionsFromOrder} from "./order";
+import {
+    ordersAllSlice,
+    ordersAllOfUserSlice,
+    TypedActionsFromOrder
+} from "./order";
+
 
 
 
@@ -13,7 +18,8 @@ export const reducersEntities = {
     [spinnerSlice.name]: spinnerSlice.reducer,
     [basketSlice.name]:  basketSlice.reducer,
     [sessionSlice.name]: sessionSlice.reducer,
-    [ordersAllFeedSlice.name]: ordersAllFeedSlice.reducer,
+    [ordersAllSlice.name]: ordersAllSlice.reducer,
+    [ordersAllOfUserSlice.name]: ordersAllOfUserSlice.reducer,
     ...reducersProducts,
 }
 
