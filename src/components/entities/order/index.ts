@@ -3,19 +3,24 @@ import {ReturnSliceActionsType} from "components/shared/utils";
 //OrdersAll
 import { selectIsStreamingOrdersAll, selectOrdersAll } from "./orders-all/selectors";
 
-import {ordersAllSlice} from "./orders-all/slice";
+import {ordersAllSlice, ordersAllActions} from "./orders-all/slice";
 import {ordersAllWSDisconnectAction, ordersAllWSStartAction} from "./orders-all/ws/actions";
 
 
 //Orders of User
-import { selectIsStreamingOrdersAllOfUser, selectOrdersAllOfUser } from "./orders-user/selectors";
+import { selectOrdersAllOfUser } from "./orders-user/selectors";
 
-import {ordersAllOfUserSlice} from "./orders-user/slice";
-import {ordersAllOfUserWSDisconnectAction, ordersAllOfUserWSStartAction} from "./orders-user/ws/actions";
+import {ordersAllOfUserSlice, ordersAllOfUserActions} from "./orders-user/slice";
+import {
+    ordersAllOfUserWSDisconnectAction,
+    ordersAllOfUserWSReconnectAction,
+    ordersAllOfUserWSStartAction
+} from "./orders-user/ws/actions";
 
 
 //OrdersAll
 export {ordersAllSlice}
+export {ordersAllActions}
 export {ordersAllWSStartAction}
 export {ordersAllWSDisconnectAction}
 export {selectIsStreamingOrdersAll}
@@ -25,18 +30,19 @@ export {ordersAllWSMiddleware} from "./orders-all/ws/ws";
 
 //Orders of User
 export {ordersAllOfUserSlice}
+export {ordersAllOfUserActions}
 export {ordersAllOfUserWSStartAction}
 export {ordersAllOfUserWSDisconnectAction}
-export {selectIsStreamingOrdersAllOfUser}
 export {selectOrdersAllOfUser}
 export {ordersAllOfUserWSMiddleware} from "./orders-user/ws/ws";
 
 
 export type TypedActionsFromOrder =
-    ReturnSliceActionsType<typeof ordersAllSlice.actions> |
+    ReturnSliceActionsType<typeof ordersAllActions> |
     ReturnType<typeof ordersAllWSStartAction> |
     ReturnType<typeof ordersAllWSDisconnectAction> |
 
-    ReturnSliceActionsType<typeof ordersAllOfUserSlice.actions> |
+    ReturnSliceActionsType<typeof ordersAllOfUserActions> |
     ReturnType<typeof ordersAllOfUserWSStartAction> |
-    ReturnType<typeof ordersAllOfUserWSDisconnectAction>
+    ReturnType<typeof ordersAllOfUserWSDisconnectAction> |
+    ReturnType<typeof ordersAllOfUserWSReconnectAction>

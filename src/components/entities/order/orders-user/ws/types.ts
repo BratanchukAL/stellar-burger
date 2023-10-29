@@ -1,7 +1,7 @@
 export type TOrdersBody = void
 
 export type TOrdersDto = {
-    success: boolean
+    success: true
     orders:{
         name: string
         ingredients: string[]
@@ -13,4 +13,9 @@ export type TOrdersDto = {
     }[]
     total: number
     totalToday: number
+}
+
+export type TError = {
+    success: false
+    message: string
 }

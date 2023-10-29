@@ -8,3 +8,7 @@ export const ordersAllOfUserWSStartAction = createAction<void, 'WS/Orders/all/us
 export const ordersAllOfUserWSDisconnectAction = createAction<void, 'WS/Orders/all/user/wsDisconnectAction'>(
   'WS/Orders/all/user/wsDisconnectAction'
 )
+
+export const ordersAllOfUserWSReconnectAction = createAction<void, 'WS/Orders/all/user/WSReconnectAction'>(
+  'WS/Orders/all/user/WSReconnectAction'
+)
