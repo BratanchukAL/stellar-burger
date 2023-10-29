@@ -1,5 +1,8 @@
 import {TOrdersDto} from "./types";
-import {IOrders} from "../models";
+import {IOrders} from "../../models";
+
+
+
 
 export function mapOrders(dto: TOrdersDto): IOrders {
     return {

@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IOrders} from "./models";
+import {IOrders} from "../models";
 
 
 

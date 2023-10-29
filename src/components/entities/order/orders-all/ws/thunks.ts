@@ -3,7 +3,7 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import {TAsyncThunk} from "components/providers/store";
 
 import {ordersAllFeedActions} from "../slice";
-import {IOrders} from "../models";
+import {IOrders} from "../../models";
 
 import {mapOrders} from "./maps";
 

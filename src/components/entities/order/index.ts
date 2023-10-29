@@ -1,9 +1,9 @@
-export {ordersAllFeedSlice} from "./slice";
-export {ordersWSMiddleware} from "./ws/ws";
-export {ordersAllWSStartAction, ordersAllWSDisconnectAction} from "./ws/actions";
+export {ordersAllFeedSlice} from "./orders-all/slice";
+export {ordersWSMiddleware} from "./orders-all/ws/ws";
+export {ordersAllWSStartAction, ordersAllWSDisconnectAction} from "./orders-all/ws/actions";
 export {
     selectIsStreamingOrdersAll,
     selectOrdersAll
-} from "./selectors";
+} from "./orders-all/selectors";
 
 
