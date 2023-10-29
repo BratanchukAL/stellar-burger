@@ -14,8 +14,8 @@ const initialState = {
 }
 
 
-export const ordersAllFeedSlice = createSlice({
-    name: 'ordersAllFeed',
+export const ordersAllSlice = createSlice({
+    name: 'ordersAll',
     initialState,
     reducers: {
         streaming(state){
@@ -53,4 +53,4 @@ export const ordersAllFeedSlice = createSlice({
 })
 
 
-export const { actions: ordersAllFeedActions } = ordersAllFeedSlice;
+export const { actions: ordersAllActions } = ordersAllSlice;

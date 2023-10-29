@@ -2,7 +2,7 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 
 import {TAsyncThunk} from "components/providers/store";
 
-import {ordersAllFeedActions} from "../slice";
+import {ordersAllActions} from "../slice";
 import {IOrders} from "../../models";
 
 import {mapOrders} from "./maps";
@@ -18,8 +18,8 @@ export const onSuccessActionThunk = createAsyncThunk<
     'WS/Orders/all/onSuccessActionThunk',
     async (e,  api) => {
         const dispatch = api.dispatch
-        dispatch(ordersAllFeedActions.loading())
-        dispatch(ordersAllFeedActions.streaming())
+        dispatch(ordersAllActions.loading())
+        dispatch(ordersAllActions.streaming())
 
         console.log('WS/Orders/all/onSuccessActionThunk')
         console.log(e)
@@ -34,7 +34,7 @@ export const onErrorActionThunk= createAsyncThunk<
     'WS/Orders/all/onErrorActionThunk',
     async (e,  api) => {
         const dispatch = api.dispatch
-        dispatch(ordersAllFeedActions.error(e.type))
+        dispatch(ordersAllActions.error(e.type))
 
         console.log('WS/Orders/all/onErrorActionThunk')
         console.log(e)
@@ -52,7 +52,7 @@ export const onMessageActionThunk= createAsyncThunk<
 
         const orders: IOrders = mapOrders(JSON.parse(e.data))
 
-        dispatch(ordersAllFeedActions.update(orders))
+        dispatch(ordersAllActions.update(orders))
 
         console.log('WS/Orders/all/onMessageActionThunk')
         console.log(e)
@@ -67,7 +67,7 @@ export const onClosedActionThunk= createAsyncThunk<
     'WS/Orders/all/onClosedActionThunk',
     async (e,  api) => {
         const dispatch = api.dispatch
-        dispatch(ordersAllFeedActions.closedStream())
+        dispatch(ordersAllActions.closedStream())
 
         console.log('WS/Orders/all/onClosedActionThunk')
         console.log(e)
