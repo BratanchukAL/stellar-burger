@@ -1,12 +1,11 @@
 import {ReturnSliceActionsType} from "components/shared/utils";
 
-import {basketSlice} from "./basket/slice";
+import {basketSlice} from "./basket";
 import {reducersProducts, TypedActionsFromProducts} from "./products";
 import {sessionSlice} from "./session";
 import {spinnerSlice} from "./spinner";
+import {ordersAllFeedSlice, TypedActionsFromOrder} from "./order";
 
-import {ordersAllFeedSlice} from "./order";
-import {ordersAllWSDisconnectAction, ordersAllWSStartAction} from "./order";
 
 
 
@@ -22,11 +21,7 @@ export const reducersEntities = {
 //typing actions
 export type TypedActionsFromEntities =
     TypedActionsFromProducts |
+    TypedActionsFromOrder |
     ReturnSliceActionsType<typeof spinnerSlice.actions> |
     ReturnSliceActionsType<typeof basketSlice.actions> |
-    ReturnSliceActionsType<typeof sessionSlice.actions> |
-
-
-    ReturnSliceActionsType<typeof ordersAllFeedSlice.actions> |
-    ReturnType<typeof ordersAllWSStartAction> |
-    ReturnType<typeof ordersAllWSDisconnectAction>
+    ReturnSliceActionsType<typeof sessionSlice.actions>

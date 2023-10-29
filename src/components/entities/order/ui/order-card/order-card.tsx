@@ -1,9 +1,11 @@
-import React, {useMemo} from 'react'
+import React, {FC, useMemo} from 'react'
 
 import {FormattedDate} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import {clx} from "components/shared/utils";
 import {PriceWithCurrency, ThumbnailInCircle} from "components/shared/ui";
+
+import {IOrder} from "../../models";
 
 import styles from './order-card.module.css'
 
@@ -11,16 +13,15 @@ import styles from './order-card.module.css'
 //TODO: drop
 import DefaultImage from "@ya.praktikum/react-developer-burger-ui-components/dist/images/img.png";
 
-export const OrderCard = () => {
-    const today = new Date()
-    const yesterday = new Date(
-        today.getFullYear(),
-        today.getMonth(),
-        today.getDate() - 1,
-        today.getHours(),
-        today.getMinutes() - 1,
-        0,
-    )
+
+interface IOrderCardProps {
+    order: IOrder
+}
+
+
+export const OrderCard:FC<IOrderCardProps> = ({order}) => {
+    const date = new Date(order.createdAt)
+
 
     const thumbnailsOfIngredients = useMemo(()=>{
         const images: string[] | [] = [DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage,DefaultImage]
@@ -44,14 +45,14 @@ export const OrderCard = () => {
     return(
         <div className={clx(styles.content, ['p-6'])}>
             <div className={styles.item_info}>
-                <p className="text text_type_digits-default">#034535</p>
-                <FormattedDate className="text text_type_main-default text_color_inactive" date={yesterday} />
+                <p className="text text_type_digits-default">#{order.number}</p>
+                <FormattedDate className="text text_type_main-default text_color_inactive" date={date} />
             </div>
             <div className={clx(styles.item_info, ['pt-6'])}>
-                <p className="text text_type_main-medium">Death Star Starship Main бургер</p>
+                <p className="text text_type_main-medium">{order.name}</p>
             </div>
             <div className={clx(styles.item_info, ['pt-2'])}>
-                <p className="text text_type_main-default">Создан</p>
+                <p className="text text_type_main-default">{order.status}</p>
             </div>
             <div className={clx(styles.item_info, ['pt-6'])}>
                 <div className={styles.content_images}>

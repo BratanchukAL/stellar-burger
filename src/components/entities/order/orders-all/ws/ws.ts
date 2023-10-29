@@ -6,7 +6,7 @@ import {ordersAllWSDisconnectAction, ordersAllWSStartAction} from "./actions";
 import {onErrorActionThunk, onMessageActionThunk, onSuccessActionThunk, onClosedActionThunk} from "./thunks";
 
 
-export const ordersWSMiddleware = websocketMiddlewareBase(
+export const ordersAllWSMiddleware = websocketMiddlewareBase(
     API_WS_URL,
     API_WS_PATH_ALL_ORDERS,
 
