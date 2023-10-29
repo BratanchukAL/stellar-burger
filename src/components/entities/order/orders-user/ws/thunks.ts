@@ -61,7 +61,7 @@ export const onMessageActionThunk= createAsyncThunk<
         const data: TOrdersDto | TError = JSON.parse(e.data)
 
         if(!data.success) {
-            if (data.message === "jwt expired"){
+            if (data.message === "Invalid or missing token"){
                 await dispatch(refreshTokenThunk())
                 dispatch(ordersAllOfUserWSReconnectAction())
             }else {
