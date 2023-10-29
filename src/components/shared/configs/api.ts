@@ -24,4 +24,4 @@ export const API_WS_URL = 'wss://norma.nomoreparties.space/'
 export const API_WS_PATH_ALL_ORDERS = 'orders/all'
 
 //Profile
-export const API_WS_PATH_USER_ALL_ORDERS = 'orders?token=${accessToken}'  //TODO:  без Bearer
+export const API_WS_PATH_USER_ALL_ORDERS = 'orders?token=$(accessToken)'
