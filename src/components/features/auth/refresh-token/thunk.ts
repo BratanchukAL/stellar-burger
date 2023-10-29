@@ -3,7 +3,7 @@ import {createAsyncThunk} from "@reduxjs/toolkit";
 import {TAsyncThunk} from "components/providers/store";
 
 import {ITokens, selectRefreshToken, sessionActions} from "components/entities/session";
-import {selectText, spinnerActions} from "components/entities/spinner";
+import {selectIsLoading, selectText, spinnerActions} from "components/entities/spinner";
 
 import {RefreshTokenBody} from "./api/types";
 import {refreshTokenAPI} from "./api/api";
@@ -20,6 +20,7 @@ export const refreshTokenThunk = createAsyncThunk<
         const dispatch = api.dispatch
         const refreshToken = selectRefreshToken(api.getState())
         const bufferTextSpinner = selectText(api.getState())
+        const currentIsLoading = selectIsLoading(api.getState())
 
         dispatch(sessionActions.loading())
         dispatch(spinnerActions.start("Идет проверка токена. Подождите..."))
@@ -38,7 +39,8 @@ export const refreshTokenThunk = createAsyncThunk<
         if (response.isSuccess && refreshResult) {
             // store the new token
             dispatch(sessionActions.refresh(refreshResult))
-            dispatch(spinnerActions.start(bufferTextSpinner))
+            if (currentIsLoading)
+                dispatch(spinnerActions.start(bufferTextSpinner))
         } else {
             dispatch(sessionActions.logout())
         }
