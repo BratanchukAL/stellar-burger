@@ -1,5 +1,7 @@
 import {ReturnSliceActionsType} from "components/shared/utils";
 
+import {IOrder} from "./models";
+
 //OrdersAll
 import { selectOrdersAll } from "./orders-all/selectors";
 
@@ -16,6 +18,9 @@ import {
     ordersAllOfUserWSReconnectAction,
     ordersAllOfUserWSStartAction
 } from "./orders-user/ws/actions";
+
+
+export type {IOrder}
 
 
 //OrdersAll
