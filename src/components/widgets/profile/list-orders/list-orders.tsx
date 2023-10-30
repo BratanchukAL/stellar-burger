@@ -47,7 +47,7 @@ export const ListOrders = () => {
             isError ? <ErrorText message={(error as any)?.error} extraClass="mt-6"/> :
             products &&
                 <section className={styles.box}>
-                    {orders && orders.map((v) => {
+                    {!!orders.length && orders.map((v) => {
                         return (
                             <OrderCard key={v.number} order={v}
                                 childrenComposition={
