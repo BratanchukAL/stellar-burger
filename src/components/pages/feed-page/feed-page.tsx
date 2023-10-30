@@ -1,6 +1,7 @@
 import React from "react"
 
 import {ListOrders} from "components/widgets/feed/list-orders";
+import {Dashboard} from "components/widgets/feed/dashboard";
 
 import styles from "./feed-page.module.css"
 
@@ -14,7 +15,10 @@ export const FeedPage = () => {
                 <p className={styles.title}>
                     Лента заказов
                 </p>
-                <ListOrders/>
+                <div className={styles.content}>
+                    <ListOrders/>
+                    <Dashboard/>
+                </div>
             </section>
         </>
     )

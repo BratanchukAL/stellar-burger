@@ -19,6 +19,8 @@ import {ListOrders as ProfileListOrders} from "components/widgets/profile/list-o
 import {BurgerConstructorPage} from "./burger-constructor-page";
 import {IngredientDetailsPage} from "./ingredient-details-page";
 
+import {FeedPage} from "./feed-page";
+
 import {LoginPage} from "./auth-pages/login-page";
 import {SignupPage} from "./auth-pages/signup-page";
 import {ForgotPage} from "./auth-pages/forgot-page";
@@ -37,7 +39,7 @@ export const Pages = () => {
                         <Route path={ROUTES.INGREDIENT_DETAIL} element={<IngredientDetailsPage  />}/>
                     </Route>
 
-                    <Route path={ROUTES.FEED} element={<p>В разработке...</p>}/>
+                    <Route path={ROUTES.FEED} element={<FeedPage/>}/>
 
                     {/*Guest pages*/}
                     <Route element={<RequireGuest/>}>
