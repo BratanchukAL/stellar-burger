@@ -7,15 +7,7 @@ import {clx} from "components/shared/utils";
 import {IOrder} from "../../models";
 
 import styles from './order-card.module.css'
-
-
-
-const StatusDictionary = {
-    done: 'Готово',
-    created: 'Создан',
-    pending: 'Готовится',
-    cancelled: 'Отменен'
-}
+import {StatusDictionary} from "../../maps";
 
 
 interface IOrderCardProps {
