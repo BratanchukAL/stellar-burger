@@ -15,20 +15,27 @@ export const Dashboard = () => {
     } = useAppSelector(selectOrdersAll)
 
 
+    //TODO: duplicate
+    const ordersSorted = useMemo(()=>{
+        let orders_buf = [...orders]
+        return orders_buf.sort((a,b)=> -(a.number - b.number))
+    }, [orders])
+
+
     const ordersWithStatusDone = useMemo(()=> {
-        const filtered = orders.filter((v)=> v.status === 'done').slice(0, 18)
+        const filtered = ordersSorted.filter((v)=> v.status === 'done').slice(0, 18)
         return filtered.map((v: IOrder) =>
             <span key={v.number} className="text text_type_digits-default mr-2 mb-2">{v.number}</span>
         )
-    }, [orders])
+    }, [ordersSorted])
 
 
     const ordersWithStatusPending = useMemo(()=> {
-        const filtered = orders.filter((v)=> v.status === 'pending').slice(0, 18)
+        const filtered = ordersSorted.filter((v)=> v.status === 'pending').slice(0, 18)
         return filtered.map((v: IOrder) =>
             <span key={v.number} className="text text_type_digits-default mr-2 mb-2">{v.number}</span>
         )
-    }, [orders])
+    }, [ordersSorted])
 
 
     return(

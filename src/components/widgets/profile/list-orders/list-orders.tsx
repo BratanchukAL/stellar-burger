@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useMemo} from 'react'
 
 import {useAppDispatch, useAppSelector} from "components/providers/store";
 
@@ -41,13 +41,19 @@ export const ListOrders = () => {
     }, [dispatch, isStreaming, isErrorWs])
 
 
+    const ordersSorted = useMemo(()=>{
+        let orders_buf = [...orders]
+        return orders_buf.sort((a,b)=> -(a.number - b.number))
+    }, [orders])
+
+
     return(<>
         {
             isErrorWs ? <ErrorText message={errorWs} extraClass="mt-6"/> :
             isError ? <ErrorText message={(error as any)?.error} extraClass="mt-6"/> :
             products &&
                 <section className={styles.box}>
-                    {!!orders.length && orders.map((v) => {
+                    {!!ordersSorted.length && ordersSorted.map((v) => {
                         return (
                             <OrderCard key={v.number} order={v}
                                 childrenComposition={
