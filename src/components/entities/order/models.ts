@@ -1,10 +1,12 @@
 type TIngredientsIDs = string
 
+export type TStatus = 'done' | 'created' | 'pending' | 'cancelled'
+
 export interface IOrder{
     name: string
     ingredients: TIngredientsIDs[]
     _id: string
-    status: 'done' | 'created' | 'pending' | 'cancelled'
+    status: TStatus
     number: number
     createdAt: string
     updatedAt: string
