@@ -1,7 +1,7 @@
 import {TStatus} from "./models";
 
 export const StatusDictionary: Record<TStatus, string> = {
-    done: 'Готово',
+    done: 'Выполнен',
     created: 'Создан',
     pending: 'Готовится',
     cancelled: 'Отменен'
