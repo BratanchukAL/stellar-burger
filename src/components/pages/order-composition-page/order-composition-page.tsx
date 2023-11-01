@@ -27,7 +27,7 @@ export const OrderCompositionPage = () =>{
     const {isStreaming:isStreamingOfUser, data: {orders: ordersOfUser}} = useAppSelector(selectOrdersAllOfUser)
 
     useEffect(()=>{
-        if (!isStreaming || !isStreamingOfUser)
+        if (!isStreaming && !isStreamingOfUser)
             dispatch(orderAPI.endpoints.getOrder.initiate({number: Number(id_param)}))
                 .then((response)=>setOrder(response.data as IOrder))
     }, [dispatch, id_param])
