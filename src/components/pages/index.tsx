@@ -21,6 +21,8 @@ import {IngredientDetailsPage} from "./ingredient-details-page";
 
 import {FeedPage} from "./feed-page";
 
+import {OrderCompositionPage} from "./order-composition-page";
+
 import {LoginPage} from "./auth-pages/login-page";
 import {SignupPage} from "./auth-pages/signup-page";
 import {ForgotPage} from "./auth-pages/forgot-page";
