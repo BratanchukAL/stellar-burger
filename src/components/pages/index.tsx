@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Route, Routes} from 'react-router-dom'
+import {Route, Routes, useNavigationType} from 'react-router-dom'
 
 import {ROUTES} from "components/shared/configs";
 
@@ -30,7 +30,9 @@ import {ResetPage} from "./auth-pages/reset-page";
 
 
 
+
 export const Pages = () => {
+    const transitionType = useNavigationType()
     return (
         <>
             <SpinnerWidget/>
@@ -38,10 +40,15 @@ export const Pages = () => {
             <Content>
                 <Routes>
                     <Route path='/' element={<BurgerConstructorPage/>}>
+                        {/* Popup */}
                         <Route path={ROUTES.INGREDIENT_DETAIL} element={<IngredientDetailsPage  />}/>
                     </Route>
 
-                    <Route path={ROUTES.FEED} element={<FeedPage/>}/>
+                    <Route path={ROUTES.FEED} element={<FeedPage/>}>
+                        {/* Popup */}
+                        {(transitionType !== 'POP') && <Route path={':id'} element={<OrderCompositionPage  />}/>}
+                    </Route>
+                    {(transitionType === 'POP') && <Route path={ROUTES.ORDER_IN_FEED} element={<OrderCompositionPage  />}/>}
 
                     {/*Guest pages*/}
                     <Route element={<RequireGuest/>}>
@@ -56,8 +63,12 @@ export const Pages = () => {
                     <Route element={<RequireAuth/>}>
                         <Route element={<LeftHeader/>}>
                             <Route path={ROUTES.PROFILE} element={<ProfileForm/>}/>
-                            <Route path={ROUTES.ORDERS_IN_PROFILE} element={<ProfileListOrders/>}/>
+                            <Route path={ROUTES.ORDERS_IN_PROFILE} element={<ProfileListOrders/>}>
+                                {/* Popup */}
+                                {(transitionType !== 'POP') && <Route path={':id'} element={<OrderCompositionPage  />}/>}
+                            </Route>
                         </Route>
+                        {(transitionType === 'POP') && <Route path={ROUTES.ORDER_IN_PROFILE} element={<OrderCompositionPage  />}/>}
                     </Route>
 
                     <Route path={"*"} element={<p>404 :(</p>}/>
