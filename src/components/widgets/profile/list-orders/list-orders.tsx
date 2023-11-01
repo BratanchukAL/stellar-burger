@@ -1,8 +1,9 @@
-import React, {useEffect, useMemo} from 'react'
-import { Outlet } from 'react-router-dom';
+import React, {useCallback, useEffect, useMemo} from 'react'
+import {Outlet, useNavigate} from 'react-router-dom';
 
 import {useAppDispatch, useAppSelector} from "components/providers/store";
 
+import {ROUTES} from "components/shared/configs";
 import {ErrorText} from "components/shared/ui";
 
 import {
@@ -15,16 +16,17 @@ import {selectOrdersAllOfUser} from "components/entities/order";
 import {useGetProductsQuery} from "components/entities/products";
 import {ProductsShortComposition} from "components/entities/products/ui/products-short-composition";
 
-import styles from './list-orders.module.css'
 import {CalcPrice} from "components/features/calc-price";
+
+import styles from './list-orders.module.css'
 
 
 
 
 export const ListOrders = () => {
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
     const {isStreaming, data: {orders}, isError:isErrorWs, error:errorWs} = useAppSelector(selectOrdersAllOfUser)
-
 
     const {
         data: products = [],
@@ -48,6 +50,10 @@ export const ListOrders = () => {
     }, [orders])
 
 
+    const onClickCard = useCallback((number:number)=>{
+        navigate(ROUTES.ORDER_IN_PROFILE.replace(':id', String(number)))
+    }, [navigate])
+
     return(<>
             <Outlet/>
             {
@@ -58,11 +64,13 @@ export const ListOrders = () => {
                         {!!ordersSorted.length && ordersSorted.map((v) => {
                             return (
                                 <OrderCard key={v.number} order={v}
+                                    onClick={onClickCard}
                                     childrenComposition={
                                         <ProductsShortComposition ids={v.ingredients} products={products}/>
                                     }
                                    childrenCalcPrice={<CalcPrice ids={v.ingredients} products={products}/>}
                                 />
+
                             )
                         })}
                     </section>

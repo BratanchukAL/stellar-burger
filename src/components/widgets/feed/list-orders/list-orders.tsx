@@ -1,8 +1,10 @@
-import React, {useEffect, useMemo} from 'react'
+import React, {useCallback, useEffect, useMemo} from 'react'
+import {useNavigate} from "react-router-dom";
 
 import {useAppDispatch, useAppSelector} from "components/providers/store";
 
 import {ErrorText} from "components/shared/ui";
+import {ROUTES} from "components/shared/configs";
 
 import {
     ordersAllWSDisconnectAction,
@@ -23,6 +25,7 @@ import styles from './list-orders.module.css'
 
 export const ListOrders = () => {
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
     const {isStreaming, data: {orders}, isError:isErrorWs, error:errorWs} = useAppSelector(selectOrdersAll)
 
 
@@ -47,6 +50,9 @@ export const ListOrders = () => {
         return orders_buf.sort((a,b)=> -(a.number - b.number))
     }, [orders])
 
+    const onClickCard = useCallback((number:number)=>{
+        navigate(ROUTES.ORDER_IN_FEED.replace(':id', String(number)))
+    }, [navigate])
 
     return(<>
         {
@@ -57,6 +63,7 @@ export const ListOrders = () => {
                     {!!ordersSorted.length && ordersSorted.map((v) => {
                         return (
                             <OrderCard key={v.number} order={v}
+                                onClick={onClickCard}
                                 childrenComposition={
                                     <ProductsShortComposition ids={v.ingredients} products={products}/>
                                 }
