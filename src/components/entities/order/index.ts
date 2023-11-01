@@ -23,6 +23,10 @@ import {
 export type {IOrder}
 
 
+//Order one
+export {orderAPI} from "./order-composition/api/api";
+
+
 //OrdersAll
 export {ordersAllSlice}
 export {ordersAllActions}
