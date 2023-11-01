@@ -1,3 +1,7 @@
+.name{
+    max-width: 600px;
+}
+
 .footer{
     display: flex;
     align-items: center;

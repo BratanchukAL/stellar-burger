@@ -23,7 +23,7 @@ export const OrderComposition:FC<IOrderCompositionProps> = ({order, childrenPosi
     return (
         <>
             <p className="text text_type_digits-default">#{order.number}</p>
-            <p className="text text_type_main-medium mt-10">{order.name}</p>
+            <p className={clx(styles.name, ["text text_type_main-medium mt-10"])}>{order.name}</p>
             <p className="text text_type_main-default mt-3">{StatusDictionary[order.status]}</p>
             <p className="text text_type_main-medium mt-15 mb-6">Состав:</p>
             {childrenPositions}
