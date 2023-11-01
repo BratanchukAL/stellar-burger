@@ -1,8 +1,7 @@
-import React, {FC, useMemo} from "react";
+import React, {FC} from "react";
 import {FormattedDate} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import {clx} from "components/shared/utils";
-// import {PriceWithCurrency, ThumbnailInCircle} from "components/shared/ui";
 
 import {IOrder} from "../../models";
 import {StatusDictionary} from "../../maps";
