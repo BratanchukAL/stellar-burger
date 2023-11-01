@@ -22,7 +22,7 @@ export const CalcPrice:FC<ICalcPriceProps> = ({ids, products, size}) => {
     const {bunDoc, ingredientsDocs} = useMemo(()=>{
         const initial = {bunDoc: null as IProduct | null , ingredientsDocs: [] as IProduct[]}
 
-        if (products.length && ids.length)
+        if (products.length && ids && ids.length)
             return ids.reduce((previousValue, currentValue, index: number) => {
                 const product = products.find((p)=>p._id === currentValue)
 
