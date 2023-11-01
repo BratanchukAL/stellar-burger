@@ -8,7 +8,7 @@ import {mapResponse} from "./maps";
 import {TOrderBody, TOrdersDto} from "./types";
 
 
-const orderAPI = baseApi.injectEndpoints({
+export const orderAPI = baseApi.injectEndpoints({
     endpoints: builder => ({
         getOrder: builder.query<IOrder, TOrderBody>({
             query: ({number}) => ({
@@ -20,4 +20,4 @@ const orderAPI = baseApi.injectEndpoints({
     })
 })
 
-export const { useGetOrderQuery } = orderAPI
+// export const { useGetOrderQuery } = orderAPI
