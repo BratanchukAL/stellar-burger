@@ -1,4 +1,5 @@
 import React, {useEffect, useMemo} from 'react'
+import { Outlet } from 'react-router-dom';
 
 import {useAppDispatch, useAppSelector} from "components/providers/store";
 
@@ -48,23 +49,24 @@ export const ListOrders = () => {
 
 
     return(<>
-        {
-            isErrorWs ? <ErrorText message={errorWs} extraClass="mt-6"/> :
-            isError ? <ErrorText message={(error as any)?.error} extraClass="mt-6"/> :
-            products &&
-                <section className={styles.box}>
-                    {!!ordersSorted.length && ordersSorted.map((v) => {
-                        return (
-                            <OrderCard key={v.number} order={v}
-                                childrenComposition={
-                                    <ProductsShortComposition ids={v.ingredients} products={products}/>
-                                }
-                               childrenCalcPrice={<CalcPrice ids={v.ingredients} products={products}/>}
-                            />
-                        )
-                    })}
-                </section>
-        }
+            <Outlet/>
+            {
+                isErrorWs ? <ErrorText message={errorWs} extraClass="mt-6"/> :
+                isError ? <ErrorText message={(error as any)?.error} extraClass="mt-6"/> :
+                products &&
+                    <section className={styles.box}>
+                        {!!ordersSorted.length && ordersSorted.map((v) => {
+                            return (
+                                <OrderCard key={v.number} order={v}
+                                    childrenComposition={
+                                        <ProductsShortComposition ids={v.ingredients} products={products}/>
+                                    }
+                                   childrenCalcPrice={<CalcPrice ids={v.ingredients} products={products}/>}
+                                />
+                            )
+                        })}
+                    </section>
+            }
         </>
     )
 }
