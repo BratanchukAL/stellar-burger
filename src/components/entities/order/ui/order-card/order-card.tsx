@@ -16,15 +16,23 @@ interface IOrderCardProps {
     order: IOrder
     childrenComposition: React.ReactNode
     childrenCalcPrice: React.ReactNode
+    onClick: (number: number)=>void
 }
 
 
-export const OrderCard:FC<IOrderCardProps> = ({order, childrenComposition, childrenCalcPrice}) => {
+export const OrderCard:FC<IOrderCardProps> = ({
+    order,
+    childrenComposition,
+    childrenCalcPrice,
+    onClick
+}) => {
     const date = new Date(order.createdAt)
 
 
     return(
-        <div className={clx(styles.content, ['p-6'])}>
+        <div className={clx(styles.content, ['p-6'])}
+            onClick={()=>onClick(order.number)}
+        >
             <div className={styles.item_info}>
                 <p className="text text_type_digits-default">#{order.number}</p>
                 <FormattedDate className="text text_type_main-default text_color_inactive" date={date} />
