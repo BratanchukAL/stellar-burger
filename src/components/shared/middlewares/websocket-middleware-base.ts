@@ -45,9 +45,6 @@ export const websocketMiddlewareBase =
                     if(params)
                         fullUrl = printf(fullUrl, params)
                 }
-
-                console.log('fullUrl')
-                console.log(fullUrl)
                 // объект класса WebSocket
                 socket = new WebSocket(fullUrl);
             }
