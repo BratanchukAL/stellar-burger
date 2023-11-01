@@ -1,11 +1,11 @@
 import React, {FC, useMemo} from 'react'
 
+import {clx} from "components/shared/utils";
 import {PriceWithCurrency, ThumbnailInCircle} from "components/shared/ui";
 
 import {IProduct} from "../../models";
 
 import styles from './products-long-composition.module.css'
-import {clx} from "../../../../shared/utils";
 
 
 
@@ -15,27 +15,39 @@ interface IProductsLongCompositionProps {
     products: IProduct[]
 }
 
+interface IProductWithCount extends IProduct{
+    count: number
+}
+
 
 export const ProductsLongComposition:FC<IProductsLongCompositionProps> = ({ids, products}) => {
 
     const {bunDoc, ingredientsDoc} = useMemo(()=>{
-        const initial = {bunDoc: null as IProduct | null , ingredientsDoc: [] as IProduct[]}
-        if (products.length && ids && ids.length)
-            return ids.reduce((previousValue, currentValue, index: number) => {
-                const product = products.find((p)=>p._id === currentValue)
+        const initial = {
+            bunDoc: null as IProductWithCount | null ,
+            ingredientsDoc: [] as IProductWithCount[]
+        }
 
-                if (!product)
+        if (products.length && ids && ids.length) {
+            const idsUnique = ids.filter((v, i, array) => array.indexOf(v) === i)
+
+            return idsUnique.reduce((previousValue, currentValue, index: number) => {
+                    const product = products.find((p) => p._id === currentValue)
+
+                    if (!product)
+                        return previousValue
+
+                    if (product.type === 'bun')
+                        previousValue.bunDoc = {...product, count: 2}
+                    else {
+                        const count = ids.filter((p) => p === currentValue).length
+                        previousValue.ingredientsDoc.push({...product, count: count})
+                    }
+
                     return previousValue
-
-                if (product.type === 'bun')
-                    previousValue.bunDoc = product
-                else
-                    previousValue.ingredientsDoc.push(product)
-
-                return previousValue
-            }
-            , initial)
-
+                }
+                , initial)
+        }
         return initial
     }, [products, ids])
 
@@ -44,7 +56,7 @@ export const ProductsLongComposition:FC<IProductsLongCompositionProps> = ({ids, 
         if (bunDoc)
             ingredientsDoc.unshift(bunDoc)
 
-        const positions = ingredientsDoc as IProduct[]
+        const positions = ingredientsDoc as IProductWithCount[]
 
         return positions.map((v, index)=>
             <div key={index} className={styles.card_position}>
@@ -52,7 +64,7 @@ export const ProductsLongComposition:FC<IProductsLongCompositionProps> = ({ids, 
                     <ThumbnailInCircle image={v.image_mobile}/>
                     <p className="text text_type_main-default ml-4">{v.name}</p>
                 </div>
-                <PriceWithCurrency price={"4 x 551"} extraClassName="ml-4"/>
+                <PriceWithCurrency price={`${v.count} x ${v.price}`} extraClassName="ml-4"/>
             </div>
         )
     }, [ingredientsDoc, bunDoc])
