@@ -23,8 +23,8 @@ export const OrderCompositionWidget:FC<IOrderCompositionWidgetProps> = ({order})
         data: products = [],
         // isLoading,
         // isSuccess,
-        isError,
-        error
+        // isError,
+        // error
     } = useGetProductsQuery()
 
     return(
