@@ -1,5 +1,8 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+
 import {IOrders} from "../models";
+
+import {ordersAllWSDisconnectAction} from "./ws/actions";
 
 
 
@@ -49,7 +52,13 @@ export const ordersAllSlice = createSlice({
         },
 
         clean: (state) => initialState
-    }
+    },
+    extraReducers: (builder) =>
+    builder
+        .addCase(ordersAllWSDisconnectAction, (state) => {
+            state.loading = false
+            state.isStreaming = false
+        })
 })
 
 
