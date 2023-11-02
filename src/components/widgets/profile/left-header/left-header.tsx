@@ -18,7 +18,7 @@ export const LeftHeader = () => {
                     <ButtonLink to={ROUTES.PROFILE} size="large">
                         Профиль
                     </ButtonLink>
-                    <ButtonLink to={ROUTES.ORDERS_IN_PROFILE} size="large">
+                    <ButtonLink to={ROUTES.ORDERS_IN_PROFILE} size="large" isParentLink>
                         История заказов
                     </ButtonLink>
                     <ButtonLink to={ROUTES.LOGOUT} size="large">
