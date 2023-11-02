@@ -23,7 +23,7 @@ export const Dashboard = () => {
 
 
     const ordersWithStatusDone = useMemo(()=> {
-        const filtered = ordersSorted.filter((v)=> v.status === 'done').slice(0, 18)
+        const filtered = ordersSorted.filter((v)=> v.status === 'done').slice(0, 30)
         return filtered.map((v: IOrder) =>
             <span key={v.number} className="text text_type_digits-default mr-2 mb-2">{v.number}</span>
         )
@@ -31,7 +31,7 @@ export const Dashboard = () => {
 
 
     const ordersWithStatusPending = useMemo(()=> {
-        const filtered = ordersSorted.filter((v)=> v.status === 'pending').slice(0, 18)
+        const filtered = ordersSorted.filter((v)=> v.status === 'pending').slice(0, 30)
         return filtered.map((v: IOrder) =>
             <span key={v.number} className="text text_type_digits-default mr-2 mb-2">{v.number}</span>
         )

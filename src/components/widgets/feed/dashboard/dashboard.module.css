@@ -9,8 +9,6 @@
 .content_orders_with_statuses{
     display: flex;
     flex-direction: row;
-
-    height: 200px;
 }
 
 
@@ -39,7 +37,7 @@
     flex-direction: column;
     flex-wrap: wrap;
 
-    height: inherit;
+    height: calc((24.08px + var(--offset-base-size) * 2) * 10);
 }
 
 .items_orders_status_done{
