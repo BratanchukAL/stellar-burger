@@ -21,52 +21,60 @@ export const OrderCompositionPage = () =>{
     const transitionType = useNavigationType()
     const id_param = useParams().id
 
-    const [order, setOrder] = useState<IOrder>({} as IOrder)
+    const [order, setOrder] = useState<IOrder | null>(null)
 
     const {isStreaming, data: {orders}} = useAppSelector(selectOrdersAll)
     const {isStreaming:isStreamingOfUser, data: {orders: ordersOfUser}} = useAppSelector(selectOrdersAllOfUser)
 
     useEffect(()=>{
-        if (!isStreaming && !isStreamingOfUser)
+        if(transitionType === 'POP')
             dispatch(orderAPI.endpoints.getOrder.initiate({number: Number(id_param)}))
                 .then((response)=>setOrder(response.data as IOrder))
-    }, [dispatch, id_param])
+    }, [dispatch, id_param, transitionType])
 
 
-    const currentOrder: IOrder | undefined = useMemo<IOrder>(()=>{
-        let r = {} as IOrder | undefined
-        if (isStreaming)
-            r = orders.find((v)=> v.number === Number(id_param))
-        else if (isStreamingOfUser)
-            r = ordersOfUser.find((v)=> v.number === Number(id_param))
+    const currentOrder: IOrder | null = useMemo<IOrder | null>(()=>{
+        let r = null as IOrder | null
+        if (orders.length)
+            r = orders.find((v)=> v.number === Number(id_param))!
+        else if (ordersOfUser.length)
+            r = ordersOfUser.find((v)=> v.number === Number(id_param))!
         else if (order?.ingredients)
             r = order
 
         return r as IOrder
     },
-    [id_param, orders, ordersOfUser, isStreaming, isStreamingOfUser, order])
+    [id_param, orders, ordersOfUser, order])
 
 
     const handleClose = useCallback(()=>{
+        if(isStreamingOfUser)
             navigate(ROUTES.ORDERS_IN_PROFILE)
-    }, [navigate])
+        else if(isStreaming)
+            navigate(ROUTES.FEED)
+    }, [navigate, isStreamingOfUser, isStreaming])
 
+
+    const isNotEmptyCurrentOrder: boolean = Boolean(currentOrder && currentOrder?.ingredients.length)
+    const isEmptyCurrentOrder: boolean = Boolean(currentOrder && !currentOrder?.ingredients.length)
 
     return(
         <>
-            {!currentOrder?.ingredients && <div>Не найден такой заказ</div>}
-            {currentOrder?.ingredients && (transitionType !== 'POP') &&
+            {isEmptyCurrentOrder && <div>Не найден такой заказ</div>}
+            {isNotEmptyCurrentOrder
+            && (transitionType !== 'POP') &&
 
                 <Modal onClose={handleClose}>
                     <div className={styles.content_modal}>
-                        <OrderCompositionWidget order={currentOrder}/>
+                        <OrderCompositionWidget order={currentOrder!}/>
                     </div>
                 </Modal>
             }
-            {currentOrder?.ingredients && (transitionType === 'POP') &&
+            {isNotEmptyCurrentOrder
+            && (transitionType === 'POP') &&
 
                 <section className={styles.page}>
-                    <OrderCompositionWidget order={currentOrder}/>
+                    <OrderCompositionWidget order={currentOrder!}/>
                 </section>
             }
         </>

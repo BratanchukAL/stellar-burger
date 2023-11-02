@@ -21,18 +21,19 @@ interface IOrderCompositionWidgetProps {
 export const OrderCompositionWidget:FC<IOrderCompositionWidgetProps> = ({order}) => {
     const {
         data: products = [],
-        // isLoading,
+        isLoading,
         // isSuccess,
         // isError,
         // error
     } = useGetProductsQuery()
 
     return(
-        <>
+        <>{ !isLoading &&
             <OrderComposition order={order}
-                childrenPositions={<ProductsLongComposition ids={order.ingredients} products={products} />}
-                childrenCalcPrice={<CalcPrice ids={order.ingredients} products={products} />}
+                              childrenPositions={<ProductsLongComposition ids={order.ingredients} products={products}/>}
+                              childrenCalcPrice={<CalcPrice ids={order.ingredients} products={products}/>}
             />
+        }
         </>
     )
 }
