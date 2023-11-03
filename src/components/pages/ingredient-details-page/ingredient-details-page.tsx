@@ -12,7 +12,7 @@ import {
     selectCurrentIngredientDetailsState
 } from "components/entities/products/ingredient-details";
 
-import {useGetProductsQuery} from "components/entities/products";
+import {IProduct, useGetProductsQuery} from "components/entities/products";
 
 import {IngredientDetails} from "components/widgets/burger-ingredients";
 
@@ -25,7 +25,7 @@ export const IngredientDetailsPage = () => {
 
     const navigate = useNavigate()
     const location = useLocation();
-    const id_param = useParams().id
+    const id_param = useParams<{id: string}>().id
     const background = location.state && location.state.background;
 
     const {isOpen: isOpenModal, details: currentDetails} = useAppSelector(selectCurrentIngredientDetailsState)
@@ -38,15 +38,15 @@ export const IngredientDetailsPage = () => {
         // error
     } = useGetProductsQuery()
 
-    const details = useMemo(()=>{
+    const details = useMemo<IProduct | undefined>(()=>{
         if (!isOpenModal)
             if (products.length)
-                return products.find((v)=>v._id === id_param)!
+                return products.find((v)=>v._id === id_param)
         return currentDetails
     },[currentDetails, products, isOpenModal])
 
 
-    useEffect(()=>{
+    useEffect((): void=>{
         if (!background)
             dispatch(ingredientDetailsActions.clean())
     },[dispatch, background])

@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from 'react'
+import React from 'react'
 
 import {clx} from "components/shared/utils";
 

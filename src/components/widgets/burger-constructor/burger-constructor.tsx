@@ -34,17 +34,17 @@ export const BurgerConstructor = () => {
 
     const [dropRef, canDrop] = useDropItem(['bun', 'sauce', 'main'], handleDropItem)
 
-    const isFillBasket = useMemo(
+    const isFillBasket = useMemo<boolean>(
         ()=>!Boolean(selectedBun && selectedIngredients.length),
     [selectedBun, selectedIngredients])
 
-    const selectedBunDoc = useMemo(()=>{
+    const selectedBunDoc = useMemo<IProduct | null | undefined>(()=>{
         if (products && selectedBun)
             return products.find((p)=>p._id === selectedBun)
         return null
     }, [products, selectedBun])
 
-    const selectedIngredientsDocs = useMemo(()=>{
+    const selectedIngredientsDocs = useMemo<IProduct[]>(()=>{
         if (products.length && selectedIngredients.length)
             return selectedIngredients.reduce((previousValue: IProduct[], currentValue, index: number):IProduct[] => {
                 const found = {
@@ -59,7 +59,7 @@ export const BurgerConstructor = () => {
         return []
     }, [products, selectedIngredients])
 
-    const totalPrice = useMemo(()=>{
+    const totalPrice = useMemo<number>(()=>{
         let total = 0
         if (!products.length)
             return total

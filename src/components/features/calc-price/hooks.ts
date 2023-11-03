@@ -5,7 +5,7 @@ import {IProduct} from "components/entities/products";
 
 
 export const useCalcPrice = (bunDoc:IProduct | null, ingredientsDocs:IProduct[]):number => {
-    return useMemo(() => {
+    return useMemo<number>(():number => {
         let total = 0
         if (!(bunDoc) && !ingredientsDocs.length)
             return total

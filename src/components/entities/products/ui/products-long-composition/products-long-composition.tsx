@@ -20,12 +20,18 @@ interface IProductWithCount extends IProduct{
 }
 
 
+type TIngredientsDocs = {
+    bunDoc: IProductWithCount | null ,
+    ingredientsDoc: IProductWithCount[]
+}
+
+
 export const ProductsLongComposition:FC<IProductsLongCompositionProps> = ({ids, products}) => {
 
-    const {bunDoc, ingredientsDoc} = useMemo(()=>{
-        const initial = {
-            bunDoc: null as IProductWithCount | null ,
-            ingredientsDoc: [] as IProductWithCount[]
+    const {bunDoc, ingredientsDoc} = useMemo<TIngredientsDocs>(()=>{
+        const initial: TIngredientsDocs = {
+            bunDoc: null ,
+            ingredientsDoc: []
         }
 
         if (products.length && ids && ids.length) {
@@ -52,7 +58,7 @@ export const ProductsLongComposition:FC<IProductsLongCompositionProps> = ({ids, 
     }, [products, ids])
 
 
-    const cardPositions = useMemo(()=>{
+    const cardPositions = useMemo<JSX.Element[]>(()=>{
         if (bunDoc)
             ingredientsDoc.unshift(bunDoc)
 

@@ -18,7 +18,7 @@ export const Dashboard = () => {
     const ordersSorted = useSortOrders(orders)
 
 
-    const ordersWithStatusDone = useMemo(()=> {
+    const ordersWithStatusDone = useMemo<JSX.Element[]>(()=> {
         const filtered = ordersSorted.filter((v)=> v.status === 'done').slice(0, 30)
         return filtered.map((v: IOrder) =>
             <span key={v.number} className="text text_type_digits-default mr-2 mb-2">{v.number}</span>
@@ -26,7 +26,7 @@ export const Dashboard = () => {
     }, [ordersSorted])
 
 
-    const ordersWithStatusPending = useMemo(()=> {
+    const ordersWithStatusPending = useMemo<JSX.Element[]>(()=> {
         const filtered = ordersSorted.filter((v)=> v.status === 'pending').slice(0, 30)
         return filtered.map((v: IOrder) =>
             <span key={v.number} className="text text_type_digits-default mr-2 mb-2">{v.number}</span>
