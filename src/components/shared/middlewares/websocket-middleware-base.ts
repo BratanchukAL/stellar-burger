@@ -58,6 +58,8 @@ export const websocketMiddlewareBase =
                 // функция, которая вызывается при ошибке соединения
                 socket.onerror = (event: Event) => {
                     dispatch(onErrorAction(event));
+                    dispatch(onClosedAction(event as CloseEvent));
+                    socket = null
                 };
 
                 // функция, которая вызывается при получения события от сервера
