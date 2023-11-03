@@ -3,8 +3,12 @@ import {IIngredientDetails} from "./models";
 import {IProduct} from "../models";
 
 
+type TIngredientDetailsState = {
+    data: IIngredientDetails
+}
+
 // Persisted
-const initialState = {
+const initialState:TIngredientDetailsState = {
     data: {
         isOpen: false,
         details: {}

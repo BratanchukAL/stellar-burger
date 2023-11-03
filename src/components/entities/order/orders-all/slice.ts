@@ -5,8 +5,15 @@ import {IOrders} from "../models";
 import {ordersAllWSDisconnectAction} from "./ws/actions";
 
 
+type TOrdersAllState = {
+    loading: boolean,
+    isStreaming: boolean,
+    data: IOrders,
+    error: string,
+    isError: boolean
+}
 
-const initialState = {
+const initialState: TOrdersAllState = {
     loading: false,
     isStreaming: false,
     data: {
