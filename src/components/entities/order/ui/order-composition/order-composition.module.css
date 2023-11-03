@@ -2,6 +2,10 @@
     max-width: 600px;
 }
 
+.text_status_done{
+    color: var(--colors-interface-success);
+}
+
 .footer{
     display: flex;
     align-items: center;

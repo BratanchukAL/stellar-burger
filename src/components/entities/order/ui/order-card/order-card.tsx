@@ -41,7 +41,13 @@ export const OrderCard:FC<IOrderCardProps> = ({
                 <p className="text text_type_main-medium">{order.name}</p>
             </div>
             <div className={clx(styles.item_info, ['pt-2'])}>
-                <p className="text text_type_main-default">{StatusDictionary[order.status]}</p>
+                <p className={clx(
+                    "text text_type_main-default",
+                    [],
+                    {[styles.text_status_done]: order.status==='done'})
+                }>
+                    {StatusDictionary[order.status]}
+                </p>
             </div>
             <div className={clx(styles.item_info, ['pt-6'])}>
                 {childrenComposition}
