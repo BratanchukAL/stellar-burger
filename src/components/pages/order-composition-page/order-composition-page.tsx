@@ -35,16 +35,16 @@ export const OrderCompositionPage = () =>{
 
     const currentOrder: IOrder | null = useMemo<IOrder | null>(()=>{
         let r = null as IOrder | null
-        if (orders.length)
+        if (isStreaming)
             r = orders.find((v)=> v.number === Number(id_param))!
-        else if (ordersOfUser.length)
+        if (isStreamingOfUser)
             r = ordersOfUser.find((v)=> v.number === Number(id_param))!
-        else if (order?.ingredients)
+        if (order?.ingredients)
             r = order
 
         return r as IOrder
     },
-    [id_param, orders, ordersOfUser, order])
+    [id_param, orders, ordersOfUser, order, isStreaming, isStreamingOfUser])
 
 
     const handleClose = useCallback(()=>{
