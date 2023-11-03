@@ -21,7 +21,7 @@ import {
 
 
 export type {IOrder}
-
+export {useSortOrders} from "./hooks"
 
 //Order one
 export {orderAPI} from "./order-composition/api/api";

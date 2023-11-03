@@ -2,7 +2,7 @@ import React, {useMemo} from "react";
 
 import {useAppSelector} from "components/providers/store";
 
-import {IOrder, selectOrdersAll} from "components/entities/order";
+import {IOrder, selectOrdersAll, useSortOrders} from "components/entities/order";
 
 import styles from './dashboard.module.css'
 
@@ -15,11 +15,7 @@ export const Dashboard = () => {
     } = useAppSelector(selectOrdersAll)
 
 
-    //TODO: duplicate
-    const ordersSorted = useMemo(()=>{
-        let orders_buf = [...orders]
-        return orders_buf.sort((a,b)=> -(a.number - b.number))
-    }, [orders])
+    const ordersSorted = useSortOrders(orders)
 
 
     const ordersWithStatusDone = useMemo(()=> {

@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useMemo} from 'react'
+import React, {useCallback, useEffect} from 'react'
 import {useNavigate} from "react-router-dom";
 
 import {useAppDispatch, useAppSelector} from "components/providers/store";
@@ -9,6 +9,7 @@ import {ROUTES} from "components/shared/configs";
 import {
     ordersAllWSDisconnectAction,
     ordersAllWSStartAction,
+    useSortOrders,
 } from "components/entities/order";
 import {OrderCard} from "components/entities/order/ui/order-card";
 import {selectOrdersAll} from "components/entities/order";
@@ -45,10 +46,7 @@ export const ListOrders = () => {
     }, [dispatch, isStreaming, isErrorWs])
 
 
-    const ordersSorted = useMemo(()=>{
-        let orders_buf = [...orders]
-        return orders_buf.sort((a,b)=> -(a.number - b.number))
-    }, [orders])
+    const ordersSorted = useSortOrders(orders)
 
     const onClickCard = useCallback((number:number)=>{
         navigate(ROUTES.ORDER_IN_FEED.replace(':id', String(number)))
