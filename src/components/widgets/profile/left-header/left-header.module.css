@@ -1,6 +1,8 @@
 .container{
     display: flex;
     flex-direction: row;
+
+    width: 100%;
 }
 
 .header{
@@ -9,8 +11,15 @@
     justify-content: left;
     align-items: flex-start;
     min-width: 350px;
+
+    margin-left: -20px;
 }
 
 .right{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
 
+    width: calc(100% - 350px - var(--offset-base-size)  * 15);
 }

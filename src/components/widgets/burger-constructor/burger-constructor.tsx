@@ -1,10 +1,11 @@
 import React, {useCallback, useMemo} from "react";
 
-import {Button, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+import {Button} from "@ya.praktikum/react-developer-burger-ui-components";
 
 import {useAppDispatch, useAppSelector} from "components/providers/store";
 
 import {clx} from "components/shared/utils";
+import {PriceWithCurrency} from "components/shared/ui";
 import {useDropItem} from "components/shared/hooks";
 
 import {IProduct, useGetProductsQuery} from "components/entities/products";
@@ -14,6 +15,7 @@ import {CardPosition} from "./card-position/card-position";
 import {OrderDetails} from "./оrder-details/order-details";
 
 import styles from './burger-constructor.module.css'
+
 
 
 export const BurgerConstructor = () => {
@@ -32,17 +34,17 @@ export const BurgerConstructor = () => {
 
     const [dropRef, canDrop] = useDropItem(['bun', 'sauce', 'main'], handleDropItem)
 
-    const isFillBasket = useMemo(
+    const isFillBasket = useMemo<boolean>(
         ()=>!Boolean(selectedBun && selectedIngredients.length),
     [selectedBun, selectedIngredients])
 
-    const selectedBunDoc = useMemo(()=>{
+    const selectedBunDoc = useMemo<IProduct | null | undefined>(()=>{
         if (products && selectedBun)
             return products.find((p)=>p._id === selectedBun)
         return null
     }, [products, selectedBun])
 
-    const selectedIngredientsDocs = useMemo(()=>{
+    const selectedIngredientsDocs = useMemo<IProduct[]>(()=>{
         if (products.length && selectedIngredients.length)
             return selectedIngredients.reduce((previousValue: IProduct[], currentValue, index: number):IProduct[] => {
                 const found = {
@@ -57,7 +59,7 @@ export const BurgerConstructor = () => {
         return []
     }, [products, selectedIngredients])
 
-    const totalPrice = useMemo(()=>{
+    const totalPrice = useMemo<number>(()=>{
         let total = 0
         if (!products.length)
             return total
@@ -137,8 +139,7 @@ export const BurgerConstructor = () => {
            </div>
            <div className={styles.button_order}>
                <span className="mr-10">
-                   <p className="text text_type_digits-medium">{totalPrice}&nbsp;
-                   <CurrencyIcon type="primary" /></p>
+                   <PriceWithCurrency price={totalPrice} size="medium"/>
                </span>
                <OrderDetails>
                    <Button htmlType={'button'} disabled={isFillBasket}>Оформить заказ</Button>

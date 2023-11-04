@@ -1,7 +1,14 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 
-const initialState = {
+const isActionOfRTKQuery = (action: any, ends: string): boolean => action.type.startsWith('api/') && action.type.endsWith(ends)
+
+type TSpinnerState = {
+    isLoading: boolean
+    text: string
+}
+
+const initialState: TSpinnerState = {
     isLoading: false,
     text: 'Загрузка...'
 };
@@ -19,11 +26,11 @@ export const spinnerSlice = createSlice({
     },
     extraReducers: (builder) =>
         builder
-            .addMatcher((action)=> action.type.endsWith('/pending'), (state) => {
+            .addMatcher((action)=> isActionOfRTKQuery(action, '/pending'), (state) => {
                 state.isLoading = true
             })
-            .addMatcher((action)=> action.type.endsWith('/fulfilled'), () => initialState)
-            .addMatcher((action)=> action.type.endsWith('/rejected'), () => initialState)
+            .addMatcher((action)=> isActionOfRTKQuery(action, '/fulfilled'), () => initialState)
+            .addMatcher((action)=> isActionOfRTKQuery(action, '/rejected'), () => initialState)
 })
 
 export const {actions: spinnerActions} = spinnerSlice

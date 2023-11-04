@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Route, Routes} from 'react-router-dom'
+import {Route, Routes, useNavigationType} from 'react-router-dom'
 
 import {ROUTES} from "components/shared/configs";
 
@@ -14,9 +14,14 @@ import {Content} from "components/widgets/content";
 
 import {LeftHeader} from "components/widgets/profile/left-header";
 import {ProfileForm} from "components/widgets/profile/profile-form";
+import {ListOrders as ProfileListOrders} from "components/widgets/profile/list-orders";
 
 import {BurgerConstructorPage} from "./burger-constructor-page";
 import {IngredientDetailsPage} from "./ingredient-details-page";
+
+import {FeedPage} from "./feed-page";
+
+import {OrderCompositionPage} from "./order-composition-page";
 
 import {LoginPage} from "./auth-pages/login-page";
 import {SignupPage} from "./auth-pages/signup-page";
@@ -25,7 +30,9 @@ import {ResetPage} from "./auth-pages/reset-page";
 
 
 
+
 export const Pages = () => {
+    const transitionType = useNavigationType()
     return (
         <>
             <SpinnerWidget/>
@@ -33,8 +40,15 @@ export const Pages = () => {
             <Content>
                 <Routes>
                     <Route path='/' element={<BurgerConstructorPage/>}>
+                        {/* Popup */}
                         <Route path={ROUTES.INGREDIENT_DETAIL} element={<IngredientDetailsPage  />}/>
                     </Route>
+
+                    <Route path={ROUTES.FEED} element={<FeedPage/>}>
+                        {/* Popup */}
+                        {(transitionType !== 'POP') && <Route path={':id'} element={<OrderCompositionPage  />}/>}
+                    </Route>
+                    {(transitionType === 'POP') && <Route path={ROUTES.ORDER_IN_FEED} element={<OrderCompositionPage  />}/>}
 
                     {/*Guest pages*/}
                     <Route element={<RequireGuest/>}>
@@ -47,11 +61,14 @@ export const Pages = () => {
 
                     {/*Only Auth*/}
                     <Route element={<RequireAuth/>}>
-                        <Route path={ROUTES.APPLICATION_TAPE} element={<p>В разработке...</p>}/>
                         <Route element={<LeftHeader/>}>
                             <Route path={ROUTES.PROFILE} element={<ProfileForm/>}/>
-                            <Route path={ROUTES.ORDERS_IN_PROFILE} element={<p>В разработке...</p>}/>
+                            <Route path={ROUTES.ORDERS_IN_PROFILE} element={<ProfileListOrders/>}>
+                                {/* Popup */}
+                                {(transitionType !== 'POP') && <Route path={':id'} element={<OrderCompositionPage  />}/>}
+                            </Route>
                         </Route>
+                        {(transitionType === 'POP') && <Route path={ROUTES.ORDER_IN_PROFILE} element={<OrderCompositionPage  />}/>}
                     </Route>
 
                     <Route path={"*"} element={<p>404 :(</p>}/>

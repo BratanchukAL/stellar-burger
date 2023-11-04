@@ -11,7 +11,7 @@ export function useForm<Type>(initialState: Type, deps: any[] = [true]): [Type, 
             setState({...state, ...initialState})
     }, deps)
 
-    const onChange = useCallback((e: ChangeEvent<HTMLInputElement>)=>{
+    const onChange = useCallback((e: ChangeEvent<HTMLInputElement>):void=>{
         const name = e.target.name
         const value = e.target.value
         setState({...state, [name]: value})

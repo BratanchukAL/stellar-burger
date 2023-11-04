@@ -11,7 +11,9 @@ import {
 } from 'redux-persist'
 
 import {baseApi} from "components/shared/api";
+
 import {reducersEntities} from "components/entities";
+import {ordersAllWSMiddleware, ordersAllOfUserWSMiddleware} from "components/entities/order";
 
 
 
@@ -20,6 +22,7 @@ export const rootReducers = combineReducers({
     [baseApi.reducerPath]: baseApi.reducer,
     ...reducersEntities
 })
+
 
 // Configures store
 export const store = configureStore({
@@ -33,6 +36,8 @@ export const store = configureStore({
         }).concat(
             logger,
             baseApi.middleware,
+            ordersAllWSMiddleware,
+            ordersAllOfUserWSMiddleware
         ),
 })
 

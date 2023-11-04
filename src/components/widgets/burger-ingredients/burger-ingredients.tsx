@@ -28,7 +28,7 @@ export const BurgerIngredients = () => {
         error
     } = useGetProductsQuery()
 
-    const categoriesData = useMemo(()=>[
+    const categoriesData = useMemo<{name: string, lang: string}[]>(()=>[
         {
             name: 'bun',
             lang: 'Булки'
@@ -41,35 +41,38 @@ export const BurgerIngredients = () => {
         },
     ], [])
 
-    const productsElements = useMemo(()=> products.length && categoriesData.map((category, index)=>{
-        const productsOfCat = products.filter((v)=>v.type===category.name)
+    const productsElements = useMemo<false | JSX.Element[]>(()=>
+        !!products.length &&
+        categoriesData.map((category, index)=>
+        {
+            const productsOfCat = products.filter((v)=>v.type===category.name)
 
-        return (
-            <div key={category.name} ref={el => categoriesRefs.current[category.name] = el! }>
-                <CategoryProduct  title={category.lang} extraClass={'mb-10'}>
-                    {
-                        productsOfCat.map((prod => {
-                            // Counter products
-                            const count = selectedIngredients.filter((v)=>v.id===prod._id).length +
-                                (selectedBun === prod._id ? 1 : 0)
+            return (
+                <div key={category.name} ref={el => categoriesRefs.current[category.name] = el! }>
+                    <CategoryProduct  title={category.lang} extraClass={'mb-10'}>
+                        {
+                            productsOfCat.map((prod => {
+                                // Counter products
+                                const count = selectedIngredients.filter((v)=>v.id===prod._id).length +
+                                    (selectedBun === prod._id ? 1 : 0)
 
-                            return (
-                                <CardProduct key={prod._id}
-                                    id={prod._id}
-                                    productType={prod.type}
-                                    count={count}
-                                    price={prod.price}
-                                    caption={prod.name}
-                                    image={prod.image_large}
-                                    details={prod}
-                                    extraClass={'mr-3 ml-3 mb-4 mt-4'}
-                                />
-                            )
-                        }))
-                    }
-                </CategoryProduct>
-            </div>
-        )
+                                return (
+                                    <CardProduct key={prod._id}
+                                        id={prod._id}
+                                        productType={prod.type}
+                                        count={count}
+                                        price={prod.price}
+                                        caption={prod.name}
+                                        image={prod.image_large}
+                                        details={prod}
+                                        extraClass={'mr-3 ml-3 mb-4 mt-4'}
+                                    />
+                                )
+                            }))
+                        }
+                    </CategoryProduct>
+                </div>
+            )
     }), [categoriesData, products, categoriesRefs, selectedBun, selectedIngredients])
 
     return (

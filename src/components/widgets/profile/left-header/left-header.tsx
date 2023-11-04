@@ -12,13 +12,13 @@ export const LeftHeader = () => {
     const isMatchOrdersInProfile = Boolean(useMatch(ROUTES.ORDERS_IN_PROFILE))
 
     return (
-        <section className={styles.container + " p-10"}>
+        <section className={styles.container + " pt-10"}>
             <section>
                 <nav className={styles.header}>
                     <ButtonLink to={ROUTES.PROFILE} size="large">
                         Профиль
                     </ButtonLink>
-                    <ButtonLink to={ROUTES.ORDERS_IN_PROFILE} size="large">
+                    <ButtonLink to={ROUTES.ORDERS_IN_PROFILE} size="large" isParentLink>
                         История заказов
                     </ButtonLink>
                     <ButtonLink to={ROUTES.LOGOUT} size="large">
@@ -31,7 +31,7 @@ export const LeftHeader = () => {
                     </p>
                 }{isMatchOrdersInProfile &&
                     <p className="text text_type_main-default text_color_inactive mt-20">
-                        В разработке...
+                        В этом разделе вы можете <br/> посмотреть свою историю заказов
                     </p>
                 }
             </section>
