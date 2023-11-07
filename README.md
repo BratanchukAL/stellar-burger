@@ -1,4 +1,4 @@
-#Stellar Burgers
+# Stellar Burgers
 ## Visit the site
 https://alexeybratanchukcps.github.io/react-burger/
 
