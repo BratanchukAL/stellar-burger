@@ -1,14 +1,11 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IIngredientDetails} from "./models";
 import {IProduct} from "../models";
+import {TIngredientDetailsState} from "./types";
 
-
-type TIngredientDetailsState = {
-    data: IIngredientDetails
-}
 
 // Persisted
-const initialState:TIngredientDetailsState = {
+export const initialState:TIngredientDetailsState = {
     data: {
         isOpen: false,
         details: {}
