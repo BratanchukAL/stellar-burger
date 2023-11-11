@@ -78,7 +78,10 @@ export const BurgerConstructor = () => {
 
    return (
        <section>
-           <div className={styles.content + ' pl-4 mb-10'} ref={dropRef}>
+           <div className={styles.content + ' pl-4 mb-10'}
+                ref={dropRef}
+                data-testid="drop_card-product_from_burger-ingredients"
+           >
                {!selectedIngredientsDocs.length && canDrop && <div className={styles.drop_place}>
                    <p className={clx('text text_type_main-medium', [], {'text_color_inactive': !canDrop})}>
                        Перетащите сюда ингредиент
@@ -142,7 +145,11 @@ export const BurgerConstructor = () => {
                    <PriceWithCurrency price={totalPrice} size="medium"/>
                </span>
                <OrderDetails>
-                   <Button htmlType={'button'} disabled={isFillBasket}>Оформить заказ</Button>
+                   <Button
+                       data-testid="button-post-order"
+                       htmlType={'button'}
+                       disabled={isFillBasket}
+                   >Оформить заказ</Button>
                </OrderDetails>
            </div>
        </section>
