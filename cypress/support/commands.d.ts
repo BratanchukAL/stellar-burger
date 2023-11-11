@@ -1,4 +1,7 @@
 import { mount } from 'cypress/react'
+import {TApplicationActions} from "components/providers/store";
+
+
 // Augment the Cypress namespace to include type definitions for
 // your custom command.
 // Alternatively, can be defined in cypress/support/component.d.ts
@@ -7,7 +10,8 @@ declare global {
     namespace Cypress {
         interface Chainable {
             mount: typeof mount,
-            initApp(): never
+            initApp(): never,
+            AppDispatch: (action: TApplicationActions) => void
         }
     }
 }

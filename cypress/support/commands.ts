@@ -51,6 +51,9 @@ Cypress.Commands.add('initApp', () => {
 })
 
 
+Cypress.Commands.add('AppDispatch', action =>
+    cy.window().its('store').invoke('dispatch', action)
+)
 
 
 export {}
