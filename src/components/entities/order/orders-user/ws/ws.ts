@@ -1,4 +1,4 @@
-import {websocketMiddlewareBase} from "components/shared/middlewares";
+import {websocketMiddlewareBase} from "components/shared/middlewares/websocket-middleware-base";
 
 import {AppDispatch, RootStateType} from "components/providers/store";
 import {API_WS_PATH_USER_ALL_ORDERS, API_WS_URL} from "components/shared/configs/api";

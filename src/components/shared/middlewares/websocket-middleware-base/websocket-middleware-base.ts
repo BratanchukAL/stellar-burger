@@ -1,8 +1,9 @@
 import type {AnyAction, Middleware, MiddlewareAPI} from 'redux';
 
-import {ActionCreatorWithPayload, AsyncThunk, PayloadAction, ThunkDispatch} from "@reduxjs/toolkit";
+import {PayloadAction, ThunkDispatch} from "@reduxjs/toolkit";
 
-import {printf} from "../utils";
+import {printf} from "../../utils";
+import {TWSActions, TWSOnActionWithEvent, TWSOnActionWithMessageCloseEvent, TWSOnActionWithMessageEvent} from "./types";
 
 
 
@@ -16,16 +17,16 @@ export const websocketMiddlewareBase =
         baseUrl: string,
         path: string,
 
-        wsStartAction:  ActionCreatorWithPayload<void, any>,
-        wsDisconnectAction:  ActionCreatorWithPayload<void, any>,
+        wsStartAction:       TWSActions,
+        wsDisconnectAction:  TWSActions,
 
-        onSuccessAction:  ActionCreatorWithPayload<Event, any> | AsyncThunk<void, Event, any>,
-        onErrorAction:  ActionCreatorWithPayload<Event, any> | AsyncThunk<void, Event, any>,
-        onMessageAction:  ActionCreatorWithPayload<MessageEvent, any> | AsyncThunk<void, MessageEvent, any>,
-        onClosedAction:  ActionCreatorWithPayload<CloseEvent, any> | AsyncThunk<void, CloseEvent, any>,
+        onSuccessAction:    TWSOnActionWithEvent,
+        onErrorAction:      TWSOnActionWithEvent,
+        onMessageAction:    TWSOnActionWithMessageEvent,
+        onClosedAction:     TWSOnActionWithMessageCloseEvent,
 
         //optionals
-        wsReconnectAction?:  ActionCreatorWithPayload<void, any>,
+        wsReconnectAction?:  TWSActions,
         selectAccessToken?:  (state: RootState)=>Record<string,string>
 
     ): Middleware<{}, RootState, AppDispatch> => {
