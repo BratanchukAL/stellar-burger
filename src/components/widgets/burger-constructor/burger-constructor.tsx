@@ -140,7 +140,7 @@ export const BurgerConstructor = () => {
                    />}
                </div>
            </div>
-           <div className={styles.button_order}>
+           <div className={clx(styles.button_order, ["mr-4"])}>
                <span className="mr-10">
                    <PriceWithCurrency price={totalPrice} size="medium"/>
                </span>
