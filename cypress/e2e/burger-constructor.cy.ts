@@ -1,5 +1,6 @@
 import {sessionActions} from "components/entities/session";
 
+import orderFixture from '../fixtures/post-order.json'
 
 
 const test = it
@@ -36,23 +37,21 @@ describe('Test burger-constructor', () => {
         //#1
         const dropPlace = cy.get('[data-testid=drop_card-product_from_burger-ingredients]').first()
 
-        cy.get('[data-testid=card-product]').filter(':contains("Краторная булка N-200i")').trigger('dragstart')
-        dropPlace.trigger('drop')
+        const ingredients = orderFixture.order.ingredients
 
-        cy.get('[data-testid=card-product]').filter(':contains("Соус с шипами Антарианского плоскоходца")').trigger('dragstart')
-        dropPlace.trigger('drop')
-
-        dropPlace
-            .filter(':contains("Краторная булка N-200i")')
-            .should('exist')
-        dropPlace
-            .filter(':contains("Соус с шипами Антарианского плоскоходца")')
-            .should('exist')
+        ingredients.forEach((ingredient)=>{
+            cy.get('[data-testid=card-product]').filter(`:contains("${ingredient.name}")`).trigger('dragstart')
+            dropPlace.trigger('drop')
+        })
+        ingredients.forEach((ingredient)=>{
+            dropPlace.filter(`:contains("${ingredient.name}")`)
+                .should('exist')
+        })
 
         //#2
         cy.get('[data-testid=button-post-order]').click()
-        cy.get('[data-testid=order-details_number-order]').should("have.text", "25814")
         cy.wait('@postOrder')
+        cy.get('[data-testid=order-details_number-order]').should("have.text", orderFixture.order.number)
 
         //#3
         cy.get('[data-testid=modal_close]').first().click()
