@@ -3,6 +3,8 @@ import productsFixture from '../fixtures/products.json'
 
 
 describe('Test modal of ingredient details', () => {
+    const objectForTesting = productsFixture.data[0].name
+
     beforeEach(()=>{
         cy.clearCookies()
         cy.clearLocalStorage()
@@ -13,7 +15,7 @@ describe('Test modal of ingredient details', () => {
 
         cy.wait('@getIngredients')
 
-        cy.get('[data-testid=card-product]').filter(`:contains("${productsFixture.data[0].name}")`).click()
+        cy.get('[data-testid=card-product]').filter(`:contains("${objectForTesting}")`).click()
     })
 
     it('should open the modal of ingredient', () => {
@@ -21,7 +23,7 @@ describe('Test modal of ingredient details', () => {
     })
 
     it('should have data the modal of ingredient', () => {
-        cy.get('[data-testid=ingredient-details_title]').should("have.text", productsFixture.data[0].name)
+        cy.get('[data-testid=ingredient-details_title]').should("have.text", objectForTesting)
     })
 
     it('should close the modal of ingredient', () => {
