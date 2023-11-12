@@ -3,7 +3,9 @@ import type {AnyAction, Middleware, MiddlewareAPI} from 'redux';
 import {PayloadAction, ThunkDispatch} from "@reduxjs/toolkit";
 
 import {printf} from "../../utils";
-import {TWSActions, TWSOnActionWithEvent, TWSOnActionWithMessageCloseEvent, TWSOnActionWithMessageEvent} from "./types";
+import {
+    IWSMiddlewareBase,
+} from "./types";
 
 
 
@@ -13,22 +15,22 @@ export const websocketMiddlewareBase =
         AppDispatch extends ThunkDispatch<RootState, unknown, AnyAction>,
         RootState
     >
-    (
-        baseUrl: string,
-        path: string,
+    ({
+        baseUrl,
+        path,
 
-        wsStartAction:       TWSActions,
-        wsDisconnectAction:  TWSActions,
+        wsStartAction,
+        wsDisconnectAction,
 
-        onSuccessAction:    TWSOnActionWithEvent,
-        onErrorAction:      TWSOnActionWithEvent,
-        onMessageAction:    TWSOnActionWithMessageEvent,
-        onClosedAction:     TWSOnActionWithMessageCloseEvent,
+        onSuccessAction,
+        onErrorAction,
+        onMessageAction,
+        onClosedAction,
 
         //optionals
-        wsReconnectAction?:  TWSActions,
-        selectAccessToken?:  (state: RootState)=>Record<string,string>
-
+        wsReconnectAction,
+        selectAccessToken
+    }: IWSMiddlewareBase<RootState>
     ): Middleware<{}, RootState, AppDispatch> => {
 
     return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
