@@ -65,7 +65,11 @@ export const OrderDetails: FC<PropsWithChildren>= ({children}) =>{
                 <Modal onClose={handleClose} extraClassContent="pt-20 pb-20">
                     <ErrorText message={(response?.error as any)?.data?.message} extraClass="mb-6"/>
 
-                    <p className={'text text_type_digits-large'}>{order_id}</p>
+                    <p className={'text text_type_digits-large'}
+                       data-testid="order-details_number-order"
+                    >
+                        {order_id}
+                    </p>
                     <p className={'text text_type_main-medium mt-8'}>идентификатор заказа</p>
                     {response.isSuccess &&
                         <img className={clx(styles.img, ['mt-15', 'mb-15'])} src={CheckImage} alt={'check'}/>

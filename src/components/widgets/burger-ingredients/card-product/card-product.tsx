@@ -61,6 +61,7 @@ export const CardProduct: FC<CardProductProps> = (
         <div className={clx(styles.card_content, [extraClass, styles.drag_place])}
              ref={dragRef}
              onClick={handleClick}
+             data-testid="card-product"
         >
             <div className={styles.image_content}>
                 {counterElement}

@@ -65,9 +65,13 @@ export const Modal: FC<React.PropsWithChildren<ModalProps>> = ({
                     onClose={handleClose}
                     onKeyPress={handleCloseByKeyDown}
                     ref={modalRef}
+                    data-testid="modal_showed"
                 >
                     <div className={clx(styles.modal_dialog, ['p-10'])}>
-                        <div className={styles.close_icon_content}>
+                        <div
+                            className={styles.close_icon_content}
+                            data-testid="modal_close"
+                        >
                             <CloseIcon type="primary" onClick={handleClose}/>
                         </div>
                         <div className={clx(styles.modal_content, [extraClassContent])}>

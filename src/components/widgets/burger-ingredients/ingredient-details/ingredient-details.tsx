@@ -25,7 +25,9 @@ export const IngredientDetails:FC<IIngredientDetailsProps> = ({details}) => {
                  src={details.image_large}
                  alt={'картинка продукта'}
             />
-            <p className={clx(styles.title, ["text text_type_main-medium mt-4 mb-8"])}>
+            <p className={clx(styles.title, ["text text_type_main-medium mt-4 mb-8"])}
+               data-testid="ingredient-details_title"
+            >
                 {details.name}
             </p>
             <div className={clx(styles.content_content, ['mb-5'])}>
