@@ -1,5 +1,7 @@
 # Stellar Burgers
 ## Visit the site
+https://bratanchukal.github.io/stellar-burger/
+###### OR
 https://alexeybratanchukcps.github.io/react-burger/
 
 ## Getting Started with Create React App
